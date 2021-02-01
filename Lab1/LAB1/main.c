@@ -1,0 +1,227 @@
+/* 
+ * File:   Template Digital 2
+ * Author: Jorge Rafael Hurtado Garcia 18052
+ * 
+ * Template Proyectos Digital 2
+ * 
+ * Created on 2021
+ */
+
+//**************************
+// Importación de librerías
+//**************************
+
+#include <xc.h>
+
+//**************************
+// Palabra de configuración
+//**************************
+// CONFIG1
+#pragma config FOSC = XT        // Oscillator Selection bits (XT oscillator: Crystal/resonator on RA6/OSC2/CLKOUT and RA7/OSC1/CLKIN)
+#pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled and can be enabled by SWDTEN bit of the WDTCON register)
+#pragma config PWRTE = OFF      // Power-up Timer Enable bit (PWRT disabled)
+#pragma config MCLRE = OFF      // RE3/MCLR pin function select bit (RE3/MCLR pin function is digital input, MCLR internally tied to VDD)
+#pragma config CP = OFF         // Code Protection bit (Program memory code protection is disabled)
+#pragma config CPD = OFF        // Data Code Protection bit (Data memory code protection is disabled)
+#pragma config BOREN = OFF      // Brown Out Reset Selection bits (BOR disabled)
+#pragma config IESO = OFF       // Internal External Switchover bit (Internal/External Switchover mode is disabled)
+#pragma config FCMEN = OFF      // Fail-Safe Clock Monitor Enabled bit (Fail-Safe Clock Monitor is disabled)
+#pragma config LVP = OFF        // Low Voltage Programming Enable bit (RB3 pin has digital I/O, HV on MCLR must be used for programming)
+
+// CONFIG2
+#pragma config BOR4V = BOR40V   // Brown-out Reset Selection bit (Brown-out Reset set to 4.0V)
+#pragma config WRT = OFF        // Flash Program Memory Self Write Enable bits (Write protection off)
+
+
+#define _XTAL_FREQ 8000000
+
+#define Ledr PORTEbits.RE0
+#define Ledy PORTEbits.RE1
+#define Ledg PORTEbits.RE2
+
+//**************************
+// Variables
+//**************************
+
+char contadorJA = 0;
+char contadorJB = 0;
+char Startnow = 0;
+char dummy = 0;
+
+//**************************
+// Prototipos de funciones
+//**************************
+void setup(void);
+void semaforo(void);
+void contador1A(void);
+void contador2A(void);
+
+//**************************
+// Ciclo principal
+//**************************
+
+void main(void) {
+
+    setup();
+
+    //**************************
+    // Loop principal
+    //**************************
+
+
+
+
+    while (1) {
+        if (PORTAbits.RA0 == 0) {
+            while (PORTAbits.RA0 == 0) {
+                PORTD = 0;
+                Ledr = 1;
+            }
+            if (PORTAbits.RA0 == 1) {
+                semaforo();
+            }
+        }
+        Ledy = 0;
+        Ledg = 0;
+        Ledr = 1;
+
+    }
+}
+
+//**************************
+// Configuración
+//**************************
+
+void setup(void) {
+    ANSEL = 0;
+    ANSELH = 0;
+    TRISA = 0b00000111;
+    PORTA = 0;
+    TRISB = 0;
+    PORTB = 0;
+    TRISC = 0;
+    PORTC = 0;
+    TRISD = 0;
+    PORTD = 0;
+    TRISE = 0;
+    PORTE = 0;
+    contadorJA = 0;
+    contadorJB = 0;
+    Startnow = 0;
+    dummy = 0;
+
+
+}
+
+//**************************
+// Funciones
+//**************************
+
+void semaforo(void) {
+    Ledr = 1;
+    __delay_ms(100);
+    Ledr = 0;
+    Ledy = 1;
+    __delay_ms(200);
+    Ledy = 0;
+    Ledg = 1;
+    Startnow = 1;
+    while (Startnow == 1) {
+        if (PORTAbits.RA1 == 0) {
+            while (PORTAbits.RA1 == 0) {
+                dummy = 0;
+            }
+            if (PORTAbits.RA1 == 1) {
+                contadorJA = contadorJA + 1;
+                contador1A();
+            }
+        }
+        if (PORTAbits.RA2 == 0) {
+            while (PORTAbits.RA2 == 0) {
+                dummy = 0;
+            }
+            if (PORTAbits.RA2 == 1) {
+                contadorJB = contadorJB + 1;
+                contador2A();
+            }
+        }
+    }
+    PORTB = 0;
+    PORTC = 0;
+    contadorJA = 0;
+    contadorJB = 0;
+}
+
+void contador1A(void) {
+    if (contadorJA == 0) {
+        PORTC = 0b00000000;
+    }
+    if (contadorJA == 1) {
+        PORTC = 0b00000001;
+    }
+    if (contadorJA == 2) {
+        PORTC = 0b00000010;
+    }
+    if (contadorJA == 3) {
+        PORTC = 0b00000100;
+    }
+    if (contadorJA == 4) {
+        PORTC = 0b00001000;
+    }
+    if (contadorJA == 5) {
+        PORTC = 0b00010000;
+    }
+    if (contadorJA == 6) {
+        PORTC = 0b00100000;
+    }
+    if (contadorJA == 7) {
+        PORTC = 0b01000000;
+    }
+    if (contadorJA == 8) {
+        PORTC = 0b10000000;
+    }
+    if (contadorJA == 9) {
+        PORTC = 0b11111111;
+        PORTDbits.RD0 = 1;
+        contadorJA = 0;
+        Startnow = 0;
+    }
+}
+
+void contador2A(void) {
+    if (contadorJB == 0) {
+        PORTB = 0b00000000;
+    }
+    if (contadorJB == 1) {
+        PORTB = 0b00000001;
+    }
+    if (contadorJB == 2) {
+        PORTB = 0b00000010;
+    }
+    if (contadorJB == 3) {
+        PORTB = 0b00000100;
+    }
+    if (contadorJB == 4) {
+        PORTB = 0b00001000;
+    }
+    if (contadorJB == 5) {
+        PORTB = 0b00010000;
+    }
+    if (contadorJB == 6) {
+        PORTB = 0b00100000;
+    }
+    if (contadorJB == 7) {
+        PORTB = 0b01000000;
+    }
+    if (contadorJB == 8) {
+        PORTB = 0b10000000;
+    }
+    if (contadorJB == 9) {
+        PORTB = 0b11111111;
+        PORTDbits.RD1 = 1;
+        contadorJB = 0;
+        Startnow = 0;
+    }
+}
+
+
