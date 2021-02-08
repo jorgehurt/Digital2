@@ -2638,12 +2638,6 @@ void conversion(int channel){
     ADCON0=0b01000000;
 
     ADCON1=0b00000000;
-    ADCON0bits.ADON = 1;
     ADCON0bits.CHS=channel;
     PIR1bits.ADIF = 0;
-    _delay((unsigned long)((10)*(8000000/4000.0)));
-    ADCON0bits.GO_DONE=1;
-    while(ADCON0bits.GO_DONE==1);
-
-
 }

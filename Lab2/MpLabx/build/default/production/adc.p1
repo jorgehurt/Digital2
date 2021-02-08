@@ -65,10 +65,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1276
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1276: extern volatile ADCON0bits_t ADCON0bits __attribute__((address(0x01F)));
 [v _ADCON0bits `VS44 ~T0 @X0 0 e@31 ]
-[v F1256 `(v ~T0 @X0 1 tf1`ul ]
-"92 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\pic.h
-[v __delay `JF1256 ~T0 @X0 0 e ]
-[p i __delay ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -329,28 +325,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;adc.c: 24:     ADCON1=0b00000000;
 [e = _ADCON1 -> -> 0 `i `uc ]
 "25
-[; ;adc.c: 25:     ADCON0bits.ADON = 1;
-[e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
-"26
-[; ;adc.c: 26:     ADCON0bits.CHS=channel;
+[; ;adc.c: 25:     ADCON0bits.CHS=channel;
 [e = . . _ADCON0bits 0 2 -> _channel `uc ]
-"27
-[; ;adc.c: 27:     PIR1bits.ADIF = 0;
+"26
+[; ;adc.c: 26:     PIR1bits.ADIF = 0;
 [e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
-"28
-[; ;adc.c: 28:     _delay((unsigned long)((10)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"29
-[; ;adc.c: 29:     ADCON0bits.GO_DONE=1;
-[e = . . _ADCON0bits 3 1 -> -> 1 `i `uc ]
-"30
-[; ;adc.c: 30:     while(ADCON0bits.GO_DONE==1);
-[e $U 139  ]
-[e :U 140 ]
-[e :U 139 ]
-[e $ == -> . . _ADCON0bits 3 1 `i -> 1 `i 140  ]
-[e :U 141 ]
-"33
-[; ;adc.c: 33: }
+"27
+[; ;adc.c: 27: }
 [e :UE 138 ]
 }

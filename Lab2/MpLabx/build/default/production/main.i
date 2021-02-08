@@ -2662,8 +2662,16 @@ void conversion(int channel);
 
 #pragma config BOR4V = BOR40V
 #pragma config WRT = OFF
-# 47 "main.c"
-char contadorJA = 0;
+
+
+
+
+
+
+
+
+char x = 0;
+char y = 0;
 
 
 
@@ -2681,9 +2689,13 @@ void main(void) {
 
 
 
-
     while (1) {
-
+        conversion(1000);
+        ADCON0bits.ADON = 1;
+        _delay((unsigned long)((10)*(8000000/4000.0)));
+        ADCON0bits.GO_DONE = 1;
+        while (ADCON0bits.GO_DONE == 1);
+        PORTEbits.RE0 = 1;
     }
 }
 
@@ -2726,7 +2738,33 @@ void setup(void) {
     TRISE = 0;
     PORTE = 0;
 }
-# 119 "main.c"
+
+
+
+
+
+uint8_t segmentos[] = {
+    0b00111111,
+    0b00000110,
+    0b01011011,
+    0b01001111,
+    0b01100110,
+    0b01101101,
+    0b01111101,
+    0b00000111,
+    0b01111111,
+    0b01101111,
+    0b01110111,
+    0b01111100,
+    0b00111001,
+    0b01011110,
+    0b01111001,
+    0b01110001
+};
+
+
+
+
 void __attribute__((picinterrupt(("")))) ISR() {
     if (INTCONbits.RBIF == 1 && PORTBbits.RB0 == 0) {
         PORTD = PORTD + 1;
@@ -2736,10 +2774,14 @@ void __attribute__((picinterrupt(("")))) ISR() {
         PORTD = PORTD - 1;
         INTCONbits.RBIF = 0;
     }
-    if (INTCONbits.RBIF == 1) {
+    if (PIR1bits.ADIF == 1) {
+        PIR1bits.ADIF = 0;
         INTCONbits.RBIF = 0;
-        conversion(1000);
-        PORTD=ADRESH;
-    }
+        x = ADRESH;
+        y = x;
+        x = x & 0x0F;
+        y = ((y & 0xF0) >> 4);
+        PORTC = segmentos[x];
 
+    }
 }

@@ -37,14 +37,12 @@
 
 #define _XTAL_FREQ 8000000
 
-
-#define Ledr PORTEbits.RE0
-
 //**************************
 // Variables
 //**************************
 
-char contadorJA = 0;
+char x = 0;
+char y = 0;
 
 
 //**************************
@@ -62,9 +60,13 @@ void main(void) {
     //**************************
     // Loop principal
     //**************************
-
     while (1) {
-
+        conversion(1000);
+        ADCON0bits.ADON = 1;
+        __delay_ms(10);
+        ADCON0bits.GO_DONE = 1;
+        while (ADCON0bits.GO_DONE == 1);
+        PORTEbits.RE0 = 1;
     }
 }
 
@@ -86,9 +88,9 @@ void setup(void) {
     INTCONbits.INTE = 1;
     PIE1bits.ADIE = 1;
     //Limpieza de Banderas de Interrupciones.
-    INTCONbits.T0IF = 0;//Bandera de Timer 0
-    INTCONbits.RBIF = 0;//Bandera de IOC
-    PIR1bits.ADIF = 0;//Bandera del ADC
+    INTCONbits.T0IF = 0; //Bandera de Timer 0
+    INTCONbits.RBIF = 0; //Bandera de IOC
+    PIR1bits.ADIF = 0; //Bandera del ADC
     //Enable Bits de IOC del Puerto B en RB0 y RB1 para los PushButton.
     IOCBbits.IOCB0 = 1;
     IOCBbits.IOCB1 = 1;
@@ -112,6 +114,24 @@ void setup(void) {
 // Funciones
 //**************************
 
+uint8_t segmentos[] = {
+    0b00111111,
+    0b00000110,
+    0b01011011,
+    0b01001111,
+    0b01100110,
+    0b01101101,
+    0b01111101,
+    0b00000111,
+    0b01111111,
+    0b01101111,
+    0b01110111,
+    0b01111100,
+    0b00111001,
+    0b01011110,
+    0b01111001,
+    0b01110001
+};
 //**************************
 // Interrupciones
 //**************************
@@ -125,10 +145,14 @@ void __interrupt() ISR() {
         PORTD = PORTD - 1;
         INTCONbits.RBIF = 0;
     }
-    if (INTCONbits.RBIF == 1) {
+    if (PIR1bits.ADIF == 1) {
+        PIR1bits.ADIF = 0;
         INTCONbits.RBIF = 0;
-        conversion(1000);
-        PORTD=ADRESH;
+        x = ADRESH;
+        y = x;
+        x = x & 0x0F;
+        y = ((y & 0xF0) >> 4);
+        PORTC = segmentos[x];
+
     }
-    
 }

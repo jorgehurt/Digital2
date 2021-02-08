@@ -22,13 +22,6 @@ void conversion(int channel){
     ADCON0=0b01000000;//Fosc/8 Selected. Channel AN0 is set as default.GoDone
     //Cleared. ADC Enable Bit set to 0 waiting further instructions.
     ADCON1=0b00000000;//Right Justified default. Voltage ref. Vdd et Vss.
-    ADCON0bits.ADON = 1;
     ADCON0bits.CHS=channel;
     PIR1bits.ADIF = 0;//Bandera del ADC
-    __delay_ms(10);
-    ADCON0bits.GO_DONE=1;
-    while(ADCON0bits.GO_DONE==1);
-    
-    
 }
-
