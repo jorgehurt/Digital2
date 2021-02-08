@@ -43,12 +43,32 @@
 
 char x = 0;
 char y = 0;
+char pato = 0;
+char tog = 0;
 
-
+uint8_t segmentos[] = {
+    0b00111111,
+    0b00000110,
+    0b01011011,
+    0b01001111,
+    0b01100110,
+    0b01101101,
+    0b01111101,
+    0b00000111,
+    0b01111111,
+    0b01101111,
+    0b01110111,
+    0b01111100,
+    0b00111001,
+    0b01011110,
+    0b01111001,
+    0b01110001
+};
 //**************************
 // Prototipos de funciones
 //**************************
 void setup(void);
+void toggle(void);
 //**************************
 // Ciclo principal
 //**************************
@@ -66,7 +86,21 @@ void main(void) {
         __delay_ms(10);
         ADCON0bits.GO_DONE = 1;
         while (ADCON0bits.GO_DONE == 1);
-        PORTEbits.RE0 = 1;
+        if (tog == 0) {
+            PORTEbits.RE0 = 1;
+            PORTEbits.RE1 = 0;
+            PORTC = segmentos[y];
+            tog=1;
+
+        }
+        if (tog == 1) {
+            PORTEbits.RE0 = 0;
+            PORTEbits.RE1 = 1;
+            PORTC = segmentos[x];
+            tog=0;
+
+        }
+
     }
 }
 
@@ -96,6 +130,14 @@ void setup(void) {
     IOCBbits.IOCB1 = 1;
     IOCBbits.IOCB2 = 1;
     //Configuracion de Puertos y limpieza de los mismos.
+    //timer 0 configuration bits
+    OPTION_REGbits.nRBPU = 1;
+    OPTION_REGbits.INTEDG = 0;
+    OPTION_REGbits.T0CS = 0;
+    OPTION_REGbits.T0SE = 0;
+    OPTION_REGbits.PSA = 0;
+    OPTION_REGbits.PS = 0b000; // 1:2 tmr0 rate 
+    TMR0 = 2;
     ANSEL = 0;
     ANSELH = 0b00000001;
     TRISA = 0;
@@ -114,24 +156,16 @@ void setup(void) {
 // Funciones
 //**************************
 
-uint8_t segmentos[] = {
-    0b00111111,
-    0b00000110,
-    0b01011011,
-    0b01001111,
-    0b01100110,
-    0b01101101,
-    0b01111101,
-    0b00000111,
-    0b01111111,
-    0b01101111,
-    0b01110111,
-    0b01111100,
-    0b00111001,
-    0b01011110,
-    0b01111001,
-    0b01110001
-};
+void toggle(void) {
+    if (tog == 0) {
+        tog = 1;
+    }
+    if (tog == 1) {
+        tog = 0;
+    }
+}
+
+
 //**************************
 // Interrupciones
 //**************************
@@ -148,11 +182,15 @@ void __interrupt() ISR() {
     if (PIR1bits.ADIF == 1) {
         PIR1bits.ADIF = 0;
         INTCONbits.RBIF = 0;
-        x = ADRESH;
-        y = x;
-        x = x & 0x0F;
-        y = ((y & 0xF0) >> 4);
-        PORTC = segmentos[x];
+        pato = ADRESH;
+        y = pato;
+        x = pato & 0x0F;
+        y = ((pato & 0xF0) >> 4);
 
     }
+    if (INTCONbits.T0IF == 1) {
+        toggle();
+        INTCONbits.T0IF = 0;
+    }
+
 }
