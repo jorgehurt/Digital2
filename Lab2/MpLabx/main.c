@@ -178,10 +178,12 @@ void __interrupt() ISR() {
     if (INTCONbits.RBIF == 1 && PORTBbits.RB0 == 0) {
         PORTD = PORTD + 1;
         INTCONbits.RBIF = 0;
+        return;
     }
     if (INTCONbits.RBIF == 1 && PORTBbits.RB1 == 0) {
         PORTD = PORTD - 1;
         INTCONbits.RBIF = 0;
+        return;
     }
     if (PIR1bits.ADIF == 1) {
         PIR1bits.ADIF = 0;
@@ -190,11 +192,13 @@ void __interrupt() ISR() {
         y = pato;
         x = pato & 0x0F;
         y = ((pato & 0xF0) >> 4);
+        return;
 
     }
     if (INTCONbits.T0IF == 1) {
         toggle();
         INTCONbits.T0IF = 0;
+        return;
     }
 
 }

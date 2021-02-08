@@ -671,63 +671,67 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 143:         INTCONbits.RBIF = 0;
 [e = . . _OPTION_REGbits 0 0 -> -> 0 `i `uc ]
 "144
-[; ;main.c: 144:     }
+[; ;main.c: 144:         return;
 [e = _TMR0 -> -> 2 `i `uc ]
 "145
-[; ;main.c: 145:     if (INTCONbits.RBIF == 1 && PORTBbits.RB1 == 0) {
+[; ;main.c: 145:     }
 [e = _ANSEL -> -> 0 `i `uc ]
 "146
-[; ;main.c: 146:         PORTD = PORTD - 1;
+[; ;main.c: 146:     if (INTCONbits.RBIF == 1 && PORTBbits.RB1 == 0) {
 [e = _ANSELH -> -> 1 `i `uc ]
 "147
-[; ;main.c: 147:         INTCONbits.RBIF = 0;
+[; ;main.c: 147:         PORTD = PORTD - 1;
 [e = _TRISA -> -> 0 `i `uc ]
 "148
-[; ;main.c: 148:     }
+[; ;main.c: 148:         INTCONbits.RBIF = 0;
 [e = _PORTA -> -> 0 `i `uc ]
 "149
-[; ;main.c: 149:     if (PIR1bits.ADIF == 1) {
+[; ;main.c: 149:         return;
 [e = _TRISB -> -> 7 `i `uc ]
 "150
-[; ;main.c: 150:         PIR1bits.ADIF = 0;
+[; ;main.c: 150:     }
 [e = _PORTB -> -> 0 `i `uc ]
 "151
-[; ;main.c: 151:         INTCONbits.RBIF = 0;
+[; ;main.c: 151:     if (PIR1bits.ADIF == 1) {
 [e = _TRISC -> -> 0 `i `uc ]
 "152
-[; ;main.c: 152:         pato = ADRESH;
+[; ;main.c: 152:         PIR1bits.ADIF = 0;
 [e = _PORTC -> -> 0 `i `uc ]
 "153
-[; ;main.c: 153:         y = pato;
+[; ;main.c: 153:         INTCONbits.RBIF = 0;
 [e = _TRISD -> -> 0 `i `uc ]
 "154
-[; ;main.c: 154:         x = pato & 0x0F;
+[; ;main.c: 154:         pato = ADRESH;
 [e = _PORTD -> -> 0 `i `uc ]
 "155
-[; ;main.c: 155:         y = ((pato & 0xF0) >> 4);
+[; ;main.c: 155:         y = pato;
 [e = _TRISE -> -> 0 `i `uc ]
 "156
-[; ;main.c: 156: 
+[; ;main.c: 156:         x = pato & 0x0F;
 [e = _PORTE -> -> 0 `i `uc ]
 "157
-[; ;main.c: 157:     }
+[; ;main.c: 157:         y = ((pato & 0xF0) >> 4);
 [e :UE 148 ]
 }
 "163
-[; ;main.c: 163: }
+[; ;main.c: 163:         INTCONbits.T0IF = 0;
 [v _toggle `(v ~T0 @X0 1 ef ]
 {
 [e :U _toggle ]
 [f ]
 "164
+[; ;main.c: 164:         return;
 [e $ ! == -> _tog `i -> 0 `i 150  ]
 {
 "165
+[; ;main.c: 165:     }
 [e = _tog -> -> 1 `i `uc ]
 "166
+[; ;main.c: 166: 
 }
 [e :U 150 ]
 "167
+[; ;main.c: 167: }
 [e $ ! == -> _tog `i -> 1 `i 151  ]
 {
 "168
@@ -752,46 +756,54 @@ Version 4.0 HI-TECH Software Intermediate Code
 "180
 [e = . . _INTCONbits 0 0 -> -> 0 `i `uc ]
 "181
+[e $UE 152  ]
+"182
 }
 [e :U 153 ]
-"182
+"183
 [e $ ! && == -> . . _INTCONbits 0 0 `i -> 1 `i == -> . . _PORTBbits 0 1 `i -> 0 `i 154  ]
 {
-"183
-[e = _PORTD -> - -> _PORTD `i -> 1 `i `uc ]
 "184
-[e = . . _INTCONbits 0 0 -> -> 0 `i `uc ]
+[e = _PORTD -> - -> _PORTD `i -> 1 `i `uc ]
 "185
+[e = . . _INTCONbits 0 0 -> -> 0 `i `uc ]
+"186
+[e $UE 152  ]
+"187
 }
 [e :U 154 ]
-"186
+"188
 [e $ ! == -> . . _PIR1bits 0 6 `i -> 1 `i 155  ]
 {
-"187
-[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
-"188
-[e = . . _INTCONbits 0 0 -> -> 0 `i `uc ]
 "189
-[e = _pato -> _ADRESH `uc ]
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
 "190
-[e = _y _pato ]
+[e = . . _INTCONbits 0 0 -> -> 0 `i `uc ]
 "191
-[e = _x -> & -> _pato `i -> 15 `i `uc ]
+[e = _pato -> _ADRESH `uc ]
 "192
-[e = _y -> >> & -> _pato `i -> 240 `i -> 4 `i `uc ]
+[e = _y _pato ]
+"193
+[e = _x -> & -> _pato `i -> 15 `i `uc ]
 "194
+[e = _y -> >> & -> _pato `i -> 240 `i -> 4 `i `uc ]
+"195
+[e $UE 152  ]
+"197
 }
 [e :U 155 ]
-"195
+"198
 [e $ ! == -> . . _INTCONbits 0 2 `i -> 1 `i 156  ]
 {
-"196
+"199
 [e ( _toggle ..  ]
-"197
+"200
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"198
+"201
+[e $UE 152  ]
+"202
 }
 [e :U 156 ]
-"200
+"204
 [e :UE 152 ]
 }
