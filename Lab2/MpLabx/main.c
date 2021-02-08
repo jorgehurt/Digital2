@@ -12,6 +12,7 @@
 //**************************
 
 #include <xc.h>
+#include "oscilador.h"
 
 //**************************
 // Palabra de configuración
@@ -35,23 +36,22 @@
 
 #define _XTAL_FREQ 8000000
 
-#define Ledr PORTEbits.RE0
 
+#define Ledr PORTEbits.RE0
 
 //**************************
 // Variables
 //**************************
 
 char contadorJA = 0;
+char Push1 = 0;
+char Push2 = 0;
 
 
 //**************************
 // Prototipos de funciones
 //**************************
 void setup(void);
-void semaforo(void);
-
-
 //**************************
 // Ciclo principal
 //**************************
@@ -64,9 +64,6 @@ void main(void) {
     // Loop principal
     //**************************
 
-
-
-
     while (1) {
         
     }
@@ -77,11 +74,24 @@ void main(void) {
 //**************************
 
 void setup(void) {
+    initosc(7);
+    OSCCONbits.OSTS = 0;
+    OSCCONbits.HTS = 0;
+    OSCCONbits.LTS = 0;
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    INTCONbits.RBIE = 1;
+    INTCONbits.T0IE = 1;
+    INTCONbits.INTE = 1;
+    INTCONbits.T0IF = 0;
+    INTCONbits.RBIF = 0;
+    IOCBbits.IOCB0 = 1;
+    IOCBbits.IOCB1 = 1;
     ANSEL = 0;
-    ANSELH = 0;
+    ANSELH = 0b00000001;
     TRISA = 0;
     PORTA = 0;
-    TRISB = 0;
+    TRISB = 0b00000111;
     PORTB = 0;
     TRISC = 0;
     PORTC = 0;
@@ -89,18 +99,24 @@ void setup(void) {
     PORTD = 0;
     TRISE = 0;
     PORTE = 0;
-
-
-
 }
 
 //**************************
 // Funciones
 //**************************
 
-void semaforo(void) {
+//**************************
+// Interrupciones
+//**************************
 
+void __interrupt() ISR() {
+    if (INTCONbits.RBIF == 1 && PORTBbits.RB0==0) {
+        PORTD=PORTD+1;
+        INTCONbits.RBIF=0;  
+    }
+    if (INTCONbits.RBIF == 1 && PORTBbits.RB1==0) {
+        PORTD=PORTD-1;
+        INTCONbits.RBIF=0;  
+    }
+        INTCONbits.RBIF=0;   
 }
-
-
-
