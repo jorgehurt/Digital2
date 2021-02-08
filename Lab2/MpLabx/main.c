@@ -100,6 +100,10 @@ void main(void) {
             tog=0;
 
         }
+        if (pato>=PORTD){
+            PORTBbits.RB3 =1;
+        }
+        PORTBbits.RB3 =0;
 
     }
 }
