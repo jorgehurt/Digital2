@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "adc.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,8 +6,9 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
-# 14 "main.c"
+# 1 "adc.c" 2
+# 1 "./adc.h" 1
+# 13 "./adc.h"
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2488,10 +2489,8 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 14 "main.c" 2
+# 13 "./adc.h" 2
 
-# 1 "./oscilador.h" 1
-# 14 "./oscilador.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
 typedef signed char int8_t;
@@ -2625,121 +2624,26 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 14 "./oscilador.h" 2
-
-
-
-
-
-void initosc(uint8_t IRCF);
-# 15 "main.c" 2
-
-# 1 "./adc.h" 1
-# 14 "./adc.h"
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 14 "./adc.h" 2
 
 
 void conversion(int channel);
-# 16 "main.c" 2
-
-
-
-
-
-
-#pragma config FOSC = XT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
-
-
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
-# 47 "main.c"
-char contadorJA = 0;
-
-
-
-
-
-void setup(void);
-
-
-
-
-void main(void) {
-
-    setup();
-
-
-
-
-
-    while (1) {
-
-    }
-}
-
-
-
-
-
-void setup(void) {
-
-    initosc(7);
-    OSCCONbits.OSTS = 0;
-    OSCCONbits.HTS = 0;
-    OSCCONbits.LTS = 0;
-
+# 1 "adc.c" 2
+# 17 "adc.c"
+void conversion(int channel){
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
-    INTCONbits.RBIE = 1;
-    INTCONbits.T0IE = 1;
-    INTCONbits.INTE = 1;
     PIE1bits.ADIE = 1;
-
-    INTCONbits.T0IF = 0;
-    INTCONbits.RBIF = 0;
     PIR1bits.ADIF = 0;
+    ADCON0=0b01000000;
 
-    IOCBbits.IOCB0 = 1;
-    IOCBbits.IOCB1 = 1;
-    IOCBbits.IOCB2 = 1;
+    ADCON1=0b00000000;
+    ADCON0bits.ADON = 1;
+    ADCON0bits.CHS=channel;
+    PIR1bits.ADIF = 0;
+    _delay((unsigned long)((10)*(8000000/4000.0)));
+    ADCON0bits.GO_DONE=1;
+    while(ADCON0bits.GO_DONE==1);
 
-    ANSEL = 0;
-    ANSELH = 0b00000001;
-    TRISA = 0;
-    PORTA = 0;
-    TRISB = 0b00000111;
-    PORTB = 0;
-    TRISC = 0;
-    PORTC = 0;
-    TRISD = 0;
-    PORTD = 0;
-    TRISE = 0;
-    PORTE = 0;
-}
-# 119 "main.c"
-void __attribute__((picinterrupt(("")))) ISR() {
-    if (INTCONbits.RBIF == 1 && PORTBbits.RB0 == 0) {
-        PORTD = PORTD + 1;
-        INTCONbits.RBIF = 0;
-    }
-    if (INTCONbits.RBIF == 1 && PORTBbits.RB1 == 0) {
-        PORTD = PORTD - 1;
-        INTCONbits.RBIF = 0;
-    }
-    if (INTCONbits.RBIF == 1) {
-        INTCONbits.RBIF = 0;
-        conversion(1000);
-        PORTD=ADRESH;
-    }
 
 }
