@@ -10,7 +10,7 @@
  * Created on 2021
  */
 //Iniciar Condiciones para generar la Interrupcion
-#define _XTAL_FREQ 8000000
+#define _XTAL_FREQ 4000000
 
 
 

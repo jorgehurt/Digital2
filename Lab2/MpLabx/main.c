@@ -11,6 +11,7 @@
 // Importación de librerías
 //**************************
 
+#include <stdint.h>
 #include <xc.h>
 #include "oscilador.h"
 #include "adc.h"
@@ -35,16 +36,19 @@
 #pragma config WRT = OFF        // Flash Program Memory Self Write Enable bits (Write protection off)
 
 
-#define _XTAL_FREQ 8000000
+#define _XTAL_FREQ 4000000
+
 
 //**************************
 // Variables
 //**************************
-
+char A1=0;
+char A2=0;
 char x = 0;
 char y = 0;
-char pato = 0;
+uint8_t pato = 0;
 char tog = 0;
+uint8_t perro = 0;
 
 uint8_t segmentos[] = {
     0b00111111,
@@ -68,6 +72,7 @@ uint8_t segmentos[] = {
 // Prototipos de funciones
 //**************************
 void setup(void);
+void op (void);
 void toggle(void);
 //**************************
 // Ciclo principal
@@ -85,25 +90,15 @@ void main(void) {
         ADCON0bits.ADON = 1;
         __delay_ms(10);
         ADCON0bits.GO_DONE = 1;
+        __delay_ms(10);
         while (ADCON0bits.GO_DONE == 1);
-        if (tog == 0) {
-            PORTEbits.RE0 = 1;
-            PORTEbits.RE1 = 0;
-            PORTC = segmentos[y];
-            tog=1;
+        if (pato >= perro) {
+            PORTBbits.RB3 = 1;
+        }
+        if (pato < perro) {
+            PORTBbits.RB3 = 0;
+        }
 
-        }
-        if (tog == 1) {
-            PORTEbits.RE0 = 0;
-            PORTEbits.RE1 = 1;
-            PORTC = segmentos[x];
-            tog=0;
-
-        }
-        if (pato>=PORTD){
-            PORTBbits.RB3 =1;
-        }
-        PORTBbits.RB3 =0;
 
     }
 }
@@ -114,7 +109,7 @@ void main(void) {
 
 void setup(void) {
     //Configuracion del Oscilador con libreria.
-    initosc(7);
+    initosc(6);
     OSCCONbits.OSTS = 0;
     OSCCONbits.HTS = 0;
     OSCCONbits.LTS = 0;
@@ -140,8 +135,8 @@ void setup(void) {
     OPTION_REGbits.T0CS = 0;
     OPTION_REGbits.T0SE = 0;
     OPTION_REGbits.PSA = 0;
-    OPTION_REGbits.PS = 0b000; // 1:2 tmr0 rate 
-    TMR0 = 2;
+    OPTION_REGbits.PS = 0b110; // 1:128 tmr0 rate 
+    TMR0 = 220; // Desborda cada 4.992 ms
     ANSEL = 0;
     ANSELH = 0b00000001;
     TRISA = 0;
@@ -154,20 +149,14 @@ void setup(void) {
     PORTD = 0;
     TRISE = 0;
     PORTE = 0;
+    tog = 0;
 }
 
 //**************************
 // Funciones
 //**************************
 
-void toggle(void) {
-    if (tog == 0) {
-        tog = 1;
-    }
-    if (tog == 1) {
-        tog = 0;
-    }
-}
+
 
 
 //**************************
@@ -175,19 +164,26 @@ void toggle(void) {
 //**************************
 
 void __interrupt() ISR() {
-    if (INTCONbits.RBIF == 1 && PORTBbits.RB0 == 0) {
-        PORTD = PORTD + 1;
-        INTCONbits.RBIF = 0;
-        return;
-    }
-    if (INTCONbits.RBIF == 1 && PORTBbits.RB1 == 0) {
-        PORTD = PORTD - 1;
-        INTCONbits.RBIF = 0;
-        return;
+//    if (INTCONbits.RBIF == 1 && PORTBbits.RB0 == 0) {
+//        PORTD = PORTD + 1;
+//        perro = perro + 1;
+//        INTCONbits.RBIF = 0;
+//        return;
+//    }
+//    if (INTCONbits.RBIF == 1 && PORTBbits.RB1 == 0) {
+//        PORTD = PORTD - 1;
+//        perro = perro - 1;
+//        INTCONbits.RBIF = 0;
+//        return;
+//    }
+    if(INTCONbits.RBIF == 1){
+       INTCONbits.RBIF = 0;
+       di();
+       op();
+       return;
     }
     if (PIR1bits.ADIF == 1) {
         PIR1bits.ADIF = 0;
-        INTCONbits.RBIF = 0;
         pato = ADRESH;
         y = pato;
         x = pato & 0x0F;
@@ -196,9 +192,49 @@ void __interrupt() ISR() {
 
     }
     if (INTCONbits.T0IF == 1) {
-        toggle();
-        INTCONbits.T0IF = 0;
-        return;
+        if (tog == 0) {
+            PORTEbits.RE0 = 0;
+            PORTEbits.RE1 = 1;
+            PORTC = segmentos[x];
+            tog = 1;
+            INTCONbits.T0IF = 0;
+            return;
+        }
+        if (tog == 1) {
+            PORTEbits.RE0 = 1;
+            PORTEbits.RE1 = 0;
+            tog = 0;
+            PORTC = segmentos[y];
+            INTCONbits.T0IF = 0;
+            return;
+        }
+        
+        
     }
 
+}
+
+void op(void){
+    if(PORTBbits.RB0==1){
+      A1=1; 
+      di();
+    }
+    if(PORTBbits.RB0==0 && A1==1){
+      A1=0;
+      perro=perro+1;
+      PORTD=PORTD+1;
+      ei();
+      return;
+    }
+    if(PORTBbits.RB1==1){
+      A2=1;
+      di();
+    }
+    if(PORTBbits.RB1==0 && A2==1){
+      A2=0;
+      perro=perro-1;
+      PORTD=PORTD-1;
+      ei();
+      return;
+    }
 }

@@ -8,6 +8,141 @@
 # 2 "<built-in>" 2
 # 1 "main.c" 2
 # 14 "main.c"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int8_t;
+
+
+
+
+
+
+typedef signed int int16_t;
+
+
+
+
+
+
+
+typedef __int24 int24_t;
+
+
+
+
+
+
+
+typedef signed long int int32_t;
+# 52 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint8_t;
+
+
+
+
+
+typedef unsigned int uint16_t;
+
+
+
+
+
+
+typedef __uint24 uint24_t;
+
+
+
+
+
+
+typedef unsigned long int uint32_t;
+# 88 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int_least8_t;
+
+
+
+
+
+
+
+typedef signed int int_least16_t;
+# 109 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef __int24 int_least24_t;
+# 118 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef signed long int int_least32_t;
+# 136 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint_least8_t;
+
+
+
+
+
+
+typedef unsigned int uint_least16_t;
+# 154 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef __uint24 uint_least24_t;
+
+
+
+
+
+
+
+typedef unsigned long int uint_least32_t;
+# 181 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int_fast8_t;
+
+
+
+
+
+
+typedef signed int int_fast16_t;
+# 200 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef __int24 int_fast24_t;
+
+
+
+
+
+
+
+typedef signed long int int_fast32_t;
+# 224 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint_fast8_t;
+
+
+
+
+
+typedef unsigned int uint_fast16_t;
+# 240 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef __uint24 uint_fast24_t;
+
+
+
+
+
+
+typedef unsigned long int uint_fast32_t;
+# 268 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef int32_t intmax_t;
+# 282 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef uint32_t uintmax_t;
+
+
+
+
+
+
+typedef int16_t intptr_t;
+
+
+
+
+typedef uint16_t uintptr_t;
+# 14 "main.c" 2
+
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2488,143 +2623,11 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 14 "main.c" 2
+# 15 "main.c" 2
 
 # 1 "./oscilador.h" 1
 # 14 "./oscilador.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int8_t;
-
-
-
-
-
-
-typedef signed int int16_t;
-
-
-
-
-
-
-
-typedef __int24 int24_t;
-
-
-
-
-
-
-
-typedef signed long int int32_t;
-# 52 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint8_t;
-
-
-
-
-
-typedef unsigned int uint16_t;
-
-
-
-
-
-
-typedef __uint24 uint24_t;
-
-
-
-
-
-
-typedef unsigned long int uint32_t;
-# 88 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_least8_t;
-
-
-
-
-
-
-
-typedef signed int int_least16_t;
-# 109 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_least24_t;
-# 118 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed long int int_least32_t;
-# 136 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_least8_t;
-
-
-
-
-
-
-typedef unsigned int uint_least16_t;
-# 154 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_least24_t;
-
-
-
-
-
-
-
-typedef unsigned long int uint_least32_t;
-# 181 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_fast8_t;
-
-
-
-
-
-
-typedef signed int int_fast16_t;
-# 200 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_fast24_t;
-
-
-
-
-
-
-
-typedef signed long int int_fast32_t;
-# 224 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_fast8_t;
-
-
-
-
-
-typedef unsigned int uint_fast16_t;
-# 240 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_fast24_t;
-
-
-
-
-
-
-typedef unsigned long int uint_fast32_t;
-# 268 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef int32_t intmax_t;
-# 282 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef uint32_t uintmax_t;
-
-
-
-
-
-
-typedef int16_t intptr_t;
-
-
-
-
-typedef uint16_t uintptr_t;
 # 14 "./oscilador.h" 2
 
 
@@ -2632,7 +2635,7 @@ typedef uint16_t uintptr_t;
 
 
 void initosc(uint8_t IRCF);
-# 15 "main.c" 2
+# 16 "main.c" 2
 
 # 1 "./adc.h" 1
 # 14 "./adc.h"
@@ -2641,7 +2644,7 @@ void initosc(uint8_t IRCF);
 
 
 void conversion(int channel);
-# 16 "main.c" 2
+# 17 "main.c" 2
 
 
 
@@ -2670,10 +2673,13 @@ void conversion(int channel);
 
 
 
+char A1=0;
+char A2=0;
 char x = 0;
 char y = 0;
-char pato = 0;
+uint8_t pato = 0;
 char tog = 0;
+uint8_t perro = 0;
 
 uint8_t segmentos[] = {
     0b00111111,
@@ -2697,6 +2703,7 @@ uint8_t segmentos[] = {
 
 
 void setup(void);
+void op (void);
 void toggle(void);
 
 
@@ -2712,27 +2719,17 @@ void main(void) {
     while (1) {
         conversion(1000);
         ADCON0bits.ADON = 1;
-        _delay((unsigned long)((10)*(8000000/4000.0)));
+        _delay((unsigned long)((10)*(4000000/4000.0)));
         ADCON0bits.GO_DONE = 1;
+        _delay((unsigned long)((10)*(4000000/4000.0)));
         while (ADCON0bits.GO_DONE == 1);
-        if (tog == 0) {
-            PORTEbits.RE0 = 1;
-            PORTEbits.RE1 = 0;
-            PORTC = segmentos[y];
-            tog=1;
+        if (pato >= perro) {
+            PORTBbits.RB3 = 1;
+        }
+        if (pato < perro) {
+            PORTBbits.RB3 = 0;
+        }
 
-        }
-        if (tog == 1) {
-            PORTEbits.RE0 = 0;
-            PORTEbits.RE1 = 1;
-            PORTC = segmentos[x];
-            tog=0;
-
-        }
-        if (pato>=PORTD){
-            PORTBbits.RB3 =1;
-        }
-        PORTBbits.RB3 =0;
 
     }
 }
@@ -2743,7 +2740,7 @@ void main(void) {
 
 void setup(void) {
 
-    initosc(7);
+    initosc(6);
     OSCCONbits.OSTS = 0;
     OSCCONbits.HTS = 0;
     OSCCONbits.LTS = 0;
@@ -2769,8 +2766,8 @@ void setup(void) {
     OPTION_REGbits.T0CS = 0;
     OPTION_REGbits.T0SE = 0;
     OPTION_REGbits.PSA = 0;
-    OPTION_REGbits.PS = 0b000;
-    TMR0 = 2;
+    OPTION_REGbits.PS = 0b110;
+    TMR0 = 220;
     ANSEL = 0;
     ANSELH = 0b00000001;
     TRISA = 0;
@@ -2783,40 +2780,19 @@ void setup(void) {
     PORTD = 0;
     TRISE = 0;
     PORTE = 0;
+    tog = 0;
 }
-
-
-
-
-
-void toggle(void) {
-    if (tog == 0) {
-        tog = 1;
-    }
-    if (tog == 1) {
-        tog = 0;
-    }
-}
-
-
-
-
-
-
+# 166 "main.c"
 void __attribute__((picinterrupt(("")))) ISR() {
-    if (INTCONbits.RBIF == 1 && PORTBbits.RB0 == 0) {
-        PORTD = PORTD + 1;
-        INTCONbits.RBIF = 0;
-        return;
-    }
-    if (INTCONbits.RBIF == 1 && PORTBbits.RB1 == 0) {
-        PORTD = PORTD - 1;
-        INTCONbits.RBIF = 0;
-        return;
+# 179 "main.c"
+    if(INTCONbits.RBIF == 1){
+       INTCONbits.RBIF = 0;
+       (INTCONbits.GIE = 0);
+       op();
+       return;
     }
     if (PIR1bits.ADIF == 1) {
         PIR1bits.ADIF = 0;
-        INTCONbits.RBIF = 0;
         pato = ADRESH;
         y = pato;
         x = pato & 0x0F;
@@ -2825,9 +2801,49 @@ void __attribute__((picinterrupt(("")))) ISR() {
 
     }
     if (INTCONbits.T0IF == 1) {
-        toggle();
-        INTCONbits.T0IF = 0;
-        return;
+        if (tog == 0) {
+            PORTEbits.RE0 = 0;
+            PORTEbits.RE1 = 1;
+            PORTC = segmentos[x];
+            tog = 1;
+            INTCONbits.T0IF = 0;
+            return;
+        }
+        if (tog == 1) {
+            PORTEbits.RE0 = 1;
+            PORTEbits.RE1 = 0;
+            tog = 0;
+            PORTC = segmentos[y];
+            INTCONbits.T0IF = 0;
+            return;
+        }
+
+
     }
 
+}
+
+void op(void){
+    if(PORTBbits.RB0==1){
+      A1=1;
+      (INTCONbits.GIE = 0);
+    }
+    if(PORTBbits.RB0==0 && A1==1){
+      A1=0;
+      perro=perro+1;
+      PORTD=PORTD+1;
+      (INTCONbits.GIE = 1);
+      return;
+    }
+    if(PORTBbits.RB1==1){
+      A2=1;
+      (INTCONbits.GIE = 0);
+    }
+    if(PORTBbits.RB1==0 && A2==1){
+      A2=0;
+      perro=perro-1;
+      PORTD=PORTD-1;
+      (INTCONbits.GIE = 1);
+      return;
+    }
 }
