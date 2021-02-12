@@ -2908,6 +2908,7 @@ uint8_t ADC2ADRESH;
 int PI;
 int plc;
 int Contador;
+char ContadorSend[5];
 char Lectura;
 
 void SerialCom(void) {
@@ -2999,8 +3000,12 @@ void ADC(void) {
             strcpy(PUNTO2A, ".");
             strcat(PUNTO2A, ADCchar2B);
             strcat(ADCchar2C, PUNTO2A);
+
+
+            Contador = Contador % 10;
+            itoa(ContadorSend, Contador, 10);
             strcpy(test, ".");
-            strcat(Contador, test);
+            strcat(ContadorSend, test);
             lcd_cmd(0xC0);
 
             lcd_msg(ADCchar1C);
@@ -3009,7 +3014,7 @@ void ADC(void) {
 
             lcd_msg(ADCchar2C);
             lcd_msg("V ");
-            lcd_msg(Contador);
+            lcd_msg(ContadorSend);
 
         }
     }

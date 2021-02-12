@@ -3,13 +3,13 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 0 ]
-"54 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\Lab3\MPLabx\adc.c
+"55 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\Lab3\MPLabx\adc.c
 [v _SerialCom SerialCom `(v  1 e 1 0 ]
-"68
+"69
 [v _Counter Counter `(v  1 e 1 0 ]
-"80
+"81
 [v _ISR ISR `II(v  1 e 1 0 ]
-"89
+"90
 [v _ADC ADC `(v  1 e 1 0 ]
 "5 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
@@ -32,7 +32,7 @@
 "8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 "8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\strcat.c
-[v _strcat strcat `(*.39uc  1 e 1 0 ]
+[v _strcat strcat `(*.4uc  1 e 1 0 ]
 "8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\strcpy.c
 [v _strcpy strcpy `(*.4uc  1 e 1 0 ]
 "4 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\Umul8_16.c
@@ -102,6 +102,8 @@
 "51
 [v _Contador Contador `i  1 e 2 0 ]
 "52
+[v _ContadorSend ContadorSend `[5]uc  1 e 5 0 ]
+"53
 [v _Lectura Lectura `uc  1 e 1 0 ]
 "166 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [v _PORTA PORTA `VEuc  1 e 1 @5 ]
@@ -238,15 +240,15 @@
 {
 "61
 } 0
-"54 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\Lab3\MPLabx\adc.c
+"55 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\Lab3\MPLabx\adc.c
 [v _SerialCom SerialCom `(v  1 e 1 0 ]
 {
-"66
+"67
 } 0
-"89
+"90
 [v _ADC ADC `(v  1 e 1 0 ]
 {
-"158
+"163
 } 0
 "8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\strcpy.c
 [v _strcpy strcpy `(*.4uc  1 e 1 0 ]
@@ -262,13 +264,16 @@
 "24
 } 0
 "8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\strcat.c
-[v _strcat strcat `(*.39uc  1 e 1 0 ]
+[v _strcat strcat `(*.4uc  1 e 1 0 ]
 {
+[v strcat@to to `*.4uc  1 a 1 wreg ]
 "15
-[v strcat@cp cp `*.39uc  1 a 2 0 ]
+[v strcat@cp cp `*.4uc  1 a 1 5 ]
 "8
-[v strcat@to to `*.39uc  1 p 2 3 ]
-[v strcat@from from `*.4DCuc  1 p 1 5 ]
+[v strcat@to to `*.4uc  1 a 1 wreg ]
+[v strcat@from from `*.4DCuc  1 p 1 3 ]
+"18
+[v strcat@to to `*.4uc  1 a 1 6 ]
 "26
 } 0
 "50 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\Lab3\MPLabx\LCD.c
@@ -459,13 +464,13 @@
 [v ___awdiv@dividend dividend `i  1 p 2 5 ]
 "41
 } 0
-"80 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\Lab3\MPLabx\adc.c
+"81 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\Lab3\MPLabx\adc.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"87
+"88
 } 0
-"68
+"69
 [v _Counter Counter `(v  1 e 1 0 ]
 {
-"78
+"79
 } 0

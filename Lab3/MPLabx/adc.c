@@ -49,6 +49,7 @@ uint8_t ADC2ADRESH;
 int PI;
 int plc;
 int Contador;
+char ContadorSend[5];
 char Lectura;
 
 void SerialCom(void) {
@@ -60,7 +61,7 @@ void SerialCom(void) {
     // Limpiamos las banderaS
     PIR1bits.RCIF = 0;
     PIR1bits.TXIF = 0;
-    SPBRG = 23; //10417
+    SPBRG = 23; //
     TXSTA = 0b00100100;
     RCSTA = 0b10010000;
 }
@@ -140,8 +141,12 @@ void ADC(void) {
             strcpy(PUNTO2A, ".");
             strcat(PUNTO2A, ADCchar2B);
             strcat(ADCchar2C, PUNTO2A);
+            
+            
+            Contador = Contador % 10;
+            itoa(ContadorSend, Contador, 10);
             strcpy(test, ".");
-            strcat(Contador, test);
+            strcat(ContadorSend, test);
             lcd_cmd(0xC0);
             // BAJAR A SEGUNDA LINEA
             lcd_msg(ADCchar1C);
@@ -150,7 +155,7 @@ void ADC(void) {
             // Espacio y V.d
             lcd_msg(ADCchar2C); // SIGUIENTE VALOR
             lcd_msg("V ");
-            lcd_msg(Contador); // EL OTRO VALOR
+            lcd_msg(ContadorSend); // EL OTRO VALOR
 
         }
     }

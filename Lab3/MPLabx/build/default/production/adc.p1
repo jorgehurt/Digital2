@@ -413,303 +413,312 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;adc.c: 51: int Contador;
 [v _Contador `i ~T0 @X0 1 e ]
 "52
-[; ;adc.c: 52: char Lectura;
+[; ;adc.c: 52: char ContadorSend[5];
+[v _ContadorSend `uc ~T0 @X0 -> 5 `i e ]
+"53
+[; ;adc.c: 53: char Lectura;
 [v _Lectura `uc ~T0 @X0 1 e ]
-"54
-[; ;adc.c: 54: void SerialCom(void) {
+"55
+[; ;adc.c: 55: void SerialCom(void) {
 [v _SerialCom `(v ~T0 @X0 1 ef ]
 {
 [e :U _SerialCom ]
 [f ]
-"56
-[; ;adc.c: 56:     INTCONbits.GIE = 1;
-[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
 "57
-[; ;adc.c: 57:     INTCONbits.PEIE = 1;
-[e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
+[; ;adc.c: 57:     INTCONbits.GIE = 1;
+[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
 "58
-[; ;adc.c: 58:     PIE1bits.RCIE = 1;
-[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
+[; ;adc.c: 58:     INTCONbits.PEIE = 1;
+[e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
 "59
-[; ;adc.c: 59:     PIE1bits.TXIE = 1;
+[; ;adc.c: 59:     PIE1bits.RCIE = 1;
+[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
+"60
+[; ;adc.c: 60:     PIE1bits.TXIE = 1;
 [e = . . _PIE1bits 0 4 -> -> 1 `i `uc ]
-"61
-[; ;adc.c: 61:     PIR1bits.RCIF = 0;
-[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
 "62
-[; ;adc.c: 62:     PIR1bits.TXIF = 0;
-[e = . . _PIR1bits 0 4 -> -> 0 `i `uc ]
+[; ;adc.c: 62:     PIR1bits.RCIF = 0;
+[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
 "63
-[; ;adc.c: 63:     SPBRG = 23;
-[e = _SPBRG -> -> 23 `i `uc ]
+[; ;adc.c: 63:     PIR1bits.TXIF = 0;
+[e = . . _PIR1bits 0 4 -> -> 0 `i `uc ]
 "64
-[; ;adc.c: 64:     TXSTA = 0b00100100;
-[e = _TXSTA -> -> 36 `i `uc ]
+[; ;adc.c: 64:     SPBRG = 23;
+[e = _SPBRG -> -> 23 `i `uc ]
 "65
-[; ;adc.c: 65:     RCSTA = 0b10010000;
-[e = _RCSTA -> -> 144 `i `uc ]
+[; ;adc.c: 65:     TXSTA = 0b00100100;
+[e = _TXSTA -> -> 36 `i `uc ]
 "66
-[; ;adc.c: 66: }
+[; ;adc.c: 66:     RCSTA = 0b10010000;
+[e = _RCSTA -> -> 144 `i `uc ]
+"67
+[; ;adc.c: 67: }
 [e :UE 143 ]
 }
-"68
-[; ;adc.c: 68: void Counter(void) {
+"69
+[; ;adc.c: 69: void Counter(void) {
 [v _Counter `(v ~T0 @X0 1 ef ]
 {
 [e :U _Counter ]
 [f ]
-"69
-[; ;adc.c: 69:     if (Lectura == '+') {
+"70
+[; ;adc.c: 70:     if (Lectura == '+') {
 [e $ ! == -> _Lectura `ui -> 43 `ui 145  ]
 {
-"70
-[; ;adc.c: 70:         Contador = Contador + 1;
-[e = _Contador + _Contador -> 1 `i ]
 "71
-[; ;adc.c: 71:         Lectura = 0;
-[e = _Lectura -> -> 0 `i `uc ]
+[; ;adc.c: 71:         Contador = Contador + 1;
+[e = _Contador + _Contador -> 1 `i ]
 "72
-[; ;adc.c: 72:     }
+[; ;adc.c: 72:         Lectura = 0;
+[e = _Lectura -> -> 0 `i `uc ]
+"73
+[; ;adc.c: 73:     }
 }
 [e :U 145 ]
-"73
-[; ;adc.c: 73:     if (Lectura == '-') {
+"74
+[; ;adc.c: 74:     if (Lectura == '-') {
 [e $ ! == -> _Lectura `ui -> 45 `ui 146  ]
 {
-"74
-[; ;adc.c: 74:         Contador = Contador - 1;
-[e = _Contador - _Contador -> 1 `i ]
 "75
-[; ;adc.c: 75:         Lectura = 0;
-[e = _Lectura -> -> 0 `i `uc ]
+[; ;adc.c: 75:         Contador = Contador - 1;
+[e = _Contador - _Contador -> 1 `i ]
 "76
-[; ;adc.c: 76:     }
+[; ;adc.c: 76:         Lectura = 0;
+[e = _Lectura -> -> 0 `i `uc ]
+"77
+[; ;adc.c: 77:     }
 }
 [e :U 146 ]
-"77
-[; ;adc.c: 77:     Lectura = 0;
-[e = _Lectura -> -> 0 `i `uc ]
 "78
-[; ;adc.c: 78: }
+[; ;adc.c: 78:     Lectura = 0;
+[e = _Lectura -> -> 0 `i `uc ]
+"79
+[; ;adc.c: 79: }
 [e :UE 144 ]
 }
 [v $root$_ISR `(v ~T0 @X0 0 e ]
-"80
-[; ;adc.c: 80: void __attribute__((picinterrupt(("")))) ISR(void) {
+"81
+[; ;adc.c: 81: void __attribute__((picinterrupt(("")))) ISR(void) {
 [v _ISR `(v ~T1 @X0 1 ef ]
 {
 [e :U _ISR ]
 [f ]
-"81
-[; ;adc.c: 81:     if (PIR1bits.RCIF == 1) {
+"82
+[; ;adc.c: 82:     if (PIR1bits.RCIF == 1) {
 [e $ ! == -> . . _PIR1bits 0 5 `i -> 1 `i 148  ]
 {
-"82
-[; ;adc.c: 82:         Lectura = RCREG;
-[e = _Lectura -> _RCREG `uc ]
 "83
-[; ;adc.c: 83:         PIR1bits.RCIF = 0;
-[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
+[; ;adc.c: 83:         Lectura = RCREG;
+[e = _Lectura -> _RCREG `uc ]
 "84
-[; ;adc.c: 84:         Counter();
+[; ;adc.c: 84:         PIR1bits.RCIF = 0;
+[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
+"85
+[; ;adc.c: 85:         Counter();
 [e ( _Counter ..  ]
-"86
-[; ;adc.c: 86:     }
+"87
+[; ;adc.c: 87:     }
 }
 [e :U 148 ]
-"87
-[; ;adc.c: 87: }
+"88
+[; ;adc.c: 88: }
 [e :UE 147 ]
 }
-"89
-[; ;adc.c: 89: void ADC(void) {
+"90
+[; ;adc.c: 90: void ADC(void) {
 [v _ADC `(v ~T0 @X0 1 ef ]
 {
 [e :U _ADC ]
 [f ]
-"90
-[; ;adc.c: 90:     while (1) {
+"91
+[; ;adc.c: 91:     while (1) {
 [e :U 151 ]
 {
-"92
-[; ;adc.c: 92:         ADCON0bits.ADCS = 01;
-[e = . . _ADCON0bits 0 3 -> -> 1 `i `uc ]
 "93
-[; ;adc.c: 93:         ADCON0bits.ADON = 1;
-[e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
+[; ;adc.c: 93:         ADCON0bits.ADCS = 01;
+[e = . . _ADCON0bits 0 3 -> -> 1 `i `uc ]
 "94
-[; ;adc.c: 94:         ADCON1bits.ADFM = 0;
-[e = . . _ADCON1bits 0 4 -> -> 0 `i `uc ]
+[; ;adc.c: 94:         ADCON0bits.ADON = 1;
+[e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
 "95
-[; ;adc.c: 95:         ADCON1bits.VCFG0 = 0;
-[e = . . _ADCON1bits 0 1 -> -> 0 `i `uc ]
+[; ;adc.c: 95:         ADCON1bits.ADFM = 0;
+[e = . . _ADCON1bits 0 4 -> -> 0 `i `uc ]
 "96
-[; ;adc.c: 96:         ADCON1bits.VCFG1 = 0;
+[; ;adc.c: 96:         ADCON1bits.VCFG0 = 0;
+[e = . . _ADCON1bits 0 1 -> -> 0 `i `uc ]
+"97
+[; ;adc.c: 97:         ADCON1bits.VCFG1 = 0;
 [e = . . _ADCON1bits 0 2 -> -> 0 `i `uc ]
-"98
-[; ;adc.c: 98:         lcd_msg("S1    S2   S3");
+"99
+[; ;adc.c: 99:         lcd_msg("S1    S2   S3");
 [e ( _lcd_msg (1 :s 1C ]
-"100
-[; ;adc.c: 100:         while (1) {
+"101
+[; ;adc.c: 101:         while (1) {
 [e :U 154 ]
 {
-"102
-[; ;adc.c: 102:             _delay((unsigned long)((1)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "103
-[; ;adc.c: 103:             ADCON0bits.CHS = 0000;
-[e = . . _ADCON0bits 0 2 -> -> 0 `i `uc ]
+[; ;adc.c: 103:             _delay((unsigned long)((1)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "104
-[; ;adc.c: 104:             ADCON0bits.ADON = 1;
-[e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
+[; ;adc.c: 104:             ADCON0bits.CHS = 0000;
+[e = . . _ADCON0bits 0 2 -> -> 0 `i `uc ]
 "105
-[; ;adc.c: 105:             ADCON0bits.GO = 1;
-[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+[; ;adc.c: 105:             ADCON0bits.ADON = 1;
+[e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
 "106
-[; ;adc.c: 106:             while (ADCON0bits.GO);
+[; ;adc.c: 106:             ADCON0bits.GO = 1;
+[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+"107
+[; ;adc.c: 107:             while (ADCON0bits.GO);
 [e $U 156  ]
 [e :U 157 ]
 [e :U 156 ]
 [e $ != -> . . _ADCON0bits 1 1 `i -> 0 `i 157  ]
 [e :U 158 ]
-"108
-[; ;adc.c: 108:             ADC1ADRESH = ADRESH;
+"109
+[; ;adc.c: 109:             ADC1ADRESH = ADRESH;
 [e = _ADC1ADRESH _ADRESH ]
-"110
-[; ;adc.c: 110:             ADCLA = (ADC1ADRESH * 5.0) / 255.0;
-[e = _ADCLA -> / * -> -> _ADC1ADRESH `i `d .5.0 .255.0 `f ]
 "111
-[; ;adc.c: 111:             DCADC1 = (ADCLA)*100;
+[; ;adc.c: 111:             ADCLA = (ADC1ADRESH * 5.0) / 255.0;
+[e = _ADCLA -> / * -> -> _ADC1ADRESH `i `d .5.0 .255.0 `f ]
+"112
+[; ;adc.c: 112:             DCADC1 = (ADCLA)*100;
 [e = _DCADC1 -> * _ADCLA -> -> 100 `i `f `i ]
-"113
-[; ;adc.c: 113:             ADC1A = DCADC1 % 10;
-[e = _ADC1A % _DCADC1 -> 10 `i ]
 "114
-[; ;adc.c: 114:             itoa(ADCchar1A, ADC1A, 10);
-[e ( _itoa (3 , , &U _ADCchar1A _ADC1A -> 10 `i ]
+[; ;adc.c: 114:             ADC1A = DCADC1 % 10;
+[e = _ADC1A % _DCADC1 -> 10 `i ]
 "115
-[; ;adc.c: 115:             ADC1B = (DCADC1 / 10) % 10;
-[e = _ADC1B % / _DCADC1 -> 10 `i -> 10 `i ]
+[; ;adc.c: 115:             itoa(ADCchar1A, ADC1A, 10);
+[e ( _itoa (3 , , &U _ADCchar1A _ADC1A -> 10 `i ]
 "116
-[; ;adc.c: 116:             itoa(ADCchar1B, ADC1B, 10);
-[e ( _itoa (3 , , &U _ADCchar1B _ADC1B -> 10 `i ]
+[; ;adc.c: 116:             ADC1B = (DCADC1 / 10) % 10;
+[e = _ADC1B % / _DCADC1 -> 10 `i -> 10 `i ]
 "117
-[; ;adc.c: 117:             ADC1C = (DCADC1 / 100) % 10;
-[e = _ADC1C % / _DCADC1 -> 100 `i -> 10 `i ]
+[; ;adc.c: 117:             itoa(ADCchar1B, ADC1B, 10);
+[e ( _itoa (3 , , &U _ADCchar1B _ADC1B -> 10 `i ]
 "118
-[; ;adc.c: 118:             itoa(ADCchar1C, ADC1C, 10);
+[; ;adc.c: 118:             ADC1C = (DCADC1 / 100) % 10;
+[e = _ADC1C % / _DCADC1 -> 100 `i -> 10 `i ]
+"119
+[; ;adc.c: 119:             itoa(ADCchar1C, ADC1C, 10);
 [e ( _itoa (3 , , &U _ADCchar1C _ADC1C -> 10 `i ]
-"120
-[; ;adc.c: 120:             strcat(ADCchar1B, ADCchar1A);
-[e ( _strcat (2 , &U _ADCchar1B -> &U _ADCchar1A `*Cuc ]
 "121
-[; ;adc.c: 121:             strcpy(PUNTO1A, ".");
-[e ( _strcpy (2 , &U _PUNTO1A :s 2C ]
+[; ;adc.c: 121:             strcat(ADCchar1B, ADCchar1A);
+[e ( _strcat (2 , &U _ADCchar1B -> &U _ADCchar1A `*Cuc ]
 "122
-[; ;adc.c: 122:             strcat(PUNTO1A, ADCchar1B);
-[e ( _strcat (2 , &U _PUNTO1A -> &U _ADCchar1B `*Cuc ]
+[; ;adc.c: 122:             strcpy(PUNTO1A, ".");
+[e ( _strcpy (2 , &U _PUNTO1A :s 2C ]
 "123
-[; ;adc.c: 123:             strcat(ADCchar1C, PUNTO1A);
+[; ;adc.c: 123:             strcat(PUNTO1A, ADCchar1B);
+[e ( _strcat (2 , &U _PUNTO1A -> &U _ADCchar1B `*Cuc ]
+"124
+[; ;adc.c: 124:             strcat(ADCchar1C, PUNTO1A);
 [e ( _strcat (2 , &U _ADCchar1C -> &U _PUNTO1A `*Cuc ]
-"125
-[; ;adc.c: 125:             _delay((unsigned long)((600)*(4000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 600 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
 "126
-[; ;adc.c: 126:             ADCON0bits.CHS = 0001;
-[e = . . _ADCON0bits 0 2 -> -> 1 `i `uc ]
+[; ;adc.c: 126:             _delay((unsigned long)((600)*(4000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 600 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
 "127
-[; ;adc.c: 127:             ADCON0bits.ADON = 1;
-[e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
+[; ;adc.c: 127:             ADCON0bits.CHS = 0001;
+[e = . . _ADCON0bits 0 2 -> -> 1 `i `uc ]
 "128
-[; ;adc.c: 128:             ADCON0bits.GO = 1;
-[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+[; ;adc.c: 128:             ADCON0bits.ADON = 1;
+[e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
 "129
-[; ;adc.c: 129:             while (ADCON0bits.GO);
+[; ;adc.c: 129:             ADCON0bits.GO = 1;
+[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+"130
+[; ;adc.c: 130:             while (ADCON0bits.GO);
 [e $U 159  ]
 [e :U 160 ]
 [e :U 159 ]
 [e $ != -> . . _ADCON0bits 1 1 `i -> 0 `i 160  ]
 [e :U 161 ]
-"130
-[; ;adc.c: 130:             ADC2ADRESH = ADRESH;
-[e = _ADC2ADRESH _ADRESH ]
 "131
-[; ;adc.c: 131:             ADCLB = ADC2ADRESH * 5.0 / 255.0;
-[e = _ADCLB -> / * -> -> _ADC2ADRESH `i `d .5.0 .255.0 `f ]
+[; ;adc.c: 131:             ADC2ADRESH = ADRESH;
+[e = _ADC2ADRESH _ADRESH ]
 "132
-[; ;adc.c: 132:             DCADC2 = (ADCLB)*100;
-[e = _DCADC2 -> * _ADCLB -> -> 100 `i `f `i ]
+[; ;adc.c: 132:             ADCLB = ADC2ADRESH * 5.0 / 255.0;
+[e = _ADCLB -> / * -> -> _ADC2ADRESH `i `d .5.0 .255.0 `f ]
 "133
-[; ;adc.c: 133:             ADC2A = DCADC2 % 10;
-[e = _ADC2A % _DCADC2 -> 10 `i ]
+[; ;adc.c: 133:             DCADC2 = (ADCLB)*100;
+[e = _DCADC2 -> * _ADCLB -> -> 100 `i `f `i ]
 "134
-[; ;adc.c: 134:             itoa(ADCchar2A, ADC2A, 10);
-[e ( _itoa (3 , , &U _ADCchar2A _ADC2A -> 10 `i ]
+[; ;adc.c: 134:             ADC2A = DCADC2 % 10;
+[e = _ADC2A % _DCADC2 -> 10 `i ]
 "135
-[; ;adc.c: 135:             ADC2B = (DCADC2 / 10) % 10;
-[e = _ADC2B % / _DCADC2 -> 10 `i -> 10 `i ]
+[; ;adc.c: 135:             itoa(ADCchar2A, ADC2A, 10);
+[e ( _itoa (3 , , &U _ADCchar2A _ADC2A -> 10 `i ]
 "136
-[; ;adc.c: 136:             itoa(ADCchar2B, ADC2B, 10);
-[e ( _itoa (3 , , &U _ADCchar2B _ADC2B -> 10 `i ]
+[; ;adc.c: 136:             ADC2B = (DCADC2 / 10) % 10;
+[e = _ADC2B % / _DCADC2 -> 10 `i -> 10 `i ]
 "137
-[; ;adc.c: 137:             ADC2C = (DCADC2 / 100) % 10;
-[e = _ADC2C % / _DCADC2 -> 100 `i -> 10 `i ]
+[; ;adc.c: 137:             itoa(ADCchar2B, ADC2B, 10);
+[e ( _itoa (3 , , &U _ADCchar2B _ADC2B -> 10 `i ]
 "138
-[; ;adc.c: 138:             itoa(ADCchar2C, ADC2C, 10);
-[e ( _itoa (3 , , &U _ADCchar2C _ADC2C -> 10 `i ]
+[; ;adc.c: 138:             ADC2C = (DCADC2 / 100) % 10;
+[e = _ADC2C % / _DCADC2 -> 100 `i -> 10 `i ]
 "139
-[; ;adc.c: 139:             strcat(ADCchar2B, ADCchar2A);
-[e ( _strcat (2 , &U _ADCchar2B -> &U _ADCchar2A `*Cuc ]
+[; ;adc.c: 139:             itoa(ADCchar2C, ADC2C, 10);
+[e ( _itoa (3 , , &U _ADCchar2C _ADC2C -> 10 `i ]
 "140
-[; ;adc.c: 140:             strcpy(PUNTO2A, ".");
-[e ( _strcpy (2 , &U _PUNTO2A :s 3C ]
+[; ;adc.c: 140:             strcat(ADCchar2B, ADCchar2A);
+[e ( _strcat (2 , &U _ADCchar2B -> &U _ADCchar2A `*Cuc ]
 "141
-[; ;adc.c: 141:             strcat(PUNTO2A, ADCchar2B);
-[e ( _strcat (2 , &U _PUNTO2A -> &U _ADCchar2B `*Cuc ]
+[; ;adc.c: 141:             strcpy(PUNTO2A, ".");
+[e ( _strcpy (2 , &U _PUNTO2A :s 3C ]
 "142
-[; ;adc.c: 142:             strcat(ADCchar2C, PUNTO2A);
-[e ( _strcat (2 , &U _ADCchar2C -> &U _PUNTO2A `*Cuc ]
+[; ;adc.c: 142:             strcat(PUNTO2A, ADCchar2B);
+[e ( _strcat (2 , &U _PUNTO2A -> &U _ADCchar2B `*Cuc ]
 "143
-[; ;adc.c: 143:             strcpy(test, ".");
-[e ( _strcpy (2 , &U _test :s 4C ]
-"144
-[; ;adc.c: 144:             strcat(Contador, test);
-[e ( _strcat (2 , -> _Contador `*uc -> &U _test `*Cuc ]
-"145
-[; ;adc.c: 145:             lcd_cmd(0xC0);
-[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
+[; ;adc.c: 143:             strcat(ADCchar2C, PUNTO2A);
+[e ( _strcat (2 , &U _ADCchar2C -> &U _PUNTO2A `*Cuc ]
+"146
+[; ;adc.c: 146:             Contador = Contador % 10;
+[e = _Contador % _Contador -> 10 `i ]
 "147
-[; ;adc.c: 147:             lcd_msg(ADCchar1C);
-[e ( _lcd_msg (1 -> &U _ADCchar1C `*uc ]
+[; ;adc.c: 147:             itoa(ContadorSend, Contador, 10);
+[e ( _itoa (3 , , &U _ContadorSend _Contador -> 10 `i ]
+"148
+[; ;adc.c: 148:             strcpy(test, ".");
+[e ( _strcpy (2 , &U _test :s 4C ]
 "149
-[; ;adc.c: 149:             lcd_msg("V ");
-[e ( _lcd_msg (1 :s 5C ]
-"151
-[; ;adc.c: 151:             lcd_msg(ADCchar2C);
-[e ( _lcd_msg (1 -> &U _ADCchar2C `*uc ]
+[; ;adc.c: 149:             strcat(ContadorSend, test);
+[e ( _strcat (2 , &U _ContadorSend -> &U _test `*Cuc ]
+"150
+[; ;adc.c: 150:             lcd_cmd(0xC0);
+[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
 "152
-[; ;adc.c: 152:             lcd_msg("V ");
+[; ;adc.c: 152:             lcd_msg(ADCchar1C);
+[e ( _lcd_msg (1 -> &U _ADCchar1C `*uc ]
+"154
+[; ;adc.c: 154:             lcd_msg("V ");
+[e ( _lcd_msg (1 :s 5C ]
+"156
+[; ;adc.c: 156:             lcd_msg(ADCchar2C);
+[e ( _lcd_msg (1 -> &U _ADCchar2C `*uc ]
+"157
+[; ;adc.c: 157:             lcd_msg("V ");
 [e ( _lcd_msg (1 :s 6C ]
-"153
-[; ;adc.c: 153:             lcd_msg(Contador);
-[e ( _lcd_msg (1 -> _Contador `*uc ]
-"155
-[; ;adc.c: 155:         }
+"158
+[; ;adc.c: 158:             lcd_msg(ContadorSend);
+[e ( _lcd_msg (1 -> &U _ContadorSend `*uc ]
+"160
+[; ;adc.c: 160:         }
 }
 [e :U 153 ]
 [e $U 154  ]
 [e :U 155 ]
-"156
-[; ;adc.c: 156:     }
+"161
+[; ;adc.c: 161:     }
 }
 [e :U 150 ]
 [e $U 151  ]
 [e :U 152 ]
-"157
-[; ;adc.c: 157:     return;
+"162
+[; ;adc.c: 162:     return;
 [e $UE 149  ]
-"158
-[; ;adc.c: 158: }
+"163
+[; ;adc.c: 163: }
 [e :UE 149 ]
 }
 [a 1C 83 49 32 32 32 32 83 50 32 32 32 83 51 0 ]
