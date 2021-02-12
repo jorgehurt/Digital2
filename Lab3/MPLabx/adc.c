@@ -3,6 +3,9 @@
  * Author: Jorge Rafael Hurtado Garcia
  */
 
+//**************************
+// Importación de librerías
+//**************************
 #include <stdio.h>
 #include <stdlib.h>
 #include <xc.h>

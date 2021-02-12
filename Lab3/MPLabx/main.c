@@ -38,16 +38,20 @@
 #pragma config BOR4V = BOR40V   // Brown-out Reset Selection bit (Brown-out Reset set to 4.0V)
 #pragma config WRT = OFF        // Flash Program Memory Self Write Enable bits (Write protection off)
 
-
+//**************************
+// Main Program
+//**************************
 
 void main(void){
-    //Configuracion del Oscilador. Para Frecuencia de 8 Mhz
+    //Setup
+    //Configuracion del Oscilador.
     OSCCONbits.IRCF = 0b110; //4Mhz
     OSCCONbits.OSTS= 0;
     OSCCONbits.HTS = 0;
     OSCCONbits.LTS = 0;
     OSCCONbits.SCS = 1; 
     //Configuracion de Puertos y lectura de datos.
+    //Lectura de potencimetros en AN0 y AN1
     ANSEL = 0b00000011;
     ANSELH= 0;
     TRISA = 0b00000011;
@@ -60,9 +64,9 @@ void main(void){
     PORTC = 0;
     PORTD = 0;
     PORTE = 0;
-    
-
-    
+    //**************************
+    // Loop Program
+    //**************************    
            
     while(1){
         inicializacion(); 
