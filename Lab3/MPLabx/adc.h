@@ -17,6 +17,7 @@
 // include processor files - each processor file is guarded.  
 #define _XTAL_FREQ 4000000
 void ADC(void);
-void PC (int n);
+void SerialCom (void);
+void Counter(void);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
