@@ -2864,7 +2864,16 @@ void ADC(void);
 void SerialCom (void);
 void Counter(void);
 # 18 "main.c" 2
-# 27 "main.c"
+
+# 1 "./eusart.h" 1
+# 13 "./eusart.h"
+uint8_t UART_INIT(const long int baudrate);
+uint8_t UART_READ(void);
+void UART_Read_Text(char *Output, unsigned int length);
+void UART_WRITE(char data);
+void UART_Write_Text(char *text);
+# 19 "main.c" 2
+# 28 "main.c"
 #pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
@@ -2898,7 +2907,7 @@ void main(void){
     TRISA = 0b00000011;
     TRISB = 0;
     TRISD = 0;
-    TRISC = 0;
+    TRISC = 0b10000000;
     TRISE = 0;
     PORTA = 0;
     PORTB = 0;
@@ -2912,6 +2921,8 @@ void main(void){
     while(1){
         inicializacion();
         ADC();
+        UART_INIT(9600);
         SerialCom();
+        Counter();
     }
 }

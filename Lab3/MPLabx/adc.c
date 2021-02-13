@@ -15,6 +15,7 @@
 #include <xc.h>
 #include "LCD.h"
 #include "adc.h"
+#include "eusart.h"
 #include <stdint.h>
 #include <string.h>
 
@@ -50,44 +51,54 @@ int PI;
 int plc;
 int Contador;
 char ContadorSend[5];
-char Lectura;
+int Lectura;
 
 void SerialCom(void) {
     //Habilitamos las Interrupciones
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
     PIE1bits.RCIE = 1;
-    PIE1bits.TXIE = 1;
+    PIE1bits.TXIE = 0;
     // Limpiamos las banderaS
     PIR1bits.RCIF = 0;
     PIR1bits.TXIF = 0;
-    SPBRG = 23; //
+    SPBRGH = 0;
+    SPBRG = 25; //9600
     TXSTA = 0b00100100;
     RCSTA = 0b10010000;
+    BAUDCTLbits.BRG16 = 0;
+    Contador = 0;
+    Lectura = 0;
 }
 
 void Counter(void) {
     if (Lectura == '+') {
         Contador = Contador + 1;
-        Lectura = 0;
+        
+        return;
     }
     if (Lectura == '-') {
         Contador = Contador - 1;
-        Lectura = 0;
+        return;
     }
-    Lectura = 0;
+    Lectura = '0';
 }
 
 void __interrupt() ISR(void) {
-    if (PIR1bits.RCIF == 1) {
+    if (PIR1bits.RCIF==1) {
         Lectura = RCREG;
-        PIR1bits.RCIF = 0;
         Counter();
-
+        PIR1bits.RCIF = 0;
+        return;
     }
+    RCSTAbits.CREN = 0;
+    __delay_ms(10);
+    RCSTAbits.CREN = 1;
+
 }
 
 void ADC(void) {
+    SerialCom();
     while (1) {
         //Configuracion de ADC 
         ADCON0bits.ADCS = 01;
@@ -96,11 +107,11 @@ void ADC(void) {
         ADCON1bits.VCFG0 = 0;
         ADCON1bits.VCFG1 = 0;
         //Impresion de Headers en LCD
-        lcd_msg("S1    S2   S3");
+        lcd_msg("S1:    S2:    S3:");
         // Loop principal de lectura e impresion
         while (1) {
             //Lectura de ADC en AN0
-            __delay_ms(1);
+            __delay_ms(10);
             ADCON0bits.CHS = 0000;
             ADCON0bits.ADON = 1;
             ADCON0bits.GO = 1;
@@ -123,7 +134,7 @@ void ADC(void) {
             strcat(PUNTO1A, ADCchar1B);
             strcat(ADCchar1C, PUNTO1A);
 
-            __delay_us(600);
+            __delay_ms(10);
             ADCON0bits.CHS = 0001;
             ADCON0bits.ADON = 1; // adc on
             ADCON0bits.GO = 1;
@@ -141,12 +152,7 @@ void ADC(void) {
             strcpy(PUNTO2A, ".");
             strcat(PUNTO2A, ADCchar2B);
             strcat(ADCchar2C, PUNTO2A);
-            
-            
-            Contador = Contador % 10;
-            itoa(ContadorSend, Contador, 10);
-            strcpy(test, ".");
-            strcat(ContadorSend, test);
+            sprintf(ContadorSend, "%.1i", Contador);
             lcd_cmd(0xC0);
             // BAJAR A SEGUNDA LINEA
             lcd_msg(ADCchar1C);
@@ -156,6 +162,7 @@ void ADC(void) {
             lcd_msg(ADCchar2C); // SIGUIENTE VALOR
             lcd_msg("V ");
             lcd_msg(ContadorSend); // EL OTRO VALOR
+
 
         }
     }

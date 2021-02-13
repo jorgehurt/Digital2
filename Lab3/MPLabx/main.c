@@ -16,6 +16,7 @@
 #include "pic16f887.h"
 #include "LCD.h"
 #include "adc.h"
+#include "eusart.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -57,7 +58,7 @@ void main(void){
     TRISA = 0b00000011;
     TRISB = 0; 
     TRISD = 0;
-    TRISC = 0;
+    TRISC = 0b10000000;
     TRISE = 0;
     PORTA = 0;
     PORTB = 0;
@@ -71,6 +72,8 @@ void main(void){
     while(1){
         inicializacion(); 
         ADC();
+        UART_INIT(9600);
         SerialCom();
+        Counter();
     }
 }
