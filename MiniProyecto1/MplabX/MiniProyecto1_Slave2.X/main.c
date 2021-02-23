@@ -16,6 +16,7 @@
 #include "pic16f887.h"
 #include "LCD.h"
 #include "adc.h"
+#include "IOCPORTB.h"
 #include "eusart.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,7 +44,14 @@
 //**************************
 // Main Program
 //**************************
-uint8_t ADC1ADRESH;
+
+//Insertamos Variables de Control
+uint8_t Inc = 0;
+uint8_t Dec = 0;
+uint8_t ContadorID=0;
+
+//Insertamos prototipos de Funciones
+void Contador(void);
 
 void main(void) {
     //Setup
@@ -55,10 +63,10 @@ void main(void) {
     OSCCONbits.SCS = 1;
     //Configuracion de Puertos y lectura de datos.
     //Lectura de potencimetros en AN0.
-    ANSEL = 0b00000001;
+    ANSEL = 0;
     ANSELH = 0;
-    TRISA = 0b00000001;
-    TRISB = 0;
+    TRISA = 0;
+    TRISB = 0b00000011;
     TRISD = 0;
     TRISC = 0;
     TRISE = 0;
@@ -72,21 +80,35 @@ void main(void) {
     //**************************    
 
     while (1) {
-        ADCInit();
-        ADCON0bits.ADON = 1;
-        ADCON0bits.GO = 1;
-        while (ADCON0bits.GO);
-        __delay_ms(10);
-        PORTD=ADC1ADRESH;
-        
+        IOCInit();
+        //Imprimimos el valor del contador al puerto D.
+        PORTD = ContadorID;
     }
 
 }
 
 void __interrupt() ISR(void) {
-    if (PIR1bits.ADIF==1) {
-        ADC1ADRESH=ADRESH;
-        PIR1bits.ADIF=0;
+    if (INTCONbits.RBIF == 1) {
+        Contador();
+        INTCONbits.RBIF = 0;
         return;
     }
+}
+
+void Contador(void) {
+    if (PORTBbits.RB0 == 1) {
+        Inc = 1;
+    }
+    if (PORTBbits.RB0 == 0 && Inc == 1) {
+        Inc = 0;
+        ContadorID=ContadorID+1;
+    }
+    if (PORTBbits.RB1 == 1) {
+        Dec = 1;
+    }
+    if (PORTBbits.RB1 == 0 && Dec == 1) {
+        Dec = 0;
+        ContadorID=ContadorID-1;
+    }
+
 }
