@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.31 build 20201012212115 
-                                                                                               Fri Feb 12 23:34:39 2021
+                                                                                               Mon Feb 22 16:39:03 2021
 
 Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1 
      1                           	processor	16F887
@@ -1839,8 +1839,8 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
   1825  088D  2892               	goto	l180
   1826  088E                     l1808:
   1827                           
-  1828                           ;adc.c: 84:     Lectura = 'G';
-  1829  088E  3047               	movlw	71
+  1828                           ;adc.c: 84:     Lectura = '0';
+  1829  088E  3030               	movlw	48
   1830  088F  00F6               	movwf	_Lectura
   1831  0890  3000               	movlw	0
   1832  0891  00F7               	movwf	_Lectura+1
@@ -7502,8 +7502,8 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
   7453  0868  286D               	goto	i1l180
   7454  0869                     i1l1822:
   7455                           
-  7456                           ;adc.c: 84:     Lectura = 'G';
-  7457  0869  3047               	movlw	71
+  7456                           ;adc.c: 84:     Lectura = '0';
+  7457  0869  3030               	movlw	48
   7458  086A  00F6               	movwf	_Lectura
   7459  086B  3000               	movlw	0
   7460  086C  00F7               	movwf	_Lectura+1
@@ -7923,7 +7923,7 @@ DATA                 0      0      A0      12        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.31 build 20201012212115 
-Symbol Table                                                                                   Fri Feb 12 23:34:39 2021
+Symbol Table                                                                                   Mon Feb 22 16:39:03 2021
 
            ___fldiv@aexp 0061             ___fldiv@bexp 0060                        pc 0002  
            ___fldiv@sign 0059           ___bmul@product 0020                       l61 1775  

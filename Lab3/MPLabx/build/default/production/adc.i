@@ -2948,7 +2948,7 @@ void Counter(void) {
         Contador = Contador - 1;
         return;
     }
-    Lectura = 'G';
+    Lectura = '0';
 }
 
 void __attribute__((picinterrupt(("")))) ISR(void) {
