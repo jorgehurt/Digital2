@@ -54,18 +54,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25 ./LCD.h
 [; ;./LCD.h: 25: void inicializacion(void);
 [v _inicializacion `(v ~T0 @X0 0 ef ]
-"19 ./adc.h
-[; ;./adc.h: 19: void ADC(void);
-[v _ADC `(v ~T0 @X0 0 ef ]
-"13 ./eusart.h
-[; ;./eusart.h: 13: void UART_INIT(void);
-[v _UART_INIT `(v ~T0 @X0 0 ef ]
-"20 ./adc.h
-[; ;./adc.h: 20: void SerialCom (void);
-[v _SerialCom `(v ~T0 @X0 0 ef ]
-"21
-[; ;./adc.h: 21: void Counter(void);
-[v _Counter `(v ~T0 @X0 0 ef ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -300,6 +288,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3546
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
+"19 ./adc.h
+[; ;./adc.h: 19: uint8_t ADC1ADRESH;
+[v _ADC1ADRESH `uc ~T0 @X0 1 e ]
 "28 main.c
 [; ;main.c: 28: 
 [p x FOSC  =  INTRC_NOCLKOUT ]
@@ -313,22 +304,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 31:         inicializacion();
 [p x MCLRE  =  OFF       ]
 "32
-[; ;main.c: 32:         ADC();
+[; ;main.c: 32: 
 [p x CP  =  OFF          ]
 "33
-[; ;main.c: 33:         UART_INIT();
+[; ;main.c: 33:     }
 [p x CPD  =  OFF         ]
 "34
-[; ;main.c: 34:         SerialCom();
+[; ;main.c: 34: }
 [p x BOREN  =  OFF       ]
 "35
-[; ;main.c: 35:         Counter();
 [p x IESO  =  OFF        ]
 "36
-[; ;main.c: 36:     }
 [p x FCMEN  =  OFF       ]
 "37
-[; ;main.c: 37: }
 [p x LVP  =  OFF         ]
 "39
 [p x BOR4V  =  BOR40V    ]
@@ -379,19 +367,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "73
 [e ( _inicializacion ..  ]
-"74
-[e ( _ADC ..  ]
 "75
-[e ( _UART_INIT ..  ]
-"76
-[e ( _SerialCom ..  ]
-"77
-[e ( _Counter ..  ]
-"78
 }
 [e :U 144 ]
 [e $U 145  ]
 [e :U 146 ]
-"79
+"76
 [e :UE 143 ]
 }

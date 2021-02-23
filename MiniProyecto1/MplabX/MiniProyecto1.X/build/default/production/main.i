@@ -2860,9 +2860,8 @@ extern char * strrichr(const char *, int);
 
 
 
-void ADC(void);
-void SerialCom (void);
-void Counter(void);
+uint8_t ADC1ADRESH;
+void ADCInit(void);
 # 18 "main.c" 2
 
 # 1 "./eusart.h" 1
@@ -2918,9 +2917,6 @@ void main(void){
 
     while(1){
         inicializacion();
-        ADC();
-        UART_INIT();
-        SerialCom();
-        Counter();
+
     }
 }

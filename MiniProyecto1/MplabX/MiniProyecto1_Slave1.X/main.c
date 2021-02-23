@@ -78,7 +78,6 @@ void main(void) {
         while (ADCON0bits.GO);
         __delay_ms(10);
         PORTD=ADC1ADRESH;
-        
     }
 
 }

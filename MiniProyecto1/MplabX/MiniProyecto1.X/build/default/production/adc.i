@@ -7,7 +7,7 @@
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "adc.c" 2
-# 13 "adc.c"
+# 10 "adc.c"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 1 3
 
 
@@ -105,7 +105,7 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 #pragma printf_check(sprintf) const
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
-# 13 "adc.c" 2
+# 10 "adc.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdlib.h" 1 3
 
@@ -203,7 +203,7 @@ extern char * ltoa(char * buf, long val, int base);
 extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
-# 14 "adc.c" 2
+# 11 "adc.c" 2
 
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
@@ -2681,7 +2681,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 15 "adc.c" 2
+# 12 "adc.c" 2
 
 # 1 "./LCD.h" 1
 # 20 "./LCD.h"
@@ -2691,7 +2691,7 @@ void lcd_msg(unsigned char *c);
 void lcd_ready(void);
 void lcd_lat(void);
 void inicializacion(void);
-# 16 "adc.c" 2
+# 13 "adc.c" 2
 
 # 1 "./adc.h" 1
 # 13 "./adc.h"
@@ -2867,169 +2867,37 @@ extern char * strrichr(const char *, int);
 
 
 
-void ADC(void);
-void SerialCom (void);
-void Counter(void);
-# 17 "adc.c" 2
+uint8_t ADC1ADRESH;
+void ADCInit(void);
+# 14 "adc.c" 2
 
 # 1 "./eusart.h" 1
 # 13 "./eusart.h"
 void UART_INIT(void);
 uint8_t UART_READ(void);
 void UART_WRITE(char data);
-# 18 "adc.c" 2
+# 15 "adc.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 19 "adc.c" 2
+# 16 "adc.c" 2
 
 
 
 
 
 
-float ADCLA;
-int DCADC1;
-int ADC1A;
-int ADC1B;
-int ADC1C;
-char ADCchar1A[5];
-char ADCchar1B[5];
-char ADCchar1C[5];
-char PUNTO1A[5];
-char test[5];
-uint8_t ADC1ADRESH;
 
 
-float ADCLB;
-int DCADC2;
-int ADC2A;
-int ADC2B;
-int ADC2C;
-char ADCchar2A[5];
-char ADCchar2B[5];
-char ADCchar2C[5];
-char PUNTO2A[5];
-uint8_t ADC2ADRESH;
-
-
-int PI;
-int plc;
-int Contador;
-char ContadorSend[5];
-int Lectura;
-
-void SerialCom(void) {
-
+void ADCInit(void) {
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
-    PIE1bits.RCIE = 1;
-    PIE1bits.TXIE = 0;
-
-    PIR1bits.RCIF = 0;
-    PIR1bits.TXIF = 0;
-    SPBRGH = 0;
-    SPBRG = 25;
-    TXSTA = 0b00100100;
-    RCSTA = 0b10010000;
-    BAUDCTLbits.BRG16 = 0;
-    Contador = 0;
-    Lectura = 0;
-}
-
-void Counter(void) {
-    if (Lectura == '+') {
-        Contador = Contador + 1;
-
-        return;
-    }
-    if (Lectura == '-') {
-        Contador = Contador - 1;
-        return;
-    }
-    Lectura = '0';
-}
-
-void __attribute__((picinterrupt(("")))) ISR(void) {
-    if (PIR1bits.RCIF==1) {
-        Lectura = RCREG;
-        Counter();
-        PIR1bits.RCIF = 0;
-        return;
-    }
-    RCSTAbits.CREN = 0;
-    _delay((unsigned long)((10)*(4000000/4000.0)));
-    RCSTAbits.CREN = 1;
-
-}
-
-void ADC(void) {
-    SerialCom();
-    while (1) {
-
-        ADCON0bits.ADCS = 01;
-        ADCON0bits.ADON = 1;
-        ADCON1bits.ADFM = 0;
-        ADCON1bits.VCFG0 = 0;
-        ADCON1bits.VCFG1 = 0;
-
-        lcd_msg("S1:    S2:    S3:");
-
-        while (1) {
-
-            _delay((unsigned long)((10)*(4000000/4000.0)));
-            ADCON0bits.CHS = 0000;
-            ADCON0bits.ADON = 1;
-            ADCON0bits.GO = 1;
-            while (ADCON0bits.GO);
-
-            ADC1ADRESH = ADRESH;
-
-            ADCLA = (ADC1ADRESH * 5.0) / 255.0;
-            DCADC1 = (ADCLA)*100;
-
-            ADC1A = DCADC1 % 10;
-            itoa(ADCchar1A, ADC1A, 10);
-            ADC1B = (DCADC1 / 10) % 10;
-            itoa(ADCchar1B, ADC1B, 10);
-            ADC1C = (DCADC1 / 100) % 10;
-            itoa(ADCchar1C, ADC1C, 10);
-
-            strcat(ADCchar1B, ADCchar1A);
-            strcpy(PUNTO1A, ".");
-            strcat(PUNTO1A, ADCchar1B);
-            strcat(ADCchar1C, PUNTO1A);
-
-            _delay((unsigned long)((10)*(4000000/4000.0)));
-            ADCON0bits.CHS = 0001;
-            ADCON0bits.ADON = 1;
-            ADCON0bits.GO = 1;
-            while (ADCON0bits.GO);
-            ADC2ADRESH = ADRESH;
-            ADCLB = ADC2ADRESH * 5.0 / 255.0;
-            DCADC2 = (ADCLB)*100;
-            ADC2A = DCADC2 % 10;
-            itoa(ADCchar2A, ADC2A, 10);
-            ADC2B = (DCADC2 / 10) % 10;
-            itoa(ADCchar2B, ADC2B, 10);
-            ADC2C = (DCADC2 / 100) % 10;
-            itoa(ADCchar2C, ADC2C, 10);
-            strcat(ADCchar2B, ADCchar2A);
-            strcpy(PUNTO2A, ".");
-            strcat(PUNTO2A, ADCchar2B);
-            strcat(ADCchar2C, PUNTO2A);
-            sprintf(ContadorSend, "%.1i", Contador);
-            lcd_cmd(0xC0);
-
-            lcd_msg(ADCchar1C);
-
-            lcd_msg("V ");
-
-            lcd_msg(ADCchar2C);
-            lcd_msg("V ");
-            lcd_msg(ContadorSend);
-
-
-        }
-    }
-    return;
+    PIE1bits.ADIE = 1;
+    PIR1bits.ADIF = 0;
+    ADCON0bits.ADCS = 01;
+    ADCON0bits.CHS = 0000;
+    ADCON0bits.ADON = 1;
+    ADCON1bits.ADFM = 0;
+    ADCON1bits.VCFG1 = 0;
+    ADCON1bits.VCFG0 = 0;
+    _delay((unsigned long)((10)*(8000000/4000.0)));
 }

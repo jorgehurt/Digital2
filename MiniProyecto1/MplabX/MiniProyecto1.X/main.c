@@ -71,9 +71,6 @@ void main(void){
            
     while(1){
         inicializacion(); 
-        ADC();
-        UART_INIT();
-        SerialCom();
-        Counter();
+
     }
 }
