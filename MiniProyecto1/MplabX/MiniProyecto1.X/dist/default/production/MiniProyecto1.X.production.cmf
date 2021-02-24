@@ -13,15 +13,15 @@
 %PSECTS
 $dist/default/production\MiniProyecto1.X.production.o
 cinit CODE 0 7FB 7FB 5 2
-text1 CODE 0 78B 78B 1F 2
-text2 CODE 0 779 779 12 2
+text1 CODE 0 790 790 1F 2
+text2 CODE 0 77E 77E 12 2
 text3 CODE 0 7D2 7D2 29 2
-text4 CODE 0 76A 76A F 2
-maintext CODE 0 7AA 7AA 28 2
+text4 CODE 0 76F 76F F 2
+maintext CODE 0 7AF 7AF 23 2
 cstackCOMMON COMMON 1 70 70 3 1
 bssCOMMON COMMON 1 73 73 1 1
 config CONFIG 4 2007 2007 2 2
-$C:\Users\hurta\AppData\Local\Temp\sfbs.o
+$C:\Users\hurta\AppData\Local\Temp\s548.o
 end_init CODE 0 0 0 3 2
 config CONFIG 4 2007 2007 2 2
 # %UNUSED Section
@@ -38,13 +38,13 @@ BANK0 20-6F 1
 BANK1 A0-EF 1
 BANK2 110-16F 1
 BANK3 190-1EF 1
-CONST 3-769 2
+CONST 3-76E 2
 CONST 800-1FFF 2
-ENTRY 3-769 2
+ENTRY 3-76E 2
 ENTRY 800-1FFF 2
 IDLOC 2000-2003 2
 STACK 110-16F 1
-CODE 3-769 2
+CODE 3-76E 2
 CODE 800-1FFF 2
 SFR0 0-1F 1
 SFR1 80-9F 1
@@ -52,9 +52,9 @@ SFR2 100-10F 1
 SFR3 180-18F 1
 COMMON 74-7D 1
 EEDATA 2100-21FF 2
-STRCODE 3-769 2
+STRCODE 3-76E 2
 STRCODE 800-1FFF 2
-STRING 3-769 2
+STRING 3-76E 2
 STRING 800-1FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
@@ -70,17 +70,17 @@ STRING 800-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\MiniProyecto1.X.production.o
-7FB cinit CODE >953:C:\Users\hurta\AppData\Local\Temp\sfbs.s
-7FB cinit CODE >956:C:\Users\hurta\AppData\Local\Temp\sfbs.s
-7FB cinit CODE >967:C:\Users\hurta\AppData\Local\Temp\sfbs.s
-7FC cinit CODE >973:C:\Users\hurta\AppData\Local\Temp\sfbs.s
-7FC cinit CODE >975:C:\Users\hurta\AppData\Local\Temp\sfbs.s
-7FD cinit CODE >976:C:\Users\hurta\AppData\Local\Temp\sfbs.s
-76A text4 CODE >23:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-76A text4 CODE >24:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-76D text4 CODE >25:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-775 text4 CODE >26:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-778 text4 CODE >27:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+7FB cinit CODE >1109:C:\Users\hurta\AppData\Local\Temp\s548.s
+7FB cinit CODE >1112:C:\Users\hurta\AppData\Local\Temp\s548.s
+7FB cinit CODE >1123:C:\Users\hurta\AppData\Local\Temp\s548.s
+7FC cinit CODE >1129:C:\Users\hurta\AppData\Local\Temp\s548.s
+7FC cinit CODE >1131:C:\Users\hurta\AppData\Local\Temp\s548.s
+7FD cinit CODE >1132:C:\Users\hurta\AppData\Local\Temp\s548.s
+76F text4 CODE >23:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+76F text4 CODE >24:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+772 text4 CODE >25:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+77A text4 CODE >26:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+77D text4 CODE >27:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
 7D2 text3 CODE >28:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
 7D2 text3 CODE >29:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
 7D6 text3 CODE >30:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
@@ -94,32 +94,32 @@ $dist/default/production\MiniProyecto1.X.production.o
 7EF text3 CODE >38:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
 7F7 text3 CODE >39:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
 7FA text3 CODE >43:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-779 text2 CODE >15:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-77A text2 CODE >16:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-77F text2 CODE >17:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-783 text2 CODE >18:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-784 text2 CODE >19:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-785 text2 CODE >20:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-78A text2 CODE >21:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-78B text1 CODE >58:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-78B text1 CODE >59:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-791 text1 CODE >60:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-797 text1 CODE >61:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-79D text1 CODE >62:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-7A3 text1 CODE >63:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-7A9 text1 CODE >64:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
-7AA maintext CODE >46:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
-7AA maintext CODE >49:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
-7B0 maintext CODE >50:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
-7B1 maintext CODE >51:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
-7B2 maintext CODE >52:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
-7B3 maintext CODE >53:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
-7B4 maintext CODE >56:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
-7B8 maintext CODE >57:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
-7B9 maintext CODE >58:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
-7BD maintext CODE >59:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
-7BE maintext CODE >60:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
-7BF maintext CODE >61:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
+77E text2 CODE >15:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+77F text2 CODE >16:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+784 text2 CODE >17:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+788 text2 CODE >18:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+789 text2 CODE >19:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+78A text2 CODE >20:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+78F text2 CODE >21:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+790 text1 CODE >58:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+790 text1 CODE >59:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+796 text1 CODE >60:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+79C text1 CODE >61:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+7A2 text1 CODE >62:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+7A8 text1 CODE >63:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+7AE text1 CODE >64:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
+7AF maintext CODE >46:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
+7AF maintext CODE >49:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
+7B3 maintext CODE >50:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
+7B4 maintext CODE >51:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
+7B5 maintext CODE >52:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
+7B6 maintext CODE >53:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
+7B7 maintext CODE >56:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
+7BA maintext CODE >57:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
+7BB maintext CODE >58:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
+7BE maintext CODE >59:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
+7BF maintext CODE >60:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
+7C0 maintext CODE >61:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
 7C1 maintext CODE >62:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
 7C2 maintext CODE >63:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
 7C5 maintext CODE >64:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\main.c
@@ -149,20 +149,20 @@ __size_of_lcd_cmd 0 0 ABS 0 - dist/default/production\MiniProyecto1.X.production
 __size_of_lcd_lat 0 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hstrings 0 0 ABS 0 strings -
-___sp 0 0 STACK 2 stack C:\Users\hurta\AppData\Local\Temp\sfbs.o
-_main F54 0 CODE 0 maintext dist/default/production\MiniProyecto1.X.production.o
+___sp 0 0 STACK 2 stack C:\Users\hurta\AppData\Local\Temp\s548.o
+_main F5E 0 CODE 0 maintext dist/default/production\MiniProyecto1.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
-start 0 0 CODE 0 init C:\Users\hurta\AppData\Local\Temp\sfbs.o
+start 0 0 CODE 0 init C:\Users\hurta\AppData\Local\Temp\s548.o
 __size_of_main 0 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 __Hpowerup 0 0 CODE 0 powerup -
 __end_of_lcd_ready FF6 0 CODE 0 text3 dist/default/production\MiniProyecto1.X.production.o
-intlevel0 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\sfbs.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\sfbs.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\sfbs.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\sfbs.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\sfbs.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\sfbs.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s548.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s548.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s548.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s548.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s548.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s548.o
 __size_of_lcd_ready 0 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
@@ -171,15 +171,15 @@ __Hfunctab 0 0 ENTRY 0 functab -
 __Hclrtext 0 0 ABS 0 clrtext -
 _lcd_ready FA4 0 CODE 0 text3 dist/default/production\MiniProyecto1.X.production.o
 _ANSELH 189 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
-__end_of_lcd_cmd F16 0 CODE 0 text2 dist/default/production\MiniProyecto1.X.production.o
-__end_of_lcd_lat EF2 0 CODE 0 text4 dist/default/production\MiniProyecto1.X.production.o
+__end_of_lcd_cmd F20 0 CODE 0 text2 dist/default/production\MiniProyecto1.X.production.o
+__end_of_lcd_lat EFC 0 CODE 0 text4 dist/default/production\MiniProyecto1.X.production.o
 __Lmaintext 0 0 ABS 0 maintext -
-___stackhi 0 0 ABS 0 - C:\Users\hurta\AppData\Local\Temp\sfbs.o
-___stacklo 0 0 ABS 0 - C:\Users\hurta\AppData\Local\Temp\sfbs.o
+___stackhi 0 0 ABS 0 - C:\Users\hurta\AppData\Local\Temp\s548.o
+___stacklo 0 0 ABS 0 - C:\Users\hurta\AppData\Local\Temp\s548.o
 _BAUDCTLbits 187 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 start_initialization FF6 0 CODE 0 cinit dist/default/production\MiniProyecto1.X.production.o
 _SPBRGH 9A 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\hurta\AppData\Local\Temp\sfbs.o
+___int_sp 0 0 STACK 2 stack C:\Users\hurta\AppData\Local\Temp\s548.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -188,7 +188,7 @@ __Hcinit 1000 0 CODE 0 cinit -
 __Hstack 0 0 STACK 2 stack -
 lcd_cmd@x 72 0 COMMON 1 cstackCOMMON dist/default/production\MiniProyecto1.X.production.o
 __Hmaintext 0 0 ABS 0 maintext -
-_inicializacion F16 0 CODE 0 text1 dist/default/production\MiniProyecto1.X.production.o
+_inicializacion F20 0 CODE 0 text1 dist/default/production\MiniProyecto1.X.production.o
 __Hcommon 0 0 ABS 0 common -
 __Hconfig 4012 0 CONFIG 4 config -
 __Lbank0 0 0 ABS 0 bank0 -
@@ -222,13 +222,13 @@ __S0 800 0 ABS 0 - -
 __S1 74 0 ABS 0 - -
 __S2 0 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
-__end_of_inicializacion F54 0 CODE 0 text1 dist/default/production\MiniProyecto1.X.production.o
+__end_of_inicializacion F5E 0 CODE 0 text1 dist/default/production\MiniProyecto1.X.production.o
 __Lintentry 0 0 CODE 0 intentry -
-_lcd_cmd EF2 0 CODE 0 text2 dist/default/production\MiniProyecto1.X.production.o
-_lcd_lat ED4 0 CODE 0 text4 dist/default/production\MiniProyecto1.X.production.o
-reset_vec 0 0 CODE 0 reset_vec C:\Users\hurta\AppData\Local\Temp\sfbs.o
+_lcd_cmd EFC 0 CODE 0 text2 dist/default/production\MiniProyecto1.X.production.o
+_lcd_lat EDE 0 CODE 0 text4 dist/default/production\MiniProyecto1.X.production.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\hurta\AppData\Local\Temp\s548.o
 _PIE1bits 8C 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
-__pmaintext F54 0 CODE 0 maintext dist/default/production\MiniProyecto1.X.production.o
+__pmaintext F5E 0 CODE 0 maintext dist/default/production\MiniProyecto1.X.production.o
 __Lcommon 0 0 ABS 0 common -
 __Lconfig 0 0 CONFIG 4 config -
 _ADCON0bits 1F 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
@@ -246,10 +246,10 @@ end_of_initialization FF8 0 CODE 0 cinit dist/default/production\MiniProyecto1.X
 __Hintentry 0 0 CODE 0 intentry -
 __Lstrings 0 0 ABS 0 strings -
 __Hreset_vec 0 0 CODE 0 reset_vec -
-__ptext1 F16 0 CODE 0 text1 dist/default/production\MiniProyecto1.X.production.o
-__ptext2 EF2 0 CODE 0 text2 dist/default/production\MiniProyecto1.X.production.o
+__ptext1 F20 0 CODE 0 text1 dist/default/production\MiniProyecto1.X.production.o
+__ptext2 EFC 0 CODE 0 text2 dist/default/production\MiniProyecto1.X.production.o
 __ptext3 FA4 0 CODE 0 text3 dist/default/production\MiniProyecto1.X.production.o
-__ptext4 ED4 0 CODE 0 text4 dist/default/production\MiniProyecto1.X.production.o
+__ptext4 EDE 0 CODE 0 text4 dist/default/production\MiniProyecto1.X.production.o
 __Lpowerup 0 0 CODE 0 powerup -
 __Leeprom_data 0 0 EEDATA 3 eeprom_data -
 __Lreset_vec 0 0 CODE 0 reset_vec -
@@ -306,11 +306,11 @@ __size_of_inicializacion 0 0 ABS 0 - dist/default/production\MiniProyecto1.X.pro
 # All other numeric quantities are in decimal.
 %SEGMENTS
 cinit 0 7FB FF6 5 2
-text1 0 78B F16 1F 2
-text2 0 779 EF2 12 2
+text1 0 790 F20 1F 2
+text2 0 77E EFC 12 2
 text3 0 7D2 FA4 29 2
-text4 0 76A ED4 F 2
-maintext 0 7AA F54 28 2
+text4 0 76F EDE F 2
+maintext 0 7AF F5E 23 2
 cstackCOMMON 1 70 70 4 1
 reset_vec 0 0 0 3 2
 # %NOTES Section

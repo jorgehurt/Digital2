@@ -2892,19 +2892,19 @@ void UART_WRITE(char data);
 void main(void){
 
 
-    OSCCONbits.IRCF = 0b110;
+    OSCCONbits.IRCF = 0b111;
     OSCCONbits.OSTS= 0;
     OSCCONbits.HTS = 0;
     OSCCONbits.LTS = 0;
     OSCCONbits.SCS = 1;
 
 
-    ANSEL = 0b00000011;
+    ANSEL = 0;
     ANSELH= 0;
-    TRISA = 0b00000011;
+    TRISA = 0;
     TRISB = 0;
     TRISD = 0;
-    TRISC = 0b10000000;
+    TRISC = 0;
     TRISE = 0;
     PORTA = 0;
     PORTB = 0;

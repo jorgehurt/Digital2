@@ -46,19 +46,19 @@
 void main(void){
     //Setup
     //Configuracion del Oscilador.
-    OSCCONbits.IRCF = 0b110; //4Mhz
+    OSCCONbits.IRCF = 0b111; //8Mhz
     OSCCONbits.OSTS= 0;
     OSCCONbits.HTS = 0;
     OSCCONbits.LTS = 0;
     OSCCONbits.SCS = 1; 
     //Configuracion de Puertos y lectura de datos.
     //Lectura de potencimetros en AN0 y AN1
-    ANSEL = 0b00000011;
+    ANSEL = 0;
     ANSELH= 0;
-    TRISA = 0b00000011;
+    TRISA = 0;
     TRISB = 0; 
     TRISD = 0;
-    TRISC = 0b10000000;
+    TRISC = 0;
     TRISE = 0;
     PORTA = 0;
     PORTB = 0;

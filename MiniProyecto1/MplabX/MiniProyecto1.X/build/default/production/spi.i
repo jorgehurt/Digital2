@@ -1,4 +1,4 @@
-# 1 "adc.c"
+# 1 "spi.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,8 +6,15 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "adc.c" 2
-# 10 "adc.c"
+# 1 "spi.c" 2
+
+
+
+
+
+
+
+
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 1 3
 
 
@@ -105,7 +112,7 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 #pragma printf_check(sprintf) const
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
-# 10 "adc.c" 2
+# 9 "spi.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdlib.h" 1 3
 
@@ -203,7 +210,7 @@ extern char * ltoa(char * buf, long val, int base);
 extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
-# 11 "adc.c" 2
+# 10 "spi.c" 2
 
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
@@ -2681,20 +2688,10 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 12 "adc.c" 2
+# 11 "spi.c" 2
 
-# 1 "./LCD.h" 1
-# 20 "./LCD.h"
-void lcd_cmd(unsigned char x);
-void lcd_dwr(unsigned char x);
-void lcd_msg(unsigned char *c);
-void lcd_ready(void);
-void lcd_lat(void);
-void inicializacion(void);
-# 13 "adc.c" 2
-
-# 1 "./adc.h" 1
-# 13 "./adc.h"
+# 1 "./spi.h" 1
+# 12 "./spi.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
 typedef signed char int8_t;
@@ -2828,7 +2825,7 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 13 "./adc.h" 2
+# 12 "./spi.h" 2
 
 
 
@@ -2863,41 +2860,51 @@ extern char * strchr(const char *, int);
 extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
-# 16 "./adc.h" 2
+# 15 "./spi.h" 2
+
+
+
+
+
+
+void SPIInit(void);
+# 12 "spi.c" 2
+
+# 1 "./LCD.h" 1
+# 20 "./LCD.h"
+void lcd_cmd(unsigned char x);
+void lcd_dwr(unsigned char x);
+void lcd_msg(unsigned char *c);
+void lcd_ready(void);
+void lcd_lat(void);
+void inicializacion(void);
+# 13 "spi.c" 2
+
+# 1 "./adc.h" 1
+# 13 "./adc.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 13 "./adc.h" 2
+
+
+
 
 
 
 uint8_t ADC1ADRESH;
 void ADCInit(void);
-# 14 "adc.c" 2
+# 14 "spi.c" 2
 
 # 1 "./eusart.h" 1
 # 13 "./eusart.h"
 void UART_INIT(void);
 uint8_t UART_READ(void);
 void UART_WRITE(char data);
-# 15 "adc.c" 2
+# 15 "spi.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 16 "adc.c" 2
+# 16 "spi.c" 2
+# 25 "spi.c"
+void SPIInit(void){
+    PORTD=0;
 
-
-
-
-
-
-
-
-void ADCInit(void) {
-    INTCONbits.GIE = 1;
-    INTCONbits.PEIE = 1;
-    PIE1bits.ADIE = 1;
-    PIR1bits.ADIF = 0;
-    ADCON0bits.ADCS = 01;
-    ADCON0bits.CHS = 0000;
-    ADCON0bits.ADON = 1;
-    ADCON1bits.ADFM = 1;
-    ADCON1bits.VCFG1 = 0;
-    ADCON1bits.VCFG0 = 0;
-    _delay((unsigned long)((10)*(8000000/4000.0)));
 }
