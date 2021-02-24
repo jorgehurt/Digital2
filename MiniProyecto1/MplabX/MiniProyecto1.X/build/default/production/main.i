@@ -2870,7 +2870,16 @@ void UART_INIT(void);
 uint8_t UART_READ(void);
 void UART_WRITE(char data);
 # 19 "main.c" 2
-# 28 "main.c"
+
+# 1 "./spi.h" 1
+# 12 "./spi.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 12 "./spi.h" 2
+# 21 "./spi.h"
+void SPIMaster(void);
+void SPISlave(void);
+# 20 "main.c" 2
+# 29 "main.c"
 #pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
@@ -2889,18 +2898,24 @@ void UART_WRITE(char data);
 
 
 
-void main(void){
+uint8_t SSbit1 =0;
+uint8_t Potenciometro =0;
+uint8_t Contador =0;
+uint8_t Temperatura =0;
+
+
+void main(void) {
 
 
     OSCCONbits.IRCF = 0b111;
-    OSCCONbits.OSTS= 0;
+    OSCCONbits.OSTS = 0;
     OSCCONbits.HTS = 0;
     OSCCONbits.LTS = 0;
     OSCCONbits.SCS = 1;
 
 
     ANSEL = 0;
-    ANSELH= 0;
+    ANSELH = 0;
     TRISA = 0;
     TRISB = 0;
     TRISD = 0;
@@ -2911,12 +2926,54 @@ void main(void){
     PORTC = 0;
     PORTD = 0;
     PORTE = 0;
+    SPIMaster();
+    SSbit1=1;
 
 
 
 
-    while(1){
-        inicializacion();
-
+    while (1) {
+        if(SSbit1==1){
+            PORTBbits.RB0 = 1;
+            PORTBbits.RB1 = 0;
+            PORTBbits.RB2 = 0;
+            return;
+        }
+        if(SSbit1==2){
+            PORTBbits.RB0 = 0;
+            PORTBbits.RB1 = 1;
+            PORTBbits.RB2 = 0;
+            return;
+        }
+        if(SSbit1==3){
+            PORTBbits.RB0 = 0;
+            PORTBbits.RB1 = 0;
+            PORTBbits.RB2 = 1;
+            return;
+        }
     }
 }
+
+void __attribute__((picinterrupt(("")))) ISR(void) {
+    if (PIR1bits.SSPIF == 1 && SSbit1 == 1) {
+        Potenciometro = SSPBUF;
+        SSbit1=2;
+        SSPSTATbits.BF = 0;
+        PIR1bits.SSPIF = 0;
+        return;
+    }
+    if (PIR1bits.SSPIF == 1 && SSbit1 == 2) {
+        Contador = SSPBUF;
+        SSbit1=3;
+        SSPSTATbits.BF = 0;
+        PIR1bits.SSPIF = 0;
+        return;
+    }
+    if (PIR1bits.SSPIF == 1 && SSbit1 == 3) {
+        Temperatura = SSPBUF;
+        SSbit1=1;
+        SSPSTATbits.BF = 0;
+        PIR1bits.SSPIF = 0;
+        return;
+    }
+ }

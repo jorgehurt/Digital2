@@ -2867,7 +2867,6 @@ extern char * strrichr(const char *, int);
 
 
 
-void SPIInit(void);
 void SPIMaster(void);
 void SPISlave(void);
 # 12 "spi.c" 2
@@ -2906,15 +2905,6 @@ void UART_WRITE(char data);
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 16 "spi.c" 2
 # 26 "spi.c"
-void SPIInit(void) {
-
-
-
-
-
-
-}
-
 void SPIMaster(void) {
 
     SSPSTATbits.SMP = 0;
@@ -2930,8 +2920,6 @@ void SPIMaster(void) {
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
     PIR1bits.SSPIF = 0;
-
-
 }
 
 void SPISlave(void) {

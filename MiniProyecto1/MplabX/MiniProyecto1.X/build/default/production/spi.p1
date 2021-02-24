@@ -346,101 +346,91 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./adc.h: 19: uint8_t ADC1ADRESH;
 [v _ADC1ADRESH `uc ~T0 @X0 1 e ]
 "26 spi.c
-[; ;spi.c: 26: void SPIInit(void) {
-[v _SPIInit `(v ~T0 @X0 1 ef ]
-{
-[e :U _SPIInit ]
-[f ]
-"33
-[; ;spi.c: 33: }
-[e :UE 143 ]
-}
-"35
-[; ;spi.c: 35: void SPIMaster(void) {
+[; ;spi.c: 26: void SPIMaster(void) {
 [v _SPIMaster `(v ~T0 @X0 1 ef ]
 {
 [e :U _SPIMaster ]
 [f ]
-"37
-[; ;spi.c: 37:     SSPSTATbits.SMP = 0;
+"28
+[; ;spi.c: 28:     SSPSTATbits.SMP = 0;
 [e = . . _SSPSTATbits 0 7 -> -> 0 `i `uc ]
-"38
-[; ;spi.c: 38:     SSPSTATbits.CKE = 0;
+"29
+[; ;spi.c: 29:     SSPSTATbits.CKE = 0;
 [e = . . _SSPSTATbits 0 6 -> -> 0 `i `uc ]
-"39
-[; ;spi.c: 39:     SSPCONbits.SSPEN = 1;
+"30
+[; ;spi.c: 30:     SSPCONbits.SSPEN = 1;
 [e = . . _SSPCONbits 0 2 -> -> 1 `i `uc ]
-"40
-[; ;spi.c: 40:     SSPCONbits.CKP = 1;
+"31
+[; ;spi.c: 31:     SSPCONbits.CKP = 1;
 [e = . . _SSPCONbits 0 1 -> -> 1 `i `uc ]
-"41
-[; ;spi.c: 41:     SSPCONbits.SSPM = 0b0010;
+"32
+[; ;spi.c: 32:     SSPCONbits.SSPM = 0b0010;
 [e = . . _SSPCONbits 0 0 -> -> 2 `i `uc ]
-"43
-[; ;spi.c: 43:     TRISCbits.TRISC5 = 0;
+"34
+[; ;spi.c: 34:     TRISCbits.TRISC5 = 0;
 [e = . . _TRISCbits 0 5 -> -> 0 `i `uc ]
-"44
-[; ;spi.c: 44:     TRISCbits.TRISC3 = 0;
+"35
+[; ;spi.c: 35:     TRISCbits.TRISC3 = 0;
 [e = . . _TRISCbits 0 3 -> -> 0 `i `uc ]
-"46
-[; ;spi.c: 46:     PIE1bits.SSPIE = 1;
+"37
+[; ;spi.c: 37:     PIE1bits.SSPIE = 1;
 [e = . . _PIE1bits 0 3 -> -> 1 `i `uc ]
-"47
-[; ;spi.c: 47:     INTCONbits.GIE = 1;
+"38
+[; ;spi.c: 38:     INTCONbits.GIE = 1;
 [e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
-"48
-[; ;spi.c: 48:     INTCONbits.PEIE = 1;
+"39
+[; ;spi.c: 39:     INTCONbits.PEIE = 1;
 [e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
-"49
-[; ;spi.c: 49:     PIR1bits.SSPIF = 0;
+"40
+[; ;spi.c: 40:     PIR1bits.SSPIF = 0;
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-"52
-[; ;spi.c: 52: }
-[e :UE 144 ]
+"41
+[; ;spi.c: 41: }
+[e :UE 143 ]
 }
-"54
-[; ;spi.c: 54: void SPISlave(void) {
+"43
+[; ;spi.c: 43: void SPISlave(void) {
 [v _SPISlave `(v ~T0 @X0 1 ef ]
 {
 [e :U _SPISlave ]
 [f ]
-"56
-[; ;spi.c: 56:     SSPSTATbits.SMP = 0;
+"45
+[; ;spi.c: 45:     SSPSTATbits.SMP = 0;
 [e = . . _SSPSTATbits 0 7 -> -> 0 `i `uc ]
-"57
-[; ;spi.c: 57:     SSPSTATbits.CKE = 0;
+"46
+[; ;spi.c: 46:     SSPSTATbits.CKE = 0;
 [e = . . _SSPSTATbits 0 6 -> -> 0 `i `uc ]
-"58
-[; ;spi.c: 58:     SSPCONbits.SSPEN = 1;
+"47
+[; ;spi.c: 47:     SSPCONbits.SSPEN = 1;
 [e = . . _SSPCONbits 0 2 -> -> 1 `i `uc ]
-"59
-[; ;spi.c: 59:     SSPCONbits.CKP = 1;
+"48
+[; ;spi.c: 48:     SSPCONbits.CKP = 1;
 [e = . . _SSPCONbits 0 1 -> -> 1 `i `uc ]
-"60
-[; ;spi.c: 60:     SSPCONbits.SSPM = 0b0100;
+"49
+[; ;spi.c: 49:     SSPCONbits.SSPM = 0b0100;
 [e = . . _SSPCONbits 0 0 -> -> 4 `i `uc ]
-"62
-[; ;spi.c: 62:     TRISCbits.TRISC5 = 0;
+"51
+[; ;spi.c: 51:     TRISCbits.TRISC5 = 0;
 [e = . . _TRISCbits 0 5 -> -> 0 `i `uc ]
-"63
-[; ;spi.c: 63:     TRISCbits.TRISC3 = 1;
+"52
+[; ;spi.c: 52:     TRISCbits.TRISC3 = 1;
 [e = . . _TRISCbits 0 3 -> -> 1 `i `uc ]
-"64
-[; ;spi.c: 64:     TRISAbits.TRISA5 = 1;
+"53
+[; ;spi.c: 53:     TRISAbits.TRISA5 = 1;
 [e = . . _TRISAbits 0 5 -> -> 1 `i `uc ]
-"66
-[; ;spi.c: 66:     PIE1bits.SSPIE = 1;
+"55
+[; ;spi.c: 55:     PIE1bits.SSPIE = 1;
 [e = . . _PIE1bits 0 3 -> -> 1 `i `uc ]
-"67
-[; ;spi.c: 67:     INTCONbits.GIE = 1;
+"56
+[; ;spi.c: 56:     INTCONbits.GIE = 1;
 [e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
-"68
-[; ;spi.c: 68:     INTCONbits.PEIE = 1;
+"57
+[; ;spi.c: 57:     INTCONbits.PEIE = 1;
 [e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
-"69
-[; ;spi.c: 69:     PIR1bits.SSPIF = 0;
+"58
+[; ;spi.c: 58:     PIR1bits.SSPIF = 0;
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-"70
-[; ;spi.c: 70: }
-[e :UE 145 ]
+"59
+[; ;spi.c: 59: }
+[e :UE 144 ]
 }

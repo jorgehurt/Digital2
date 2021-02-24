@@ -23,15 +23,6 @@
 
 //Configuramos el SPI
 
-void SPIInit(void) {
-
-
-
-
-
-
-}
-
 void SPIMaster(void) {
     //Configuramos el SPI Como Master.
     SSPSTATbits.SMP = 0;
@@ -47,8 +38,6 @@ void SPIMaster(void) {
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
     PIR1bits.SSPIF = 0;
-
-
 }
 
 void SPISlave(void) {

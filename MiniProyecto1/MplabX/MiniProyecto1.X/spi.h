@@ -18,7 +18,6 @@
 //Define Global Variables.
 
 //Define Library Functions.
-void SPIInit(void);
 void SPIMaster(void);
 void SPISlave(void);
 //End Header File.
