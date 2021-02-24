@@ -21,7 +21,7 @@ maintext CODE 0 7AF 7AF 23 2
 cstackCOMMON COMMON 1 70 70 3 1
 bssCOMMON COMMON 1 73 73 1 1
 config CONFIG 4 2007 2007 2 2
-$C:\Users\hurta\AppData\Local\Temp\s548.o
+$C:\Users\hurta\AppData\Local\Temp\s774.o
 end_init CODE 0 0 0 3 2
 config CONFIG 4 2007 2007 2 2
 # %UNUSED Section
@@ -70,12 +70,12 @@ STRING 800-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\MiniProyecto1.X.production.o
-7FB cinit CODE >1109:C:\Users\hurta\AppData\Local\Temp\s548.s
-7FB cinit CODE >1112:C:\Users\hurta\AppData\Local\Temp\s548.s
-7FB cinit CODE >1123:C:\Users\hurta\AppData\Local\Temp\s548.s
-7FC cinit CODE >1129:C:\Users\hurta\AppData\Local\Temp\s548.s
-7FC cinit CODE >1131:C:\Users\hurta\AppData\Local\Temp\s548.s
-7FD cinit CODE >1132:C:\Users\hurta\AppData\Local\Temp\s548.s
+7FB cinit CODE >1117:C:\Users\hurta\AppData\Local\Temp\s774.s
+7FB cinit CODE >1120:C:\Users\hurta\AppData\Local\Temp\s774.s
+7FB cinit CODE >1131:C:\Users\hurta\AppData\Local\Temp\s774.s
+7FC cinit CODE >1137:C:\Users\hurta\AppData\Local\Temp\s774.s
+7FC cinit CODE >1139:C:\Users\hurta\AppData\Local\Temp\s774.s
+7FD cinit CODE >1140:C:\Users\hurta\AppData\Local\Temp\s774.s
 76F text4 CODE >23:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
 76F text4 CODE >24:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
 772 text4 CODE >25:C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MplabX\MiniProyecto1.X\LCD.c
@@ -149,20 +149,20 @@ __size_of_lcd_cmd 0 0 ABS 0 - dist/default/production\MiniProyecto1.X.production
 __size_of_lcd_lat 0 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hstrings 0 0 ABS 0 strings -
-___sp 0 0 STACK 2 stack C:\Users\hurta\AppData\Local\Temp\s548.o
+___sp 0 0 STACK 2 stack C:\Users\hurta\AppData\Local\Temp\s774.o
 _main F5E 0 CODE 0 maintext dist/default/production\MiniProyecto1.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
-start 0 0 CODE 0 init C:\Users\hurta\AppData\Local\Temp\s548.o
+start 0 0 CODE 0 init C:\Users\hurta\AppData\Local\Temp\s774.o
 __size_of_main 0 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 __Hpowerup 0 0 CODE 0 powerup -
 __end_of_lcd_ready FF6 0 CODE 0 text3 dist/default/production\MiniProyecto1.X.production.o
-intlevel0 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s548.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s548.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s548.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s548.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s548.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s548.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s774.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s774.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s774.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s774.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s774.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\hurta\AppData\Local\Temp\s774.o
 __size_of_lcd_ready 0 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
@@ -173,13 +173,16 @@ _lcd_ready FA4 0 CODE 0 text3 dist/default/production\MiniProyecto1.X.production
 _ANSELH 189 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 __end_of_lcd_cmd F20 0 CODE 0 text2 dist/default/production\MiniProyecto1.X.production.o
 __end_of_lcd_lat EFC 0 CODE 0 text4 dist/default/production\MiniProyecto1.X.production.o
+_SSPCONbits 14 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 __Lmaintext 0 0 ABS 0 maintext -
-___stackhi 0 0 ABS 0 - C:\Users\hurta\AppData\Local\Temp\s548.o
-___stacklo 0 0 ABS 0 - C:\Users\hurta\AppData\Local\Temp\s548.o
+___stackhi 0 0 ABS 0 - C:\Users\hurta\AppData\Local\Temp\s774.o
+___stacklo 0 0 ABS 0 - C:\Users\hurta\AppData\Local\Temp\s774.o
 _BAUDCTLbits 187 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 start_initialization FF6 0 CODE 0 cinit dist/default/production\MiniProyecto1.X.production.o
+_TRISAbits 85 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
+_TRISCbits 87 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 _SPBRGH 9A 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\hurta\AppData\Local\Temp\s548.o
+___int_sp 0 0 STACK 2 stack C:\Users\hurta\AppData\Local\Temp\s774.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -226,7 +229,7 @@ __end_of_inicializacion F5E 0 CODE 0 text1 dist/default/production\MiniProyecto1
 __Lintentry 0 0 CODE 0 intentry -
 _lcd_cmd EFC 0 CODE 0 text2 dist/default/production\MiniProyecto1.X.production.o
 _lcd_lat EDE 0 CODE 0 text4 dist/default/production\MiniProyecto1.X.production.o
-reset_vec 0 0 CODE 0 reset_vec C:\Users\hurta\AppData\Local\Temp\s548.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\hurta\AppData\Local\Temp\s774.o
 _PIE1bits 8C 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 __pmaintext F5E 0 CODE 0 maintext dist/default/production\MiniProyecto1.X.production.o
 __Lcommon 0 0 ABS 0 common -
@@ -278,6 +281,7 @@ _TXREG 19 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 _TXSTA 98 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 __Hram 0 0 ABS 0 ram -
 __Lram 0 0 ABS 0 ram -
+_SSPSTATbits 94 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 __initialization FF6 0 CODE 0 cinit dist/default/production\MiniProyecto1.X.production.o
 __size_of_inicializacion 0 0 ABS 0 - dist/default/production\MiniProyecto1.X.production.o
 # %SPLITSTAB Section

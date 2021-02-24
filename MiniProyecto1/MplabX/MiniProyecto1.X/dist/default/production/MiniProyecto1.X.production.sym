@@ -66,6 +66,8 @@ __Htext 0 0 ABS 0
 __Ltext 0 0 ABS 0
 end_of_initialization 7FC 0 CODE 0
 ___stacklo 0 0 ABS 0
+_TRISAbits 85 0 ABS 0
+_TRISCbits 87 0 ABS 0
 _TXSTAbits 98 0 ABS 0
 __Hstrings 0 0 ABS 0
 __size_of_lcd_ready 0 0 ABS 0
@@ -90,6 +92,7 @@ __Hclrtext 0 0 ABS 0
 __Lclrtext 0 0 ABS 0
 __end_of__initialization 7FC 0 CODE 0
 _BAUDCTLbits 187 0 ABS 0
+_SSPSTATbits 94 0 ABS 0
 __size_of_lcd_lat 0 0 ABS 0
 _lcd_cmd 77E 0 CODE 0
 __Hstack 0 0 STACK 2
@@ -120,6 +123,7 @@ __LbssCOMMON 0 0 ABS 0
 __pbssCOMMON 73 0 COMMON 1
 _OSCCONbits 8F 0 ABS 0
 _INTCONbits B 0 ABS 0
+_SSPCONbits 14 0 ABS 0
 __Hend_init 3 0 CODE 0
 __Lend_init 0 0 CODE 0
 __Hreset_vec 0 0 CODE 0
@@ -150,13 +154,13 @@ text2 EFC F1F CODE EFC 0
 text4 EDE EFB CODE EDE 0
 %locals
 dist/default/production\MiniProyecto1.X.production.o
-C:\Users\hurta\AppData\Local\Temp\s548.s
-1109 7FB 0 CODE 0
-1112 7FB 0 CODE 0
-1123 7FB 0 CODE 0
-1129 7FC 0 CODE 0
-1131 7FC 0 CODE 0
-1132 7FD 0 CODE 0
+C:\Users\hurta\AppData\Local\Temp\s774.s
+1117 7FB 0 CODE 0
+1120 7FB 0 CODE 0
+1131 7FB 0 CODE 0
+1137 7FC 0 CODE 0
+1139 7FC 0 CODE 0
+1140 7FD 0 CODE 0
 main.c
 46 7AF 0 CODE 0
 49 7AF 0 CODE 0

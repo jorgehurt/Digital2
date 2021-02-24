@@ -19,5 +19,7 @@
 
 //Define Library Functions.
 void SPIInit(void);
+void SPIMaster(void);
+void SPISlave(void);
 //End Header File.
 #endif	/* XC_HEADER_TEMPLATE_H */

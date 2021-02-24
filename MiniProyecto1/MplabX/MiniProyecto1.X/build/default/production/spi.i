@@ -2868,6 +2868,8 @@ extern char * strrichr(const char *, int);
 
 
 void SPIInit(void);
+void SPIMaster(void);
+void SPISlave(void);
 # 12 "spi.c" 2
 
 # 1 "./LCD.h" 1
@@ -2903,8 +2905,49 @@ void UART_WRITE(char data);
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 16 "spi.c" 2
-# 25 "spi.c"
-void SPIInit(void){
-    PORTD=0;
+# 26 "spi.c"
+void SPIInit(void) {
 
+
+
+
+
+
+}
+
+void SPIMaster(void) {
+
+    SSPSTATbits.SMP = 0;
+    SSPSTATbits.CKE = 0;
+    SSPCONbits.SSPEN = 1;
+    SSPCONbits.CKP = 1;
+    SSPCONbits.SSPM = 0b0010;
+
+    TRISCbits.TRISC5 = 0;
+    TRISCbits.TRISC3 = 0;
+
+    PIE1bits.SSPIE = 1;
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIR1bits.SSPIF = 0;
+
+
+}
+
+void SPISlave(void) {
+
+    SSPSTATbits.SMP = 0;
+    SSPSTATbits.CKE = 0;
+    SSPCONbits.SSPEN = 1;
+    SSPCONbits.CKP = 1;
+    SSPCONbits.SSPM = 0b0100;
+
+    TRISCbits.TRISC5 = 0;
+    TRISCbits.TRISC3 = 1;
+    TRISAbits.TRISA5 = 1;
+
+    PIE1bits.SSPIE = 1;
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIR1bits.SSPIF = 0;
 }
