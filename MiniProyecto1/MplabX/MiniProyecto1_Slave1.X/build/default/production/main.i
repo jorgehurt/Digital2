@@ -2864,13 +2864,24 @@ uint8_t ADC1ADRESH;
 void ADCInit(void);
 # 18 "main.c" 2
 
+# 1 "./spi.h" 1
+# 12 "./spi.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 12 "./spi.h" 2
+# 21 "./spi.h"
+void SPIMaster(void);
+void SPISlave(void);
+void spiWrite(char dat);
+char spiRead();
+# 19 "main.c" 2
+
 # 1 "./eusart.h" 1
 # 13 "./eusart.h"
 void UART_INIT(void);
 uint8_t UART_READ(void);
 void UART_WRITE(char data);
-# 19 "main.c" 2
-# 28 "main.c"
+# 20 "main.c" 2
+# 29 "main.c"
 #pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
@@ -2890,7 +2901,7 @@ void UART_WRITE(char data);
 
 
 uint8_t ADC1ADRESH;
-
+uint8_t dummy;
 void main(void) {
 
 
@@ -2903,16 +2914,21 @@ void main(void) {
 
     ANSEL = 0b00000001;
     ANSELH = 0;
-    TRISA = 0b00000001;
+    TRISA = 0b00100001;
     TRISB = 0;
     TRISD = 0;
-    TRISC = 0;
+    TRISC = 0b00011000;
     TRISE = 0;
     PORTA = 0;
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
     PORTE = 0;
+    PIE1bits.SSPIE = 1;
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIR1bits.SSPIF = 0;
+    SPISlave();
 
 
 
@@ -2923,16 +2939,21 @@ void main(void) {
         ADCON0bits.GO = 1;
         while (ADCON0bits.GO);
         _delay((unsigned long)((10)*(8000000/4000.0)));
-        PORTD=ADC1ADRESH;
 
     }
 
 }
 
 void __attribute__((picinterrupt(("")))) ISR(void) {
-    if (PIR1bits.ADIF==1) {
-        ADC1ADRESH=ADRESH;
-        PIR1bits.ADIF=0;
+    if (PIR1bits.ADIF == 1) {
+        ADC1ADRESH = ADRESH;
+        PIR1bits.ADIF = 0;
         return;
+    }
+    if(SSPIF == 1)
+    {
+        dummy = spiRead();
+        spiWrite(ADC1ADRESH);
+        SSPIF = 0;
     }
 }

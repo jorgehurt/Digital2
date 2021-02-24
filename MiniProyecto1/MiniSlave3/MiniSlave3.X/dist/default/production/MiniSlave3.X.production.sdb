@@ -13,12 +13,20 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"57 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MiniSlave3\MiniSlave3.X\main.c
+"59 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MiniSlave3\MiniSlave3.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"95
+"102
 [v _ISR ISR `II(v  1 e 1 0 ]
-"103
+"116
 [v _Semaforo Semaforo `(v  1 e 1 0 ]
+"42 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MiniSlave3\MiniSlave3.X\spi.c
+[v _SPISlave SPISlave `(v  1 e 1 0 ]
+"61
+[v _spiRead spiRead `(uc  1 e 1 0 ]
+"66
+[v _spiWrite spiWrite `(v  1 e 1 0 ]
+"19 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MiniSlave3\MiniSlave3.X/adc.h
+[v _ADC1ADRESH ADC1ADRESH `uc  1 e 1 0 ]
 "166 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [v _PORTA PORTA `VEuc  1 e 1 @5 ]
 "228
@@ -27,7 +35,7 @@
 [v _PORTC PORTC `VEuc  1 e 1 @7 ]
 "352
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
-[s S275 . 1 `uc 1 RD0 1 0 :1:0 
+[s S318 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -37,8 +45,8 @@
 `uc 1 RD7 1 0 :1:7 
 ]
 "369
-[u S284 . 1 `S275 1 . 1 0 ]
-[v _PORTDbits PORTDbits `VES284  1 e 1 @8 ]
+[u S327 . 1 `S318 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES327  1 e 1 @8 ]
 "414
 [v _PORTE PORTE `VEuc  1 e 1 @9 ]
 [s S22 . 1 `uc 1 RBIF 1 0 :1:0 
@@ -69,6 +77,22 @@
 "553
 [u S81 . 1 `S73 1 . 1 0 ]
 [v _PIR1bits PIR1bits `VES81  1 e 1 @12 ]
+"843
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
+[s S467 . 1 `uc 1 SSPM 1 0 :4:0 
+`uc 1 CKP 1 0 :1:4 
+`uc 1 SSPEN 1 0 :1:5 
+`uc 1 SSPOV 1 0 :1:6 
+`uc 1 WCOL 1 0 :1:7 
+]
+"870
+[s S473 . 1 `uc 1 SSPM0 1 0 :1:0 
+`uc 1 SSPM1 1 0 :1:1 
+`uc 1 SSPM2 1 0 :1:2 
+`uc 1 SSPM3 1 0 :1:3 
+]
+[u S478 . 1 `S467 1 . 1 0 `S473 1 . 1 0 ]
+[v _SSPCONbits SSPCONbits `VES478  1 e 1 @20 ]
 [s S92 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
@@ -94,10 +118,34 @@
 [v _ADCON0bits ADCON0bits `VES112  1 e 1 @31 ]
 "1416
 [v _TRISA TRISA `VEuc  1 e 1 @133 ]
+[s S554 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+`uc 1 TRISA6 1 0 :1:6 
+`uc 1 TRISA7 1 0 :1:7 
+]
+"1433
+[u S563 . 1 `S554 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES563  1 e 1 @133 ]
 "1478
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
 "1540
 [v _TRISC TRISC `VEuc  1 e 1 @135 ]
+[s S493 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"1557
+[u S502 . 1 `S493 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES502  1 e 1 @135 ]
 "1602
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
 "1664
@@ -127,6 +175,49 @@
 ]
 [u S203 . 1 `S192 1 . 1 0 `S198 1 . 1 0 ]
 [v _OSCCONbits OSCCONbits `VES203  1 e 1 @143 ]
+[s S378 . 1 `uc 1 BF 1 0 :1:0 
+`uc 1 UA 1 0 :1:1 
+`uc 1 R_nW 1 0 :1:2 
+`uc 1 S 1 0 :1:3 
+`uc 1 P 1 0 :1:4 
+`uc 1 D_nA 1 0 :1:5 
+`uc 1 CKE 1 0 :1:6 
+`uc 1 SMP 1 0 :1:7 
+]
+"2231
+[s S387 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D 1 0 :1:5 
+]
+[s S392 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 I2C_READ 1 0 :1:2 
+`uc 1 I2C_START 1 0 :1:3 
+`uc 1 I2C_STOP 1 0 :1:4 
+`uc 1 I2C_DATA 1 0 :1:5 
+]
+[s S398 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nW 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nA 1 0 :1:5 
+]
+[s S403 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nWRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nADDRESS 1 0 :1:5 
+]
+[s S408 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_W 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D_A 1 0 :1:5 
+]
+[s S413 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 READ_WRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 DATA_ADDRESS 1 0 :1:5 
+]
+[u S418 . 1 `S378 1 . 1 0 `S387 1 . 1 0 `S392 1 . 1 0 `S398 1 . 1 0 `S403 1 . 1 0 `S408 1 . 1 0 `S413 1 . 1 0 ]
+[v _SSPSTATbits SSPSTATbits `VES418  1 e 1 @148 ]
 "2970
 [v _ADRESL ADRESL `VEuc  1 e 1 @158 ]
 [s S138 . 1 `uc 1 . 1 0 :4:0 
@@ -142,25 +233,45 @@
 [v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
 "3449
 [v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
-"52 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MiniSlave3\MiniSlave3.X\main.c
-[v _ADC1ADRESH ADC1ADRESH `uc  1 e 1 0 ]
-"57
+"4277
+[v _SSPIF SSPIF `VEb  1 e 0 @99 ]
+"54 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MiniSlave3\MiniSlave3.X\main.c
+[v _dummy dummy `uc  1 e 1 0 ]
+"59
 [v _main main `(v  1 e 1 0 ]
 {
-"93
+"100
 } 0
-"103
+"116
 [v _Semaforo Semaforo `(v  1 e 1 0 ]
 {
-"122
+"135
+} 0
+"42 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MiniSlave3\MiniSlave3.X\spi.c
+[v _SPISlave SPISlave `(v  1 e 1 0 ]
+{
+"59
 } 0
 "24 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MiniSlave3\MiniSlave3.X\adc.c
 [v _ADCInit ADCInit `(v  1 e 1 0 ]
 {
 "36
 } 0
-"95 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MiniSlave3\MiniSlave3.X\main.c
+"102 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MiniSlave3\MiniSlave3.X\main.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"101
+"114
+} 0
+"66 C:\Users\hurta\Downloads\UNIVERSIDAD\DIGITAL2\github\Digital2\Digital2\MiniProyecto1\MiniSlave3\MiniSlave3.X\spi.c
+[v _spiWrite spiWrite `(v  1 e 1 0 ]
+{
+[v spiWrite@dat dat `uc  1 a 1 wreg ]
+[v spiWrite@dat dat `uc  1 a 1 wreg ]
+[v spiWrite@dat dat `uc  1 a 1 0 ]
+"68
+} 0
+"61
+[v _spiRead spiRead `(uc  1 e 1 0 ]
+{
+"64
 } 0

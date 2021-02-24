@@ -39,16 +39,14 @@
 // CONFIG2
 #pragma config BOR4V = BOR40V   // Brown-out Reset Selection bit (Brown-out Reset set to 4.0V)
 #pragma config WRT = OFF        // Flash Program Memory Self Write Enable bits (Write protection off)
-
 //**************************
 // Main Program
 //**************************
 //Define local Variables
-uint8_t SSbit1 =0;
-uint8_t Potenciometro =0;
-uint8_t Contador =0;
-uint8_t Temperatura =0;
-
+uint8_t SSbit1 = 0;
+uint8_t Potenciometro = 2;
+uint8_t Contador = 0;
+uint8_t Temperatura = 0;
 
 void main(void) {
     //Setup
@@ -65,61 +63,62 @@ void main(void) {
     TRISA = 0;
     TRISB = 0;
     TRISD = 0;
-    TRISC = 0;
+    TRISC = 0b10010000;
     TRISE = 0;
     PORTA = 0;
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
     PORTE = 0;
+    PIE1bits.SSPIE = 1;
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIR1bits.SSPIF = 0;
     SPIMaster();
-    SSbit1=1;
+    SSbit1 = 1;
     //
     //**************************
     // Loop Program
     //**************************    
     while (1) {
-        if(SSbit1==1){
-            PORTBbits.RB0 = 1;
-            PORTBbits.RB1 = 0;
-            PORTBbits.RB2 = 0;
-            return;
-        }
-        if(SSbit1==2){
+        if (SSbit1 == 1) {
             PORTBbits.RB0 = 0;
             PORTBbits.RB1 = 1;
-            PORTBbits.RB2 = 0;
-            return;
-        }
-        if(SSbit1==3){
-            PORTBbits.RB0 = 0;
+            PORTBbits.RB2 = 1;
+            __delay_ms(1);
+            spiWrite(1);
+            Potenciometro = spiRead();
+            //PORTD = Potenciometro;
+            __delay_ms(1);
+            PORTBbits.RB0 = 1;
+            __delay_ms(100);
+            SSbit1 = 2;
+         }
+        if (SSbit1 == 2) {
+            PORTBbits.RB0 = 1;
             PORTBbits.RB1 = 0;
             PORTBbits.RB2 = 1;
-            return;
+            __delay_ms(1);
+            spiWrite(1);
+            Contador = spiRead();
+            PORTA = Contador;
+            __delay_ms(1);
+            PORTBbits.RB1 = 1;
+            __delay_ms(100);
+            SSbit1 = 3;
+        }
+        if (SSbit1 == 3) {
+            PORTBbits.RB0 = 1;
+            PORTBbits.RB1 = 1;
+            PORTBbits.RB2 = 0;
+            __delay_ms(1);
+            spiWrite(1);
+            Temperatura = spiRead();
+            PORTD=Temperatura;
+            __delay_ms(1);
+            PORTBbits.RB2 = 1;
+            __delay_ms(100);
+            SSbit1 = 1;
         }
     }
 }
-
-void __interrupt() ISR(void) {
-    if (PIR1bits.SSPIF == 1 && SSbit1 == 1) {
-        Potenciometro = SSPBUF;
-        SSbit1=2;
-        SSPSTATbits.BF = 0;
-        PIR1bits.SSPIF = 0;
-        return;
-    }
-    if (PIR1bits.SSPIF == 1 && SSbit1 == 2) {
-        Contador = SSPBUF;
-        SSbit1=3;
-        SSPSTATbits.BF = 0;
-        PIR1bits.SSPIF = 0;
-        return;
-    }
-    if (PIR1bits.SSPIF == 1 && SSbit1 == 3) {
-        Temperatura = SSPBUF;
-        SSbit1=1;
-        SSPSTATbits.BF = 0;
-        PIR1bits.SSPIF = 0;
-        return;
-    }    
- }

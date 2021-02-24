@@ -21,6 +21,8 @@
       <itemPath>adc.h</itemPath>
       <itemPath>IOCPORTB.c</itemPath>
       <itemPath>IOCPORTB.h</itemPath>
+      <itemPath>spi.c</itemPath>
+      <itemPath>spi.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

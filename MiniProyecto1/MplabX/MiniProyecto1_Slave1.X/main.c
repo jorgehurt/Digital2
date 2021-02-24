@@ -16,6 +16,7 @@
 #include "pic16f887.h"
 #include "LCD.h"
 #include "adc.h"
+#include "spi.h"
 #include "eusart.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,7 +45,7 @@
 // Main Program
 //**************************
 uint8_t ADC1ADRESH;
-
+uint8_t dummy;
 void main(void) {
     //Setup
     //Configuracion del Oscilador.
@@ -57,16 +58,21 @@ void main(void) {
     //Lectura de potencimetros en AN0.
     ANSEL = 0b00000001;
     ANSELH = 0;
-    TRISA = 0b00000001;
+    TRISA = 0b00100001;
     TRISB = 0;
     TRISD = 0;
-    TRISC = 0;
+    TRISC = 0b00011000;
     TRISE = 0;
     PORTA = 0;
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
     PORTE = 0;
+    PIE1bits.SSPIE = 1;
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIR1bits.SSPIF = 0;
+    SPISlave();
     //**************************
     // Loop Program
     //**************************    
@@ -77,15 +83,21 @@ void main(void) {
         ADCON0bits.GO = 1;
         while (ADCON0bits.GO);
         __delay_ms(10);
-        PORTD=ADC1ADRESH;
+        
     }
 
 }
 
 void __interrupt() ISR(void) {
-    if (PIR1bits.ADIF==1) {
-        ADC1ADRESH=ADRESH;
-        PIR1bits.ADIF=0;
+    if (PIR1bits.ADIF == 1) {
+        ADC1ADRESH = ADRESH;
+        PIR1bits.ADIF = 0;
         return;
+    }
+    if(SSPIF == 1)
+    {
+        dummy = spiRead();
+        spiWrite(ADC1ADRESH);
+        SSPIF = 0;
     }
 }

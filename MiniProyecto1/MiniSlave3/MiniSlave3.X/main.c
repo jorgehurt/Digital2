@@ -16,6 +16,7 @@
 #include "pic16f887.h"
 //#include "LCD.h"
 #include "adc.h"
+#include "spi.h"
 //#include "IOCPORTB.h"
 //#include "eusart.h"
 #include <stdio.h>
@@ -50,6 +51,7 @@ uint8_t Inc = 0;
 uint8_t Dec = 0;
 uint8_t ContadorID = 0;
 uint8_t ADC1ADRESH;
+uint8_t dummy;
 
 //Insertamos prototipos de Funciones
 void Semaforo(void);
@@ -66,16 +68,21 @@ void main(void) {
     //Lectura de potencimetros en AN0.
     ANSEL = 0b00000001;
     ANSELH = 0;
-    TRISA = 0b00000001;
+    TRISA = 0b00100001;
     TRISB = 0;
     TRISD = 0;
-    TRISC = 0;
+    TRISC = 0b00011000;
     TRISE = 0;
     PORTA = 0;
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
     PORTE = 0;
+    PIE1bits.SSPIE = 1;
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIR1bits.SSPIF = 0;
+    SPISlave();
     //**************************
     // Loop Program
     //**************************    
@@ -97,6 +104,12 @@ void __interrupt() ISR(void) {
         ADC1ADRESH = ADRESL;
         PIR1bits.ADIF = 0;
         return;
+    }
+    if(SSPIF == 1)
+    {
+        dummy = spiRead();
+        spiWrite(ADC1ADRESH);
+        SSPIF = 0;
     }
 }
 

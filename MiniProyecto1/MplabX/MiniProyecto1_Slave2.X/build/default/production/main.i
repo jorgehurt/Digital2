@@ -2864,6 +2864,17 @@ uint8_t ADC1ADRESH;
 void ADCInit(void);
 # 18 "main.c" 2
 
+# 1 "./spi.h" 1
+# 12 "./spi.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 12 "./spi.h" 2
+# 21 "./spi.h"
+void SPIMaster(void);
+void SPISlave(void);
+void spiWrite(char dat);
+char spiRead();
+# 19 "main.c" 2
+
 # 1 "./IOCPORTB.h" 1
 # 13 "./IOCPORTB.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
@@ -2875,15 +2886,15 @@ void ADCInit(void);
 
 
 void IOCInit(void);
-# 19 "main.c" 2
+# 20 "main.c" 2
 
 # 1 "./eusart.h" 1
 # 13 "./eusart.h"
 void UART_INIT(void);
 uint8_t UART_READ(void);
 void UART_WRITE(char data);
-# 20 "main.c" 2
-# 29 "main.c"
+# 21 "main.c" 2
+# 30 "main.c"
 #pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
@@ -2907,6 +2918,7 @@ void UART_WRITE(char data);
 uint8_t Inc = 0;
 uint8_t Dec = 0;
 uint8_t ContadorID=0;
+uint8_t dummy;
 
 
 void Contador(void);
@@ -2923,16 +2935,21 @@ void main(void) {
 
     ANSEL = 0;
     ANSELH = 0;
-    TRISA = 0;
+    TRISA = 0b00100000;
     TRISB = 0b00000011;
     TRISD = 0;
-    TRISC = 0;
+    TRISC = 0b00011000;
     TRISE = 0;
     PORTA = 0;
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
     PORTE = 0;
+    PIE1bits.SSPIE = 1;
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIR1bits.SSPIF = 0;
+    SPISlave();
 
 
 
@@ -2941,6 +2958,7 @@ void main(void) {
         IOCInit();
 
         PORTD = ContadorID;
+        _delay((unsigned long)((10)*(8000000/4000.0)));
     }
 
 }
@@ -2950,6 +2968,12 @@ void __attribute__((picinterrupt(("")))) ISR(void) {
         Contador();
         INTCONbits.RBIF = 0;
         return;
+    }
+    if(SSPIF == 1)
+    {
+        dummy = spiRead();
+        spiWrite(ContadorID);
+        SSPIF = 0;
     }
 }
 
