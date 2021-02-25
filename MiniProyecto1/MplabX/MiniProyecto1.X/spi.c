@@ -47,7 +47,7 @@ void SPISlave(void) {
     SSPSTATbits.CKE = 0;
     SSPCONbits.SSPEN = 1;
     SSPCONbits.CKP = 1;
-    SSPCONbits.SSPM = 0b0100;
+    SSPCONbits.SSPM = 0b0100; //Slave Select On.
     //Configuramos los PINES como IO.
     TRISCbits.TRISC5 = 0;
     TRISCbits.TRISC4 = 0;

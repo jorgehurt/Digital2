@@ -22,8 +22,23 @@ uint8_t UART_READ(){
         return RCREG;
     }  
 }
-void UART_WRITE(char data){
+void UART_WRITE(int data){
   while(!TXSTAbits.TRMT); 
   TXREG = data;
 }
 
+void UART_Read_Text(char *Output, unsigned int length)
+{
+	unsigned int i;
+	for(int i=0;i<length;i++)
+		Output[i] = UART_READ();
+}
+//**************************
+//Función para mandar un string por UART
+//**************************
+void UART_Write_Text(char *text)
+{
+  int i;
+  for(i=0;text[i]!='\0';i++) //Por cada caracter del string, mandelo y aumente el contador
+	  UART_WRITE(text[i]);
+}

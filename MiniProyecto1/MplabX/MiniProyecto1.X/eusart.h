@@ -12,5 +12,7 @@
 #endif
 void UART_INIT(void);
 uint8_t UART_READ(void);
-void UART_WRITE(char data);
+void UART_WRITE(int data);
+void UART_Write_Text(char *text);
+void UART_Read_Text(char *Output, unsigned int length);
 #endif	/* UART_H */

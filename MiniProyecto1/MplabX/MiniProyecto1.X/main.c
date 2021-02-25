@@ -22,6 +22,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+
 //**************************
 // Palabra de configuración
 //**************************
@@ -43,10 +45,33 @@
 // Main Program
 //**************************
 //Define local Variables
+//Variables para Control y Recepcion de SPI.
 uint8_t SSbit1 = 0;
-uint8_t Potenciometro = 2;
+int PotenciometroLectura = 0;
+int Potenciometro = 0;
+uint8_t ContadorLectura = 0;
 uint8_t Contador = 0;
+uint8_t TemperaturaLectura = 0;
 uint8_t Temperatura = 0;
+//Variables para impresion en LCD.
+char ContadorSend[5];
+char PotenciometroSend[5];
+char TemperaturaSend[5];
+//Variables para Mapeo de Potencimetro
+
+int Pot1A;
+int Pot1B;
+int Pot1C;
+int POINT;
+char POTchar1A[5];
+char POTchar1B[5];
+char POTchar1C[5];
+//Variables para USart
+char Titlea[5] = "Contador";
+
+//Funciones Locales para Comunicacion SPI
+void ComSPI(void);
+void MapPot(void);
 
 void main(void) {
     //Setup
@@ -76,49 +101,84 @@ void main(void) {
     PIR1bits.SSPIF = 0;
     SPIMaster();
     SSbit1 = 1;
+    inicializacion();
+    UART_INIT();
     //
     //**************************
     // Loop Program
-    //**************************    
+    //**************************
+    //Impresion de Headers en LCD
+    lcd_msg("S1:   S2:    S3:");
+    // Loop principal de lectura e impresion    
     while (1) {
-        if (SSbit1 == 1) {
-            PORTBbits.RB0 = 0;
-            PORTBbits.RB1 = 1;
-            PORTBbits.RB2 = 1;
-            __delay_ms(1);
-            spiWrite(1);
-            Potenciometro = spiRead();
-            //PORTD = Potenciometro;
-            __delay_ms(1);
-            PORTBbits.RB0 = 1;
-            __delay_ms(100);
-            SSbit1 = 2;
-         }
-        if (SSbit1 == 2) {
-            PORTBbits.RB0 = 1;
-            PORTBbits.RB1 = 0;
-            PORTBbits.RB2 = 1;
-            __delay_ms(1);
-            spiWrite(1);
-            Contador = spiRead();
-            PORTA = Contador;
-            __delay_ms(1);
-            PORTBbits.RB1 = 1;
-            __delay_ms(100);
-            SSbit1 = 3;
-        }
-        if (SSbit1 == 3) {
-            PORTBbits.RB0 = 1;
-            PORTBbits.RB1 = 1;
-            PORTBbits.RB2 = 0;
-            __delay_ms(1);
-            spiWrite(1);
-            Temperatura = spiRead();
-            PORTD=Temperatura;
-            __delay_ms(1);
-            PORTBbits.RB2 = 1;
-            __delay_ms(100);
-            SSbit1 = 1;
-        }
+        ComSPI();
+        sprintf(ContadorSend, "%.3i", Contador);
+        sprintf(PotenciometroSend, "%.4i", Potenciometro);
+        sprintf(TemperaturaSend, "%.3i", Temperatura);
+        lcd_cmd(0xC0);
+        // BAJAR A SEGUNDA LINEA
+        lcd_msg(PotenciometroSend);
+        // DESPLIEGA EL CHAR
+        lcd_msg("mV ");
+        // Espacio y V.d
+        lcd_msg(ContadorSend); // SIGUIENTE VALOR
+        lcd_msg(" ");
+        lcd_msg(TemperaturaSend); // EL OTRO VALOR
+        lcd_msg("C ");
+        //UART_WRITE("Potenciometro:");
+        //UART_WRITE(Titlea);
+        //UART_WRITE("Contador:");
+        //UART_WRITE(Contador);
+        UART_Write_Text(ContadorSend);
+        //UART_WRITE("Temperatura:");
+        //UART_WRITE(Temperatura);
+        
     }
+}
+
+void ComSPI(void) {
+    if (SSbit1 == 1) {
+        PORTBbits.RB0 = 0;
+        PORTBbits.RB1 = 1;
+        PORTBbits.RB2 = 1;
+        __delay_ms(1);
+        spiWrite(1);
+        PotenciometroLectura = spiRead();
+        MapPot();
+        __delay_ms(1);
+        PORTBbits.RB0 = 1;
+        __delay_ms(100);
+        SSbit1 = 2;
+    }
+    if (SSbit1 == 2) {
+        PORTBbits.RB0 = 1;
+        PORTBbits.RB1 = 0;
+        PORTBbits.RB2 = 1;
+        __delay_ms(1);
+        spiWrite(1);
+        Contador = spiRead();
+        __delay_ms(1);
+        PORTBbits.RB1 = 1;
+        __delay_ms(100);
+        SSbit1 = 3;
+    }
+    if (SSbit1 == 3) {
+        PORTBbits.RB0 = 1;
+        PORTBbits.RB1 = 1;
+        PORTBbits.RB2 = 0;
+        __delay_ms(1);
+        spiWrite(1);
+        TemperaturaLectura = spiRead();
+        Temperatura = (TemperaturaLectura * 125) / 250;
+        __delay_ms(1);
+        PORTBbits.RB2 = 1;
+        __delay_ms(100);
+        SSbit1 = 1;
+    }
+    return;
+}
+
+void MapPot(void) {
+    Potenciometro = (PotenciometroLectura * 5000.0) / 255;
+    return;
 }
