@@ -88,21 +88,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "553
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 553: extern volatile PIR1bits_t PIR1bits __attribute__((address(0x00C)));
 [v _PIR1bits `VS18 ~T0 @X0 0 e@12 ]
-"358
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 358:     struct {
-[s S12 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S12 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
-"357
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 357: typedef union {
-[u S11 `S12 1 ]
-[n S11 . . ]
-"369
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 369: extern volatile PORTDbits_t PORTDbits __attribute__((address(0x008)));
-[v _PORTDbits `VS11 ~T0 @X0 0 e@8 ]
-[v F1256 `(v ~T0 @X0 1 tf1`ul ]
-"92 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\pic.h
-[v __delay `JF1256 ~T0 @X0 0 e ]
-[p i __delay ]
+"29 ./I2C.h
+[; ;./I2C.h: 29: void I2C_Master_Init(const unsigned long c);
+[v _I2C_Master_Init `(v ~T0 @X0 0 ef1`Cul ]
+"29 ./RTC.h
+[; ;./RTC.h: 29: uint8_t SET_RTC(uint8_t minute , uint8_t hour, uint8_t m_day, uint8_t month, uint8_t year);
+[v _SET_RTC `(uc ~T0 @X0 0 ef5`uc`uc`uc`uc`uc ]
+"30
+[; ;./RTC.h: 30: uint8_t READ_RTC();
+[v _READ_RTC `(uc ~T0 @X0 0 e? ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -337,106 +331,143 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3546
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"30 main.c
+"25 main.c
+[; ;main.c: 25: uint8_t i, second, minute, hour, m_day, month, year;
+[; ;main.c: 25:     INTCONbits.PEIE = 1;
+[v _i `uc ~T0 @X0 1 e ]
+[v _second `uc ~T0 @X0 1 e ]
+[v _minute `uc ~T0 @X0 1 e ]
+[v _hour `uc ~T0 @X0 1 e ]
+[v _m_day `uc ~T0 @X0 1 e ]
+[v _month `uc ~T0 @X0 1 e ]
+[v _year `uc ~T0 @X0 1 e ]
+"26
+[; ;main.c: 26: uint8_t minute = 45;
+[; ;main.c: 26:     PIR1bits.SSPIF = 0;
+[v _minute `uc ~T0 @X0 1 e ]
+[i _minute
+-> -> 45 `i `uc
+]
+"27
+[; ;main.c: 27: uint8_t hour = 2;
+[; ;main.c: 27: 
+[v _hour `uc ~T0 @X0 1 e ]
+[i _hour
+-> -> 2 `i `uc
+]
+"28
+[; ;main.c: 28: uint8_t m_day = 5;
+[; ;main.c: 28: 
+[v _m_day `uc ~T0 @X0 1 e ]
+[i _m_day
+-> -> 5 `i `uc
+]
+"29
+[; ;main.c: 29: uint8_t month = 3;
+[; ;main.c: 29: 
+[v _month `uc ~T0 @X0 1 e ]
+[i _month
+-> -> 3 `i `uc
+]
+"30
+[; ;main.c: 30: uint8_t year = 21;
 [; ;main.c: 30: 
-[p x FOSC  =  INTRC_NOCLKOUT ]
-"31
-[; ;main.c: 31: 
-[p x WDTE  =  OFF        ]
-"32
-[; ;main.c: 32:     while (1) {
-[p x PWRTE  =  OFF       ]
-"33
-[; ;main.c: 33:         PORTDbits.RD1=1;
-[p x MCLRE  =  OFF       ]
-"34
-[; ;main.c: 34:         PORTDbits.RD2=0;
-[p x CP  =  OFF          ]
-"35
-[; ;main.c: 35:         _delay((unsigned long)((500)*(8000000/4000.0)));
-[p x CPD  =  OFF         ]
-"36
-[; ;main.c: 36:         PORTDbits.RD2=1;
-[p x BOREN  =  OFF       ]
+[v _year `uc ~T0 @X0 1 e ]
+[i _year
+-> -> 21 `i `uc
+]
 "37
-[; ;main.c: 37:         _delay((unsigned long)((500)*(8000000/4000.0)));
-[p x IESO  =  OFF        ]
+[; ;main.c: 37: 
+[p x FOSC  =  INTRC_NOCLKOUT ]
 "38
-[; ;main.c: 38:     }
-[p x FCMEN  =  OFF       ]
+[; ;main.c: 38: 
+[p x WDTE  =  OFF        ]
 "39
-[; ;main.c: 39: }
-[p x LVP  =  OFF         ]
+[; ;main.c: 39:     }
+[p x PWRTE  =  OFF       ]
+"40
+[; ;main.c: 40: }
+[p x MCLRE  =  OFF       ]
 "41
-[p x BOR4V  =  BOR40V    ]
+[p x CP  =  OFF          ]
 "42
+[p x CPD  =  OFF         ]
+"43
+[p x BOREN  =  OFF       ]
+"44
+[p x IESO  =  OFF        ]
+"45
+[p x FCMEN  =  OFF       ]
+"46
+[p x LVP  =  OFF         ]
+"48
+[p x BOR4V  =  BOR40V    ]
+"49
 [p x WRT  =  OFF         ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"45
+"52
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"48
-[e = . . _OSCCONbits 0 4 -> -> 7 `i `uc ]
-"49
-[e = . . _OSCCONbits 0 3 -> -> 0 `i `uc ]
-"50
-[e = . . _OSCCONbits 0 2 -> -> 0 `i `uc ]
-"51
-[e = . . _OSCCONbits 0 1 -> -> 0 `i `uc ]
-"52
-[e = . . _OSCCONbits 0 0 -> -> 1 `i `uc ]
 "55
-[e = _ANSEL -> -> 0 `i `uc ]
+[e = . . _OSCCONbits 0 4 -> -> 7 `i `uc ]
 "56
-[e = _ANSELH -> -> 0 `i `uc ]
+[e = . . _OSCCONbits 0 3 -> -> 0 `i `uc ]
 "57
-[e = _TRISA -> -> 0 `i `uc ]
+[e = . . _OSCCONbits 0 2 -> -> 0 `i `uc ]
 "58
-[e = _TRISB -> -> 0 `i `uc ]
+[e = . . _OSCCONbits 0 1 -> -> 0 `i `uc ]
 "59
-[e = _TRISD -> -> 0 `i `uc ]
-"60
-[e = _TRISC -> -> 0 `i `uc ]
-"61
-[e = _TRISE -> -> 0 `i `uc ]
+[e = . . _OSCCONbits 0 0 -> -> 1 `i `uc ]
 "62
-[e = _PORTA -> -> 0 `i `uc ]
+[e = _ANSEL -> -> 0 `i `uc ]
 "63
-[e = _PORTB -> -> 0 `i `uc ]
+[e = _ANSELH -> -> 0 `i `uc ]
 "64
-[e = _PORTC -> -> 0 `i `uc ]
+[e = _TRISA -> -> 0 `i `uc ]
 "65
-[e = _PORTD -> -> 0 `i `uc ]
+[e = _TRISB -> -> 0 `i `uc ]
 "66
-[e = _PORTE -> -> 0 `i `uc ]
+[e = _TRISD -> -> 0 `i `uc ]
 "67
-[e = . . _PIE1bits 0 3 -> -> 1 `i `uc ]
+[e = _TRISC -> -> 0 `i `uc ]
 "68
-[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
+[e = _TRISE -> -> 0 `i `uc ]
 "69
-[e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
+[e = _PORTA -> -> 0 `i `uc ]
 "70
-[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+[e = _PORTB -> -> 0 `i `uc ]
+"71
+[e = _PORTC -> -> 0 `i `uc ]
+"72
+[e = _PORTD -> -> 0 `i `uc ]
+"73
+[e = _PORTE -> -> 0 `i `uc ]
+"74
+[e = . . _PIE1bits 0 3 -> -> 1 `i `uc ]
+"75
+[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
 "76
+[e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
+"77
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"83
 [e :U 145 ]
 {
-"77
-[e = . . _PORTDbits 0 1 -> -> 1 `i `uc ]
-"78
-[e = . . _PORTDbits 0 2 -> -> 0 `i `uc ]
-"79
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"80
-[e = . . _PORTDbits 0 2 -> -> 1 `i `uc ]
-"81
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"82
+"84
+[e ( _I2C_Master_Init (1 -> -> 100000 `l `ul ]
+"85
+[e ( _SET_RTC (4 , , , , _minute _hour _m_day _month _year ]
+"86
+[e ( _READ_RTC ..  ]
+"87
+[e = _PORTD _minute ]
+"90
 }
 [e :U 144 ]
 [e $U 145  ]
 [e :U 146 ]
-"83
+"91
 [e :UE 143 ]
 }

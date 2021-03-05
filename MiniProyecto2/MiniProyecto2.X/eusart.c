@@ -1,3 +1,12 @@
+/* 
+ * File:   Template Digital 2
+ * Author: Jorge Rafael Hurtado Garcia 18052
+ * 
+ * Template Proyectos Digital 2
+ * 
+ * Created on 2021
+ */
+
 #include <xc.h>
 #include <stdint.h>
 #include "eusart.h"

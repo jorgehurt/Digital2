@@ -18,9 +18,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include "I2C.h"
+#include "RTC.h"
 #include "eusart.h"
 #define _XTAL_FREQ 8000000
 
+uint8_t  i, second, minute, hour, m_day, month, year;
+uint8_t minute = 45;
+uint8_t hour = 2;
+uint8_t m_day = 5;
+uint8_t month = 3;
+uint8_t year = 21;
 
 
 //**************************
@@ -74,10 +81,11 @@ void main(void) {
     //**************************
  
     while (1) {
-        PORTDbits.RD1=1;
-        PORTDbits.RD2=0;
-        __delay_ms(500);
-        PORTDbits.RD2=1;
-        __delay_ms(500);
+       I2C_Master_Init(100000);
+       SET_RTC(minute, hour, m_day, month, year);
+       READ_RTC();
+       PORTD=minute;
+       
+       
     }
 }
