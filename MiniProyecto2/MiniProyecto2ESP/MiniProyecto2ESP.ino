@@ -1,7 +1,4 @@
 
-#include <AdafruitIO_MQTT.h>
-
-
 int minutepic=0;
 int hourpic=0;
 int m_daypic=0;
@@ -15,7 +12,7 @@ void setup() {
 }
 
 // the loop function runs over and over again forever
-void loop() {
+void Serialpic() {
   Serial.write(Start);
   serialEvent(minutepic);
   serialEvent(hourpic);

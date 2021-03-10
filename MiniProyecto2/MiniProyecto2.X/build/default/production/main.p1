@@ -71,10 +71,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "30 ./RTC.h
 [; ;./RTC.h: 30: uint8_t READ_RTC();
 [v _READ_RTC `(uc ~T0 @X0 0 e? ]
-"15 ./eusart.h
-[; ;./eusart.h: 15: void UART_WRITE(int data);
-[v _UART_WRITE `(v ~T0 @X0 0 ef1`i ]
-"14
+"14 ./eusart.h
 [; ;./eusart.h: 14: uint8_t UART_READ(void);
 [v _UART_READ `(uc ~T0 @X0 0 ef ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
@@ -345,21 +342,22 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 37:         READ_RTC();
 [p x CP  =  OFF          ]
 "38
-[; ;main.c: 38:         UART_WRITE(minute);
+[; ;main.c: 38: 
 [p x CPD  =  OFF         ]
 "39
-[; ;main.c: 39:         UART_WRITE(hour);
+[; ;main.c: 39: 
 [p x BOREN  =  OFF       ]
 "40
-[; ;main.c: 40:         Bandera = UART_READ();
+[; ;main.c: 40: 
 [p x IESO  =  OFF        ]
 "41
-[; ;main.c: 41:         PORTD = Bandera;
+[; ;main.c: 41:         Bandera = UART_READ();
 [p x FCMEN  =  OFF       ]
 "42
-[; ;main.c: 42:     }
+[; ;main.c: 42:         PORTD = Bandera;
 [p x LVP  =  OFF         ]
 "44
+[; ;main.c: 44: }
 [p x BOR4V  =  BOR40V    ]
 "45
 [p x WRT  =  OFF         ]
@@ -410,7 +408,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _minute -> -> 45 `i `uc ]
 "71
 [v _hour `uc ~T0 @X0 1 a ]
-[e = _hour -> -> 6 `i `uc ]
+[e = _hour -> -> 15 `i `uc ]
 "72
 [v _m_day `uc ~T0 @X0 1 a ]
 [e = _m_day -> -> 5 `i `uc ]
@@ -434,19 +432,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "84
 [e ( _READ_RTC ..  ]
-"85
-[e ( _UART_WRITE (1 -> _minute `i ]
-"86
-[e ( _UART_WRITE (1 -> _hour `i ]
-"87
-[e = _Bandera ( _UART_READ ..  ]
 "88
-[e = _PORTD _Bandera ]
+[e = _Bandera ( _UART_READ ..  ]
 "89
+[e = _PORTD _Bandera ]
+"90
 }
 [e :U 144 ]
 [e $U 145  ]
 [e :U 146 ]
-"90
+"91
 [e :UE 143 ]
 }

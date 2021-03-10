@@ -2645,8 +2645,8 @@ void UART_INIT(void){
     PIR1bits.RCIF = 0;
     PIR1bits.TXIF = 0;
     SPBRGH = 0;
-    SPBRG = 25;
-    TXSTA = 0b00100100;
+    SPBRG = 11;
+    TXSTA = 0b00100000;
     RCSTA = 0b10010000;
     BAUDCTLbits.BRG16 = 0;
 }

@@ -2954,7 +2954,7 @@ void main(void) {
     PORTD = 0;
     PORTE = 0;
     uint8_t minute = 45;
-    uint8_t hour = 6;
+    uint8_t hour = 0b00001111;
     uint8_t m_day = 5;
     uint8_t month = 3;
     uint8_t year = 21;
@@ -2968,8 +2968,9 @@ void main(void) {
     UART_INIT();
     while (1) {
         READ_RTC();
-        UART_WRITE(minute);
-        UART_WRITE(hour);
+
+
+
         Bandera = UART_READ();
         PORTD = Bandera;
     }

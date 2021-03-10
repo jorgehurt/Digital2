@@ -18,12 +18,17 @@
 // or ethernet clients.
 #include "config.h"
 
+// include Serial Special functions
+#include <SoftwareSerial.h>
+SoftwareSerial s(D6,D5);
+
+
 /************************ Example Starts Here *******************************/
 
 
-int minutepic=31;
+int minutepic=1;
 int secondpic=25;
-int hourpic=3;
+int hourpic=5;
 int Bandera=0b00000100;
 int Start=0b11111111;
 unsigned long previousMillis = 0;
@@ -41,8 +46,8 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   
   // start the serial connection
-  Serial.begin(9600);
-
+  s.begin(10417);
+  Serial.begin(115200);
   io.connect();
 
   digital->onMessage(handleMessage);
@@ -61,8 +66,18 @@ void setup() {
 void loop() {
   io.run();
   WriteData();
-  Serialpic();
-
+  s.write(Bandera);
+  //Serial.println("Si pasa por alla");
+  //hourpic=s.read();
+  /*
+  Serial.println(hourpic);
+  if (s.available()>0)
+    {
+      hourpic=s.read();
+      Serial.println("Si pasa por aqui");
+      Serial.println(hourpic);
+    }
+*/
   
 }
 void WriteData(){
@@ -72,8 +87,9 @@ void WriteData(){
     digital4->save(hourpic);
     digital3->save(minutepic);
   }
+  return;
   }
-
+/*
 void serialEvent(int data) {
   while (Serial.available()) {
     data = (int)Serial.read();
@@ -87,6 +103,14 @@ void Serialpic() {
   Serial.write(Bandera);
 }
 
+void Serialpic() {
+  if (s.available()>0)
+    {
+      hourpic=s.read();
+      Serial.println(hourpic);
+    }
+}
+*/
 void handleMessage(AdafruitIO_Data *data) {
   //Bandera[2]=data->toPinLevel();
   bitWrite(Bandera,1,data->toPinLevel());
