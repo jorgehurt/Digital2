@@ -372,105 +372,108 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == -> . . _PIR1bits 0 5 `i -> 1 `i 140  ]
 {
 "31
-[; ;eusart.c: 31:         return RCREG;
+[; ;eusart.c: 31:         PIR1bits.RCIF=0;
+[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
+"32
+[; ;eusart.c: 32:         return RCREG;
 [e ) _RCREG ]
 [e $UE 139  ]
-"32
-[; ;eusart.c: 32:     }
+"33
+[; ;eusart.c: 33:     }
 }
 [e :U 140 ]
-"33
-[; ;eusart.c: 33: }
+"34
+[; ;eusart.c: 34: }
 [e :UE 139 ]
 }
-"34
-[; ;eusart.c: 34: void UART_WRITE(int data){
+"35
+[; ;eusart.c: 35: void UART_WRITE(int data){
 [v _UART_WRITE `(v ~T0 @X0 1 ef1`i ]
 {
 [e :U _UART_WRITE ]
 [v _data `i ~T0 @X0 1 r1 ]
 [f ]
-"35
-[; ;eusart.c: 35:   while(!TXSTAbits.TRMT);
+"36
+[; ;eusart.c: 36:   while(!TXSTAbits.TRMT);
 [e $U 142  ]
 [e :U 143 ]
 [e :U 142 ]
 [e $ ! != -> . . _TXSTAbits 0 1 `i -> 0 `i 143  ]
 [e :U 144 ]
-"36
-[; ;eusart.c: 36:   TXREG = data;
-[e = _TXREG -> _data `uc ]
 "37
-[; ;eusart.c: 37: }
+[; ;eusart.c: 37:   TXREG = data;
+[e = _TXREG -> _data `uc ]
+"38
+[; ;eusart.c: 38: }
 [e :UE 141 ]
 }
-"39
-[; ;eusart.c: 39: void UART_Read_Text(char *Output, unsigned int length)
-[v _UART_Read_Text `(v ~T0 @X0 1 ef2`*uc`ui ]
 "40
-[; ;eusart.c: 40: {
+[; ;eusart.c: 40: void UART_Read_Text(char *Output, unsigned int length)
+[v _UART_Read_Text `(v ~T0 @X0 1 ef2`*uc`ui ]
+"41
+[; ;eusart.c: 41: {
 {
 [e :U _UART_Read_Text ]
-"39
-[; ;eusart.c: 39: void UART_Read_Text(char *Output, unsigned int length)
+"40
+[; ;eusart.c: 40: void UART_Read_Text(char *Output, unsigned int length)
 [v _Output `*uc ~T0 @X0 1 r1 ]
 [v _length `ui ~T0 @X0 1 r2 ]
-"40
-[; ;eusart.c: 40: {
-[f ]
 "41
-[; ;eusart.c: 41:  unsigned int i;
-[v _i `ui ~T0 @X0 1 a ]
+[; ;eusart.c: 41: {
+[f ]
 "42
-[; ;eusart.c: 42:  for(int i=0;i<length;i++)
+[; ;eusart.c: 42:  unsigned int i;
+[v _i `ui ~T0 @X0 1 a ]
+"43
+[; ;eusart.c: 43:  for(int i=0;i<length;i++)
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $U 149  ]
 [e :U 146 ]
-"43
-[; ;eusart.c: 43:   Output[i] = UART_READ();
+"44
+[; ;eusart.c: 44:   Output[i] = UART_READ();
 [e = *U + _Output * -> _i `x -> -> # *U _Output `i `x -> ( _UART_READ ..  `uc ]
 [e ++ _i -> 1 `i ]
 [e :U 149 ]
 [e $ < -> _i `ui _length 146  ]
 [e :U 147 ]
 }
-"44
-[; ;eusart.c: 44: }
+"45
+[; ;eusart.c: 45: }
 [e :UE 145 ]
 }
-"48
-[; ;eusart.c: 48: void UART_Write_Text(char *text)
-[v _UART_Write_Text `(v ~T0 @X0 1 ef1`*uc ]
 "49
-[; ;eusart.c: 49: {
+[; ;eusart.c: 49: void UART_Write_Text(char *text)
+[v _UART_Write_Text `(v ~T0 @X0 1 ef1`*uc ]
+"50
+[; ;eusart.c: 50: {
 {
 [e :U _UART_Write_Text ]
-"48
-[; ;eusart.c: 48: void UART_Write_Text(char *text)
-[v _text `*uc ~T0 @X0 1 r1 ]
 "49
-[; ;eusart.c: 49: {
-[f ]
+[; ;eusart.c: 49: void UART_Write_Text(char *text)
+[v _text `*uc ~T0 @X0 1 r1 ]
 "50
-[; ;eusart.c: 50:   int i;
-[v _i `i ~T0 @X0 1 a ]
+[; ;eusart.c: 50: {
+[f ]
 "51
-[; ;eusart.c: 51:   for(i=0;text[i]!='\0';i++)
+[; ;eusart.c: 51:   int i;
+[v _i `i ~T0 @X0 1 a ]
+"52
+[; ;eusart.c: 52:   for(i=0;text[i]!='\0';i++)
 {
 [e = _i -> 0 `i ]
 [e $U 154  ]
 [e :U 151 ]
-"52
-[; ;eusart.c: 52:    UART_WRITE(text[i]);
+"53
+[; ;eusart.c: 53:    UART_WRITE(text[i]);
 [e ( _UART_WRITE (1 -> *U + _text * -> _i `x -> -> # *U _text `i `x `i ]
 [e ++ _i -> 1 `i ]
 [e :U 154 ]
 [e $ != -> *U + _text * -> _i `x -> -> # *U _text `i `x `ui -> 0 `ui 151  ]
 [e :U 152 ]
 }
-"53
-[; ;eusart.c: 53: }
+"54
+[; ;eusart.c: 54: }
 [e :UE 150 ]
 }

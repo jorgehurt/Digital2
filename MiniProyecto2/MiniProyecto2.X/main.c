@@ -22,12 +22,8 @@
 #include "eusart.h"
 #define _XTAL_FREQ 8000000
 
-uint8_t  i, second, minute, hour, m_day, month, year;
-uint8_t minute = 45;
-uint8_t hour = 2;
-uint8_t m_day = 5;
-uint8_t month = 3;
-uint8_t year = 21;
+uint8_t i, second, minute, hour, m_day, month, year, Bandera;
+uint8_t Start = 0b00000000;
 
 
 //**************************
@@ -48,7 +44,6 @@ uint8_t year = 21;
 #pragma config BOR4V = BOR40V   // Brown-out Reset Selection bit (Brown-out Reset set to 4.0V)
 #pragma config WRT = OFF        // Flash Program Memory Self Write Enable bits (Write protection off)
 
-
 void main(void) {
     //Setup
     //Configuracion del Oscilador.
@@ -64,28 +59,32 @@ void main(void) {
     TRISA = 0;
     TRISB = 0;
     TRISD = 0;
-    TRISC = 0;
+    TRISCbits.TRISC7 = 1;
+    TRISCbits.TRISC6 = 0;
     TRISE = 0;
     PORTA = 0;
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
     PORTE = 0;
-    PIE1bits.SSPIE = 1;
-    INTCONbits.GIE = 1;
-    INTCONbits.PEIE = 1;
-    PIR1bits.SSPIF = 0;
+    uint8_t minute = 45;
+    uint8_t hour = 6;
+    uint8_t m_day = 5;
+    uint8_t month = 3;
+    uint8_t year = 21;
+    uint8_t Bandera = 0b00000000;
     //
     //**************************
     // Loop Program
     //**************************
- 
+    I2C_Master_Init(100000);
+    SET_RTC(minute, hour, m_day, month, year);
+    UART_INIT();
     while (1) {
-       I2C_Master_Init(100000);
-       SET_RTC(minute, hour, m_day, month, year);
-       READ_RTC();
-       PORTD=minute;
-       
-       
+        READ_RTC();
+        UART_WRITE(minute);
+        UART_WRITE(hour);
+        Bandera = UART_READ();
+        PORTD = Bandera;
     }
 }

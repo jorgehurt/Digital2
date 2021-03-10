@@ -2694,33 +2694,6 @@ uint8_t decimal_to_bcd(uint8_t number) {
 
 
 
-uint8_t SET_RTC(uint8_t minute, uint8_t hour, uint8_t m_day, uint8_t month, uint8_t year) {
-
-    minute = decimal_to_bcd(minute);
-    hour = decimal_to_bcd(hour);
-    m_day = decimal_to_bcd(m_day);
-    month = decimal_to_bcd(month);
-    year = decimal_to_bcd(year);
-
-
-
-    I2C_Master_Start();
-    I2C_Master_Write(0xD0);
-    I2C_Master_Write(0);
-    I2C_Master_Write(0);
-    I2C_Master_Write(minute);
-    I2C_Master_Write(hour);
-    I2C_Master_Write(1);
-    I2C_Master_Write(m_day);
-    I2C_Master_Write(month);
-    I2C_Master_Write(year);
-    I2C_Master_Stop();
-
-    _delay((unsigned long)((200)*(8000000/4000.0)));
-
-}
-
-
 
 uint8_t READ_RTC() {
 
@@ -2738,4 +2711,31 @@ uint8_t READ_RTC() {
     year = I2C_Master_Read(0);
     I2C_Master_Stop();
     _delay((unsigned long)((50)*(8000000/4000.0)));
+    return second, minute, hour, m_day, month, year;
+}
+
+
+uint8_t SET_RTC(uint8_t minute, uint8_t hour, uint8_t m_day, uint8_t month, uint8_t year) {
+
+    minute = decimal_to_bcd(minute);
+    hour = decimal_to_bcd(hour);
+    m_day = decimal_to_bcd(m_day);
+    month = decimal_to_bcd(month);
+    year = decimal_to_bcd(year);
+
+
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(0);
+    I2C_Master_Write(0);
+    I2C_Master_Write(minute);
+    I2C_Master_Write(hour);
+    I2C_Master_Write(1);
+    I2C_Master_Write(m_day);
+    I2C_Master_Write(month);
+    I2C_Master_Write(year);
+    I2C_Master_Stop();
+
+    _delay((unsigned long)((200)*(8000000/4000.0)));
+    return 1;
 }

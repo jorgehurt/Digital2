@@ -2652,6 +2652,7 @@ void UART_INIT(void){
 }
 uint8_t UART_READ(){
     if(PIR1bits.RCIF==1){
+        PIR1bits.RCIF=0;
         return RCREG;
     }
 }

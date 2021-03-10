@@ -25,33 +25,6 @@ uint8_t decimal_to_bcd(uint8_t number) {
 
 //Escritura y configuracion de RTC
 
-uint8_t SET_RTC(uint8_t minute, uint8_t hour, uint8_t m_day, uint8_t month, uint8_t year) {
-    // convert decimal to BCD
-    minute = decimal_to_bcd(minute);
-    hour = decimal_to_bcd(hour);
-    m_day = decimal_to_bcd(m_day);
-    month = decimal_to_bcd(month);
-    year = decimal_to_bcd(year);
-    // end conversion
-
-    // write data to RTC chip
-    I2C_Master_Start(); // start I2C
-    I2C_Master_Write(0xD0); // RTC chip address
-    I2C_Master_Write(0); // send register address
-    I2C_Master_Write(0); // reset seconds and start oscillator
-    I2C_Master_Write(minute); // write minute value to RTC chip
-    I2C_Master_Write(hour); // write hour value to RTC chip
-    I2C_Master_Write(1); // write day value (not used)
-    I2C_Master_Write(m_day); // write date value to RTC chip
-    I2C_Master_Write(month); // write month value to RTC chip
-    I2C_Master_Write(year); // write year value to RTC chip
-    I2C_Master_Stop(); // stop I2C
-
-    __delay_ms(200);
-
-}
-
-// Lectura
 
 uint8_t READ_RTC() {
     // read current time and date from the RTC chip
@@ -69,4 +42,31 @@ uint8_t READ_RTC() {
     year = I2C_Master_Read(0); // read year from register 6
     I2C_Master_Stop(); // stop I2C
     __delay_ms(50); // wait 50 ms
+    return second, minute, hour, m_day, month, year;
+}
+
+
+uint8_t SET_RTC(uint8_t minute, uint8_t hour, uint8_t m_day, uint8_t month, uint8_t year) {
+    // convert decimal to BCD
+    minute = decimal_to_bcd(minute);
+    hour = decimal_to_bcd(hour);
+    m_day = decimal_to_bcd(m_day);
+    month = decimal_to_bcd(month);
+    year = decimal_to_bcd(year);
+    // end conversion
+    // write data to RTC chip
+    I2C_Master_Start(); // start I2C
+    I2C_Master_Write(0xD0); // RTC chip address
+    I2C_Master_Write(0); // send register address
+    I2C_Master_Write(0); // reset seconds and start oscillator
+    I2C_Master_Write(minute); // write minute value to RTC chip
+    I2C_Master_Write(hour); // write hour value to RTC chip
+    I2C_Master_Write(1); // write day value (not used)
+    I2C_Master_Write(m_day); // write date value to RTC chip
+    I2C_Master_Write(month); // write month value to RTC chip
+    I2C_Master_Write(year); // write year value to RTC chip
+    I2C_Master_Stop(); // stop I2C
+
+    __delay_ms(200);
+    return 1;
 }
