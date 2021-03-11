@@ -18,18 +18,14 @@
 // or ethernet clients.
 #include "config.h"
 
-// include Serial Special functions
-#include <SoftwareSerial.h>
-SoftwareSerial s(D6,D5);
-
 
 /************************ Example Starts Here *******************************/
 
 
-int minutepic=1;
+int minutepic=2;
 int secondpic=25;
-int hourpic=1;
-int Bandera=0b00000100;
+int hourpic=3;
+byte Bandera=0b00000000;
 int Start=0b11111111;
 unsigned long previousMillis = 0;
 const long interval = 15000;
@@ -46,8 +42,7 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   
   // start the serial connection
-  s.begin(9600);
-  Serial.begin(115200);
+  Serial.begin(9600);
   io.connect();
 
   digital->onMessage(handleMessage);
@@ -61,27 +56,24 @@ void setup() {
   }
   digital->get();
   digital2->get();
+  digital3->get();
+  digital4->get();
 }
 
 void loop() {
   io.run();
   WriteData();
-  hourpic=s.read();
-  s.write(Bandera);
-  Serial.println(Bandera);
-  //Serial.println("Si pasa por alla");
-  //hourpic=s.read();
-  /*
-  Serial.println(hourpic);
-  if (s.available()>0)
-    {
-      hourpic=s.read();
-      Serial.println("Si pasa por aqui");
-      Serial.println(hourpic);
-    }
-*/
-  
+  if (Serial.available()>0)
+  {
+    hourpic=Serial.read();
+    Serial.write(Bandera);
+  }
 }
+
+ 
+
+
+
 void WriteData(){
   unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {
@@ -91,35 +83,12 @@ void WriteData(){
   }
   return;
   }
-/*
-void serialEvent(int data) {
-  while (Serial.available()) {
-    data = (int)Serial.read();
-  }
-}
 
-void Serialpic() {
-  //Serial.write(Start);
-  serialEvent(minutepic);
-  serialEvent(hourpic);
-  Serial.write(Bandera);
-}
-
-void Serialpic() {
-  if (s.available()>0)
-    {
-      hourpic=s.read();
-      Serial.println(hourpic);
-    }
-}
-*/
 void handleMessage(AdafruitIO_Data *data) {
-  //Bandera[2]=data->toPinLevel();
   bitWrite(Bandera,1,data->toPinLevel());
   digitalWrite(LED_BUILTIN,bitRead(Bandera,1));
 }
 void handleMessage2(AdafruitIO_Data *data) {
-  //Bandera[2]=data->toPinLevel();
   bitWrite(Bandera,2,data->toPinLevel());
   digitalWrite(LED_BUILTIN,bitRead(Bandera,2));
 }

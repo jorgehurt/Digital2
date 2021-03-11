@@ -20,7 +20,7 @@
 #include "I2C.h"
 #include "RTC.h"
 #include "eusart.h"
-#define _XTAL_FREQ 8000000
+#define _XTAL_FREQ 4000000
 
 uint8_t i, second, minute, hour, m_day, month, year, Bandera;
 uint8_t Start = 0b00000000;
@@ -59,33 +59,54 @@ void main(void) {
     TRISA = 0;
     TRISB = 0;
     TRISD = 0;
-    TRISCbits.TRISC7 = 1;
-    TRISCbits.TRISC6 = 0;
+    TRISC=0b11011000;
     TRISE = 0;
     PORTA = 0;
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
     PORTE = 0;
-    int minute = 45;
-    int hour = 0b00001111;
-    uint8_t m_day = 5;
-    uint8_t month = 3;
-    uint8_t year = 21;
-    uint8_t Bandera = 0b00000000;
+    minute = 45;
+    hour = 8;
+    m_day = 5;
+    month = 3;
+    year = 21;
+    Bandera = 0b00000000;
+    
+      //Habilitamos las Interrupciones // Habilitamos UART a 9600 BaudRate.
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIE1bits.RCIE = 1;
+    //PIE1bits.TXIE = 1;
+    // Limpiamos las banderas
+    PIR1bits.RCIF = 0;
+    PIR1bits.TXIF = 0;
+    SPBRGH = 0;
+    SPBRG = 0b00011001; //9600
+    TXSTA = 0b00100100;
+    RCSTA = 0b10010000;
+    BAUDCTLbits.BRG16 = 0;
+    
     //
     //**************************
     // Loop Program
     //**************************
     I2C_Master_Init(100000);
     SET_RTC(minute, hour, m_day, month, year);
-    UART_INIT();
+    //UART_INIT();
     while (1) {
         READ_RTC();
-        //UART_WRITE(minute);
-        //UART_READ();
-        UART_WRITE(hour);
-        Bandera = UART_READ();
+        TXREG=second;
+        __delay_ms(20);
+        __delay_ms(20);
         PORTD = Bandera;
     }
 }
+
+ void __interrupt() ISR(void) {
+    if(PIR1bits.RCIF==1){
+        PIR1bits.RCIF=0;
+        Bandera = RCREG;
+        return;
+    }  
+ }
