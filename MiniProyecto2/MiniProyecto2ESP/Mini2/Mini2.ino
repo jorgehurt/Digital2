@@ -28,7 +28,7 @@ SoftwareSerial s(D6,D5);
 
 int minutepic=1;
 int secondpic=25;
-int hourpic=5;
+int hourpic=1;
 int Bandera=0b00000100;
 int Start=0b11111111;
 unsigned long previousMillis = 0;
@@ -46,7 +46,7 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   
   // start the serial connection
-  s.begin(10417);
+  s.begin(9600);
   Serial.begin(115200);
   io.connect();
 
@@ -66,7 +66,9 @@ void setup() {
 void loop() {
   io.run();
   WriteData();
+  hourpic=s.read();
   s.write(Bandera);
+  Serial.println(Bandera);
   //Serial.println("Si pasa por alla");
   //hourpic=s.read();
   /*

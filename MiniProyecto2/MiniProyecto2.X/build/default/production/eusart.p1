@@ -346,11 +346,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;eusart.c: 23:     SPBRGH = 0;
 [e = _SPBRGH -> -> 0 `i `uc ]
 "24
-[; ;eusart.c: 24:     SPBRG = 11;
-[e = _SPBRG -> -> 11 `i `uc ]
+[; ;eusart.c: 24:     SPBRG = 25;
+[e = _SPBRG -> -> 25 `i `uc ]
 "25
-[; ;eusart.c: 25:     TXSTA = 0b00100000;
-[e = _TXSTA -> -> 32 `i `uc ]
+[; ;eusart.c: 25:     TXSTA = 0b00100100;
+[e = _TXSTA -> -> 36 `i `uc ]
 "26
 [; ;eusart.c: 26:     RCSTA = 0b10010000;
 [e = _RCSTA -> -> 144 `i `uc ]

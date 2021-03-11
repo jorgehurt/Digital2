@@ -71,7 +71,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "30 ./RTC.h
 [; ;./RTC.h: 30: uint8_t READ_RTC();
 [v _READ_RTC `(uc ~T0 @X0 0 e? ]
-"14 ./eusart.h
+"15 ./eusart.h
+[; ;./eusart.h: 15: void UART_WRITE(int data);
+[v _UART_WRITE `(v ~T0 @X0 0 ef1`i ]
+"14
 [; ;./eusart.h: 14: uint8_t UART_READ(void);
 [v _UART_READ `(uc ~T0 @X0 0 ef ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
@@ -348,7 +351,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 39: 
 [p x BOREN  =  OFF       ]
 "40
-[; ;main.c: 40: 
+[; ;main.c: 40:         UART_WRITE(hour);
 [p x IESO  =  OFF        ]
 "41
 [; ;main.c: 41:         Bandera = UART_READ();
@@ -368,7 +371,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _main ]
 [f ]
 "50
-[e = . . _OSCCONbits 0 4 -> -> 7 `i `uc ]
+[e = . . _OSCCONbits 0 4 -> -> 6 `i `uc ]
 "51
 [e = . . _OSCCONbits 0 3 -> -> 0 `i `uc ]
 "52
@@ -404,11 +407,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "69
 [e = _PORTE -> -> 0 `i `uc ]
 "70
-[v _minute `uc ~T0 @X0 1 a ]
-[e = _minute -> -> 45 `i `uc ]
+[v _minute `i ~T0 @X0 1 a ]
+[e = _minute -> 45 `i ]
 "71
-[v _hour `uc ~T0 @X0 1 a ]
-[e = _hour -> -> 15 `i `uc ]
+[v _hour `i ~T0 @X0 1 a ]
+[e = _hour -> 15 `i ]
 "72
 [v _m_day `uc ~T0 @X0 1 a ]
 [e = _m_day -> -> 5 `i `uc ]
@@ -424,7 +427,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "80
 [e ( _I2C_Master_Init (1 -> -> 100000 `l `ul ]
 "81
-[e ( _SET_RTC (4 , , , , _minute _hour _m_day _month _year ]
+[e ( _SET_RTC (4 , , , , -> _minute `uc -> _hour `uc _m_day _month _year ]
 "82
 [e ( _UART_INIT ..  ]
 "83
@@ -432,6 +435,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "84
 [e ( _READ_RTC ..  ]
+"87
+[e ( _UART_WRITE (1 _hour ]
 "88
 [e = _Bandera ( _UART_READ ..  ]
 "89

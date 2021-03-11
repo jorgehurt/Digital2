@@ -2933,7 +2933,7 @@ uint8_t Start = 0b00000000;
 void main(void) {
 
 
-    OSCCONbits.IRCF = 0b111;
+    OSCCONbits.IRCF = 0b110;
     OSCCONbits.OSTS = 0;
     OSCCONbits.HTS = 0;
     OSCCONbits.LTS = 0;
@@ -2953,8 +2953,8 @@ void main(void) {
     PORTC = 0;
     PORTD = 0;
     PORTE = 0;
-    uint8_t minute = 45;
-    uint8_t hour = 0b00001111;
+    int minute = 45;
+    int hour = 0b00001111;
     uint8_t m_day = 5;
     uint8_t month = 3;
     uint8_t year = 21;
@@ -2970,7 +2970,7 @@ void main(void) {
         READ_RTC();
 
 
-
+        UART_WRITE(hour);
         Bandera = UART_READ();
         PORTD = Bandera;
     }
