@@ -28,7 +28,7 @@ int hourpic=3;
 byte Bandera=0b00000000;
 int Start=0b11111111;
 unsigned long previousMillis = 0;
-const long interval = 15000;
+const long interval = 2000;
 
 // set up the 'digital' feed
 AdafruitIO_Feed *digital = io.feed("Luz Verde");
@@ -47,7 +47,6 @@ void setup() {
 
   digital->onMessage(handleMessage);
   digital2->onMessage(handleMessage2);
-  digital3->save(minutepic);
   digital4->save(hourpic);
 
   // wait for a connection
@@ -79,7 +78,6 @@ void WriteData(){
   if (currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
     digital4->save(hourpic);
-    digital3->save(minutepic);
   }
   return;
   }
