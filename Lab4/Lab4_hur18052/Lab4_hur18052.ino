@@ -9,7 +9,7 @@
   
   This example code is in the public domain.
 */
-
+// Definimos Los pines donde se encuentran los leds.
 // most launchpads have a red LED
 #define LEDR0 PD_0
 #define LEDR1 PD_1
@@ -30,7 +30,7 @@
 #define RGBLEDG GREEN_LED
 #define RGBLEDR RED_LED
 
-
+//Configuramos las variables de Inicio de la funcion.
 const int  buttonPin1 = PUSH1;
 const int  buttonPin2 = PUSH2;
 int Contador1A=0;
@@ -42,9 +42,7 @@ byte valuecontador=0b00000000;
 int value = 0;
 int InitContador=1;
 
-  
-
-
+//Configuramos los pines como inputs o outputs.
 
 void setup() {                
   // Configura los Leds Rojos como salidas.
@@ -71,12 +69,14 @@ void setup() {
   // Configuracion de los Botones
   pinMode(buttonPin1, INPUT_PULLUP);
   pinMode(buttonPin2, INPUT_PULLUP);
+  //Configuramos las Interrupciones del puerto. Para cuando recien apachemos el boton asi configuramos el debouncing.
   attachInterrupt(digitalPinToInterrupt(buttonPin1), Push1A, FALLING);
   attachInterrupt(digitalPinToInterrupt(buttonPin2), Push2A, FALLING);
 }
 
 // the loop routine runs over and over again forever:
 void loop() {
+  //Iniciamos la funcion de semaforo cuando el buttonpin1 o el buttonpin2 inicia siempre y cuando estemos listos para la secuencia de inicio.
   if ((digitalRead(buttonPin1)==0||digitalRead(buttonPin2)==0)&&Start==0){
     Semaforo ();
     }
