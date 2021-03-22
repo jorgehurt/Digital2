@@ -81,9 +81,12 @@ void loop() {
     Semaforo ();
     }
 }
+//Configuramos la interrupcion para el Primer Pushbutton.
 void Push1A (){
     if (Start ==1){
+      // Incrementamos el Contador.
       Contador1A=Contador1A+1;
+      //Imprimimos el contador en el los leds indicados en la funcion printleds.
       Led_Rojo=ByteToPort (Contador1A);
       PrintLeds ();
     }
@@ -91,7 +94,9 @@ void Push1A (){
   }
 void Push2A (){
     if (Start ==1){
+      // Incrementamos el Contador.
       Contador2A=Contador2A+1;
+      //Imprimimos el contador en el los leds indicados en la funcion printleds.
       Led_Verde=ByteToPort (Contador2A);
       PrintLeds ();
     }
