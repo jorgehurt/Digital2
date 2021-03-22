@@ -102,7 +102,7 @@ void Push2A (){
     }
     return;
   }
-
+//Iniciamos la secuencia del semaforo antes de iniciar la carrera. y mandamos el bit de inicio para confirmar que este listo para el juego.
 void Semaforo (){
   digitalWrite(RGBLEDG, LOW);
   digitalWrite(RGBLEDR, HIGH);
@@ -118,7 +118,7 @@ void Semaforo (){
   Start=1; 
   return;
   }
-
+//Con el mapeo correspondiente se procede a hacer la impresion de los valores extraidos del contador directamente en cada led.
 void PrintLeds () {
   // Configuracion Led Rojo
     digitalWrite(LEDR0,bitRead(Led_Rojo,0));
@@ -140,7 +140,7 @@ void PrintLeds () {
     digitalWrite(LEDG7,bitRead(Led_Verde,7));
     return;
   }
-
+//En esta funcion es una tabla de valores para ver que se debe mostrar en el puerto.
 byte ByteToPort (int value) {
   if(value==1){
     return 0b00000001 ;
@@ -168,6 +168,7 @@ byte ByteToPort (int value) {
     } 
   else{
     if(Contador1A==9){
+      //Al llegar a 9 uno de los dos contadores se termina la ejecucion del juego y se imprime quien es el ganador. Se limpian las variables y se reinicia todo.
       digitalWrite(RGBLEDR, HIGH);
       Led_Rojo = 0b11111111;
       PrintLeds ();
