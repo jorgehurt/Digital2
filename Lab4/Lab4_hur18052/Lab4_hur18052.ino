@@ -70,8 +70,8 @@ void setup() {
   pinMode(buttonPin1, INPUT_PULLUP);
   pinMode(buttonPin2, INPUT_PULLUP);
   //Configuramos las Interrupciones del puerto. Para cuando recien apachemos el boton asi configuramos el debouncing.
-  attachInterrupt(digitalPinToInterrupt(buttonPin1), Push1A, FALLING);
-  attachInterrupt(digitalPinToInterrupt(buttonPin2), Push2A, FALLING);
+  attachInterrupt(digitalPinToInterrupt(buttonPin1), Push1A, RISING);
+  attachInterrupt(digitalPinToInterrupt(buttonPin2), Push2A, RISING);
 }
 
 // the loop routine runs over and over again forever:
@@ -84,6 +84,7 @@ void loop() {
 //Configuramos la interrupcion para el Primer Pushbutton.
 void Push1A (){
     if (Start ==1){
+      delay(450);
       // Incrementamos el Contador.
       Contador1A=Contador1A+1;
       //Imprimimos el contador en el los leds indicados en la funcion printleds.
@@ -94,6 +95,7 @@ void Push1A (){
   }
 void Push2A (){
     if (Start ==1){
+      delay(450);
       // Incrementamos el Contador.
       Contador2A=Contador2A+1;
       //Imprimimos el contador en el los leds indicados en la funcion printleds.
