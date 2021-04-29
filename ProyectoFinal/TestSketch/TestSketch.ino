@@ -3,10 +3,11 @@
 #include <UTFTGLUE.h>              //use GLUE class and constructor
 UTFTGLUE myGLCD(0x5408,A2,A1,A3,A4,A0); //all dummy args
 
+int CiclodeJuego =1;
 
 int timertemp = 300;
-int contadorJ1 =6;
-int contadorJ2 =3;
+int contadorJ1 =0;
+int contadorJ2 =0;
 int Ballx=random(100,200);
 int Bally=random(80,120);
 int BallSpeed = 10;
@@ -17,14 +18,14 @@ int ResBallx= 0;
 //Bar Game Position
 const int BarLenght = 60;
 //BarPos
-int BarPosUpRight = 170;
+int BarPosUpRight = 10;
 int BarPosUpLeft = 10;
 int BarPosDownRight = BarPosUpRight + BarLenght;
 int BarPosDownLeft = BarPosUpLeft + BarLenght;
 
 
 //Move Right Bar CTE
-const int BarSteps = 10;//Bar Speed Movement
+const int BarSteps = 30;//Bar Speed Movement
 int ButtonUpRightBar = 0;
 int ButtonDownRightBar = 0;
 int RightBarCounter = BarPosUpRight;
@@ -45,8 +46,7 @@ void setup()
   Serial.begin(9600);
 // Setup the LCD
   myGLCD.InitLCD();
-  myGLCD.setFont(BigFont);
-  myGLCD.fillScr(0, 0, 0);  
+  myGLCD.setFont(BigFont); 
 
 }
 
@@ -59,14 +59,22 @@ void loop()
   ButtonUpLeftBar = bitRead(SendSerial,3);
   ButtonDownLeftBar = bitRead(SendSerial,4);
 
-  //InitScreen ();
-
-  MoveBall ();
-  delay(100);
-  MoveRightBar ();
-  delay(100);
-  MoveLeftBar ();
-  delay(100);
+  InitScreen ();
+  delay(2000);
+  if(ButtonDownRightBar==1 || ButtonDownLeftBar==1){
+    myGLCD.fillScr(0, 0, 0); 
+    CiclodeJuego =1;
+    while(CiclodeJuego == 1){
+      MoveBall ();
+      delay(75);
+      MoveRightBar ();
+      delay(75);
+      MoveLeftBar ();
+      delay(75);
+      GoalRightPlayer();
+      delay(75);
+          }
+    }
 
 /*
 
@@ -152,6 +160,54 @@ void RightBar ()
   myGLCD.fillRoundRect(300, BarPosUpRight, 310, BarPosDownRight);//70
 }
 
+void GoalRightPlayer(){
+  if (Ballx>=290){
+    if(Bally < BarPosUpRight || Bally > BarPosDownRight){
+      contadorJ1=contadorJ1+1;
+      if (contadorJ1 >=3){
+        WinnerScreenJ1 ();
+        contadorJ1=0;
+        contadorJ2=0;
+        CiclodeJuego =0;
+        Ballx=random(100,200);
+        Bally=random(80,120);
+        delay(1000);
+        return;
+        }
+      ScoreScreen ();
+      delay(1000);
+      myGLCD.fillScr(0, 0, 0);
+      Ballx=random(100,200);
+      Bally=random(80,120);
+      return;
+      }
+    
+    }
+  if (Ballx<=30){
+    if(Bally < BarPosUpLeft || Bally > BarPosDownLeft){
+      contadorJ2=contadorJ2+1;
+      if (contadorJ2 >=3){
+        WinnerScreenJ2 ();
+        contadorJ1=0;
+        contadorJ2=0;
+        CiclodeJuego =0;
+        Ballx=random(100,200);
+        Bally=random(80,120);
+        delay(1000);
+        return;
+        }
+      ScoreScreen ();
+      delay(1000);
+      myGLCD.fillScr(0, 0, 0);
+      Ballx=random(100,200);
+      Bally=random(80,120);
+      return;
+      }
+    
+    }
+  }
+
+
 void ClearRightBar ()
 {
   //Pantalla de Juego Barra derecha
@@ -178,7 +234,7 @@ void MoveRightBar (){
       return;
     }
   if (ButtonDownRightBar == 1){
-    if (RightBarCounter < 170){
+    if (RightBarCounter < 150){
       RightBarCounter = RightBarCounter + BarSteps;
       BarPosUpRight = RightBarCounter;
       BarPosDownRight = BarPosUpRight + BarLenght; 
@@ -186,7 +242,10 @@ void MoveRightBar (){
       RightBar (); 
       return;    
     }
-  
+
+  BarPosUpRight = RightBarCounter;
+  BarPosDownRight = BarPosUpRight + BarLenght;  
+  RightBar (); 
   return;
   }
 
@@ -224,7 +283,7 @@ void MoveLeftBar (){
       return;
     }
   if (ButtonDownLeftBar == 1){
-    if (LeftBarCounter < 170){
+    if (LeftBarCounter < 150){
       LeftBarCounter = LeftBarCounter + BarSteps;
       BarPosUpLeft = LeftBarCounter;
       BarPosDownLeft = BarPosUpLeft + BarLenght; 
@@ -232,7 +291,9 @@ void MoveLeftBar (){
       LeftBar (); 
       return;    
     }
-  
+  BarPosUpLeft = LeftBarCounter;
+  BarPosDownLeft = BarPosUpLeft + BarLenght;    
+  LeftBar ();
   return;
   }
 

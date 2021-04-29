@@ -215,16 +215,15 @@ void setup() {
 //BUTTON
   
   Serial2.begin(9600);
-  
 
   pinMode(button1, INPUT_PULLUP);
   pinMode(button2, INPUT_PULLUP);
   pinMode(button3, INPUT_PULLUP);
   pinMode(button4, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(button1), buttonFunction1, RISING  );
-  attachInterrupt(digitalPinToInterrupt(button2), buttonFunction2, RISING  );
-  attachInterrupt(digitalPinToInterrupt(button3), buttonFunction3, RISING  );
-  attachInterrupt(digitalPinToInterrupt(button4), buttonFunction4, RISING  );
+  attachInterrupt(digitalPinToInterrupt(button1), buttonFunction1, FALLING  );
+  attachInterrupt(digitalPinToInterrupt(button2), buttonFunction2, FALLING  );
+  attachInterrupt(digitalPinToInterrupt(button3), buttonFunction3, FALLING  );
+  attachInterrupt(digitalPinToInterrupt(button4), buttonFunction4, FALLING  );
 
 }
 
@@ -258,7 +257,7 @@ void buttonFunction1 (){
     hourpic=Serial.read();
     Serial2.write(SendData);
   }
-  delay(10);
+  delay(1);
   data = 0;
   bitWrite(SendData,2,data);
   }
@@ -272,7 +271,7 @@ void buttonFunction1 (){
     hourpic=Serial.read();
     Serial2.write(SendData);
   }
-  delay(10);
+  delay(1);
   data = 0;
   bitWrite(SendData,3,data);
   }
@@ -287,12 +286,13 @@ void buttonFunction1 (){
     hourpic=Serial.read();
     Serial2.write(SendData);
   }
-  delay(10);
+  delay(1);
   data = 0;
   bitWrite(SendData,4,data);
   }
 
 void loop() {
+
    // iterate over the notes of the melody.
   // Remember, the array is twice the number of notes (notes + durations)
   for (int thisNote = 0; thisNote < notes * 2; thisNote = thisNote + 2) {
