@@ -10,7 +10,8 @@ int contadorJ1 =0;
 int contadorJ2 =0;
 int Ballx=random(100,200);
 int Bally=random(80,120);
-int BallSpeed = 10;
+int BallSpeed = 15--[]
+;
 int BallRamp = 2;
 int ResBally= 0;
 int ResBallx= 0;
@@ -66,13 +67,13 @@ void loop()
     CiclodeJuego =1;
     while(CiclodeJuego == 1){
       MoveBall ();
-      delay(75);
+      delay(50);
       MoveRightBar ();
-      delay(75);
+      delay(50);
       MoveLeftBar ();
-      delay(75);
+      delay(50);
       GoalRightPlayer();
-      delay(75);
+      delay(50);
           }
     }
 
