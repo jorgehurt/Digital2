@@ -41,10 +41,14 @@ void handleRoot() {
       P[i] = Serial.read(); 
     }
   }
-  P1= P[0];
-  P2= P[1];
-  P3= P[2];
-  P4= P[3];
+  if(P[3]!=0){P1=1;}
+  if(P[3]==0){P1=0;}
+  if(P[0]!=0){P2=1;}
+  if(P[0]==0){P2=0;}
+  if(P[1]!=0){P3=1;}
+  if(P[1]==0){P3=0;}
+  if(P[2]!=0){P4=1;}
+  if(P[2]==0){P4=0;}
   CantParqueos = P1 + P2 + P3 + P4;
   
   snprintf(temp, 400,
