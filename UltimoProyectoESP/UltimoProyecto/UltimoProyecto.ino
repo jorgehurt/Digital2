@@ -2,12 +2,13 @@
  *  18052
  *  Proyecto Final Digital 2
  *  */
- 
+
+ // se incluyen las librerias necesarias para la implementacion del webserver
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
-
+//Se cargan los datos de la red wifi
 #ifndef STASSID
 #define STASSID "CLARO_6EE204"
 #define STAPSK  "495654EFB68s"
@@ -21,19 +22,22 @@ const char *password = STAPSK;
 ESP8266WebServer server(80);
 
 const int led = 13;
-
+// Se inicia el handle root del webserver
 void handleRoot() {
   digitalWrite(led, 1);
   char temp[400];
   int sec = millis() / 1000;
   int min = sec / 60;
   int hr = min / 60;
+  //variable de recepcion serial
   uint8_t P[4];
+  //Variables de impresion en Webserver
   int CantParqueos = 4;
   int P1= 2;
   int P2= 3;
   int P3= 4;
   int P4= 5;
+  //Lectura serial de los datos que provienen de la tivac
   if (Serial.available()>0)
   {
     for (int i = 0; i<=3; i++)//se lee 4 bytes y se almacenan en un array
@@ -41,6 +45,7 @@ void handleRoot() {
       P[i] = Serial.read(); 
     }
   }
+  //Map de datos que vienen de la tivac a las variables de impresion
   if(P[3]!=0){P1=1;}
   if(P[3]==0){P1=0;}
   if(P[0]!=0){P2=1;}
@@ -49,8 +54,9 @@ void handleRoot() {
   if(P[1]==0){P3=0;}
   if(P[2]!=0){P4=1;}
   if(P[2]==0){P4=0;}
+  //suma de parqueos disponibles
   CantParqueos = P1 + P2 + P3 + P4;
-  
+  // Sprint con el contenido del webserver colores y especificaciones.
   snprintf(temp, 400,
 
            "<html>\
